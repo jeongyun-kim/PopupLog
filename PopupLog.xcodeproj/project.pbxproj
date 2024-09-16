@@ -119,9 +119,10 @@
 		E07A20792C98049D00557A22 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				E07A209D2C981C3300557A22 /* SideMenu */,
 				E07A207A2C9804A600557A22 /* FSCalendar */,
+				E07A209E2C981C3B00557A22 /* BottomSheet */,
 				E07A20872C98055F00557A22 /* CalendarView.swift */,
-				E07A208C2C9805BF00557A22 /* BottomSheetView.swift */,
 				E07A208A2C98058D00557A22 /* CalendarViewModel.swift */,
 			);
 			path = Calendar;
@@ -142,6 +143,21 @@
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 			);
 			path = Wrapper;
+			sourceTree = "<group>";
+		};
+		E07A209D2C981C3300557A22 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		E07A209E2C981C3B00557A22 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				E07A208C2C9805BF00557A22 /* BottomSheetView.swift */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
