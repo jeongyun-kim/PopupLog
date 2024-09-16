@@ -9,8 +9,9 @@ import SwiftUI
 
 struct CalendarView: View {
     @StateObject var vm = CalendarViewModel()
-    @State private var detentType: PresentationDetent = Detents.mid.detents
+    @State private var detentType: PresentationDetent = Resources.Detents.mid.detents
     @State private var isPresentingSheet = true
+    @State private var isPresentingSideMenu = false
     
     var body: some View {
         NavigationStack {
@@ -20,13 +21,55 @@ struct CalendarView: View {
                     randomTitle()
                     calendarView(proxy.size.width)
                 }
+                SideMenuView(isPresenting: $isPresentingSideMenu,
+                             content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
+                    
             }
             .onAppear {
                 vm.action(.viewOnAppear)
+                isPresentingSheet = true
             }
+            .navigationBar(leading: {
+                leadingBarButton()
+            }, trailing: {
+                trailingBarButtons()
+            })
+            .foregroundStyle(Resources.Colors.primaryColor)
+        }
+    }
+}
+
+// MARK: NavigationBarButton
+extension CalendarView {
+    private func trailingBarButtons() -> some View {
+        HStack(spacing: 0) {
+            trailingBarButton(AnyView(ChartView(isPresentingSheet: $isPresentingSheet)), image: Resources.Images.chart)
+            trailingBarButton(AnyView(AddView(isPresentingSheet: $isPresentingSheet)), image: Resources.Images.plus)
         }
     }
     
+    private func trailingBarButton(_ view: AnyView, image: Image) -> some View {
+        return NavigationLink(destination: {
+            LazyNavigationView(view)
+        }, label: {
+            image
+        })
+        .padding(8)
+    }
+    
+    private func leadingBarButton() -> some View {
+        Button(action: {
+            isPresentingSideMenu.toggle()
+            isPresentingSheet = !isPresentingSideMenu
+        }, label: {
+            Resources.Images.menu
+                .foregroundStyle(Resources.Colors.primaryColor)
+        })
+    }
+}
+
+// MARK: ViewUI
+extension CalendarView {
     private func currentYearMonth() -> some View {
         Text(vm.output.currentYearMonth) // Output : 현재 페이지 날짜
             .font(.callout)
@@ -37,8 +80,9 @@ struct CalendarView: View {
     }
     
     private func randomTitle() -> some View {
-        Text(vm.output.randomTitle) // Output : 랜덤 제목 
+        Text(vm.output.randomTitle) // Output : 랜덤 제목
             .font(.title2)
+            .foregroundStyle(Resources.Colors.black)
             .bold()
             .padding(.horizontal)
             .padding(.bottom, 8)
@@ -50,7 +94,7 @@ struct CalendarView: View {
             .padding(.horizontal)
             .sheet(isPresented: $isPresentingSheet, content: {
                 BottomSheetView()
-                    .presentationDetents([Detents.mid.detents, Detents.large.detents], selection: $detentType)
+                    .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
                     .presentationBackgroundInteraction(.enabled)
                     .presentationDragIndicator(.hidden)
                     .presentationCornerRadius(Resources.Radius.bottomSheet)
@@ -58,7 +102,6 @@ struct CalendarView: View {
             })
     }
 }
-
 #Preview {
     CalendarView()
 }

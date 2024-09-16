@@ -24,6 +24,14 @@
 		E07A20922C98085E00557A22 /* Detents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20912C98085E00557A22 /* Detents.swift */; };
 		E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */; };
 		E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20992C980C5E00557A22 /* BaseViewModel.swift */; };
+		E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A209F2C981C8E00557A22 /* MenuContentsView.swift */; };
+		E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A12C981DD300557A22 /* SideMenuView.swift */; };
+		E07A20A42C981F1D00557A22 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A32C981F1D00557A22 /* Texts.swift */; };
+		E07A20A72C9865A500557A22 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A62C9865A500557A22 /* SearchView.swift */; };
+		E07A20AA2C98673800557A22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A92C98673800557A22 /* SettingView.swift */; };
+		E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AC2C98690F00557A22 /* ChartView.swift */; };
+		E07A20B02C98691A00557A22 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AF2C98691A00557A22 /* AddView.swift */; };
+		E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20B12C98693C00557A22 /* LazyNavigationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +51,14 @@
 		E07A20912C98085E00557A22 /* Detents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detents.swift; sourceTree = "<group>"; };
 		E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarWrapper.swift; sourceTree = "<group>"; };
 		E07A20992C980C5E00557A22 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		E07A209F2C981C8E00557A22 /* MenuContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuContentsView.swift; sourceTree = "<group>"; };
+		E07A20A12C981DD300557A22 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
+		E07A20A32C981F1D00557A22 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
+		E07A20A62C9865A500557A22 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		E07A20A92C98673800557A22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		E07A20AC2C98690F00557A22 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		E07A20AF2C98691A00557A22 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		E07A20B12C98693C00557A22 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,10 @@
 		E07A20602C98041600557A22 /* PopupLog */ = {
 			isa = PBXGroup;
 			children = (
+				E07A20AE2C98691400557A22 /* Add */,
+				E07A20AB2C98690800557A22 /* Chart */,
+				E07A20A82C98673100557A22 /* Setting */,
+				E07A20A52C98659F00557A22 /* Search */,
 				E07A20792C98049D00557A22 /* Calendar */,
 				E07A20752C98045600557A22 /* Resources */,
 				E07A20612C98041600557A22 /* PopupLogApp.swift */,
@@ -99,9 +119,11 @@
 		E07A20752C98045600557A22 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E07A20B32C9869EA00557A22 /* CustomView */,
 				E07A20932C9809FD00557A22 /* Wrapper */,
 				E07A208F2C98062200557A22 /* Resources.swift */,
 				E07A20912C98085E00557A22 /* Detents.swift */,
+				E07A20A32C981F1D00557A22 /* Texts.swift */,
 				E07A20762C98045D00557A22 /* Extension */,
 				E07A20992C980C5E00557A22 /* BaseViewModel.swift */,
 			);
@@ -148,6 +170,8 @@
 		E07A209D2C981C3300557A22 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
+				E07A209F2C981C8E00557A22 /* MenuContentsView.swift */,
+				E07A20A12C981DD300557A22 /* SideMenuView.swift */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -158,6 +182,46 @@
 				E07A208C2C9805BF00557A22 /* BottomSheetView.swift */,
 			);
 			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		E07A20A52C98659F00557A22 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20A62C9865A500557A22 /* SearchView.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		E07A20A82C98673100557A22 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20A92C98673800557A22 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		E07A20AB2C98690800557A22 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20AC2C98690F00557A22 /* ChartView.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
+		E07A20AE2C98691400557A22 /* Add */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20AF2C98691A00557A22 /* AddView.swift */,
+			);
+			path = Add;
+			sourceTree = "<group>";
+		};
+		E07A20B32C9869EA00557A22 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20B12C98693C00557A22 /* LazyNavigationView.swift */,
+			);
+			path = CustomView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,13 +306,21 @@
 				E07A20642C98041600557A22 /* ContentView.swift in Sources */,
 				E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */,
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
+				E07A20A42C981F1D00557A22 /* Texts.swift in Sources */,
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
+				E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */,
+				E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
 				E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */,
 				E07A20882C98055F00557A22 /* CalendarView.swift in Sources */,
 				E07A20782C98046500557A22 /* Color + Extension.swift in Sources */,
+				E07A20B02C98691A00557A22 /* AddView.swift in Sources */,
+				E07A20AA2C98673800557A22 /* SettingView.swift in Sources */,
+				E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
+				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
+				E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */,
 				E07A20862C98050400557A22 /* CalendarCell.swift in Sources */,
 				E07A208B2C98058D00557A22 /* CalendarViewModel.swift in Sources */,
 			);
