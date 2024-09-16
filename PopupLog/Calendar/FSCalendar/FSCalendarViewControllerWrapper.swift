@@ -72,9 +72,14 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             }
         }
         
+        // MARK: FSCalendar Extension
         func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
             guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: date, at: position) as? CalendarCell else { return FSCalendarCell() }
             return cell
+        }
+        
+        func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+            vm.action(.changeCurrentPage(date: calendar.currentPage))
         }
     }
 }

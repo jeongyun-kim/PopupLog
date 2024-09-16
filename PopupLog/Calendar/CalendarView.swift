@@ -21,11 +21,14 @@ struct CalendarView: View {
                     calendarView(proxy.size.width)
                 }
             }
+            .onAppear {
+                vm.action(.viewOnAppear)
+            }
         }
     }
     
     private func currentYearMonth() -> some View {
-        Text("2024년 9월")
+        Text(vm.output.currentYearMonth) // Output : 현재 페이지 날짜
             .font(.callout)
             .foregroundStyle(Resources.Colors.lightGray)
             .padding(.horizontal)
@@ -34,7 +37,7 @@ struct CalendarView: View {
     }
     
     private func randomTitle() -> some View {
-        Text("✨ 오늘은 어떤 팝업을 다녀오셨나요?")
+        Text(vm.output.randomTitle) // Output : 랜덤 제목 
             .font(.title2)
             .bold()
             .padding(.horizontal)
@@ -50,7 +53,7 @@ struct CalendarView: View {
                     .presentationDetents([Detents.mid.detents, Detents.large.detents], selection: $detentType)
                     .presentationBackgroundInteraction(.enabled)
                     .presentationDragIndicator(.hidden)
-                    .presentationCornerRadius(42)
+                    .presentationCornerRadius(Resources.Radius.bottomSheet)
                     .interactiveDismissDisabled()
             })
 

@@ -20,5 +20,5 @@ protocol BaseViewModel: ObservableObject {
     
     associatedtype Inputs
     
-    func action(_ input: Inputs)
+    func action(_ inputs: Inputs)
 }
