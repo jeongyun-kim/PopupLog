@@ -10,11 +10,11 @@ import UIKit
 
 enum Resources {
     enum Images {
-        static let setting = "gearshape.fill"
-        static let search = "magnifyingglass"
-        static let plus = "plus"
-        static let chart = "chart.bar.fill"
-        static let menu = "line.3.horizontal"
+        static let setting = Image(systemName: "gearshape.fill")
+        static let search = Image(systemName: "magnifyingglass")
+        static let plus = Image(systemName: "plus")
+        static let chart = Image(systemName: "chart.bar")
+        static let menu = Image(systemName: "line.3.horizontal")
     }
     
     enum Colors {
@@ -35,13 +35,4 @@ enum Resources {
     enum Radius {
         static let bottomSheet: CGFloat = 42
     }
-    
-    static let titles = [
-        "✨ 오늘은 어떤 팝업을 다녀오셨나요?",
-        "🔥 오늘도 화이팅하세요!",
-        "✏️ 기록은 즐거운 일이에요 :D",
-        "👀 최근에 다녀오신 팝업이 있나요?",
-        "👍 바람쐬러 가볼까요?",
-        "🤗 좋은 하루 되세요"
-    ]
 }

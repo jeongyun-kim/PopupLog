@@ -22,7 +22,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     // BottomSheet 높이 변할 때마다 달력의 형태도 변경 
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         guard let vc = uiViewController as? FSCalendarViewController else { return }
-        guard let detentType = Detents.allCases.filter({ $0.detents == detent }).first else { return }
+        guard let detentType = Resources.Detents.allCases.filter({ $0.detents == detent }).first else { return }
         vc.changeScopeByDetent(detentType)
     }
     
@@ -77,7 +77,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
         }
         
         // BottomSheet에 따른 달력 모드 변경(mid -> 월간, large -> 주간)
-        func changeScopeByDetent(_ data: Detents) {
+        func changeScopeByDetent(_ data: Resources.Detents) {
             calendar.scope = data == .mid ? .month : .week
         }
         
@@ -104,7 +104,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
         // 주간모드에서 이전 또는 미래 날짜를 선택한 이후, 다시 월간모드로 돌아갔을 때
         // 사용자에게 보여주는 날짜 영역 데이터 업데이트
         func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-            let detent = Detents.allCases[Int(calendar.scope.rawValue)]
+            let detent = Resources.Detents.allCases[Int(calendar.scope.rawValue)]
             guard detent == .mid else { return }
             vm.action(.changeCurrentPage(date: calendar.currentPage))
         }

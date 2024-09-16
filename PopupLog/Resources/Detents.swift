@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-enum Detents: CaseIterable {
-    case mid
-    case large
-    
-    var detents: PresentationDetent {
-        switch self {
-        case .mid:
-            return .fraction(0.3)
-        case .large:
-            return .fraction(0.7)
+extension Resources {
+    enum Detents: CaseIterable {
+        case mid
+        case large
+        
+        var detents: PresentationDetent {
+            switch self {
+            case .mid:
+                return .fraction(0.3)
+            case .large:
+                return .fraction(0.7)
+            }
         }
     }
 }
