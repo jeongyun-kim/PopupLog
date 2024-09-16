@@ -33,6 +33,8 @@ enum Resources {
     }
     
     enum Radius {
+        static let tag: CGFloat = 6
+        static let textField: CGFloat = 10
         static let bottomSheet: CGFloat = 42
     }
 }
