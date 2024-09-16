@@ -21,6 +21,8 @@
 		E07A208B2C98058D00557A22 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A208A2C98058D00557A22 /* CalendarViewModel.swift */; };
 		E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A208C2C9805BF00557A22 /* BottomSheetView.swift */; };
 		E07A20902C98062200557A22 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A208F2C98062200557A22 /* Resources.swift */; };
+		E07A20922C98085E00557A22 /* Detents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20912C98085E00557A22 /* Detents.swift */; };
+		E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,8 @@
 		E07A208A2C98058D00557A22 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		E07A208C2C9805BF00557A22 /* BottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetView.swift; sourceTree = "<group>"; };
 		E07A208F2C98062200557A22 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		E07A20912C98085E00557A22 /* Detents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detents.swift; sourceTree = "<group>"; };
+		E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarWrapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +97,9 @@
 		E07A20752C98045600557A22 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E07A20932C9809FD00557A22 /* Wrapper */,
 				E07A208F2C98062200557A22 /* Resources.swift */,
+				E07A20912C98085E00557A22 /* Detents.swift */,
 				E07A20762C98045D00557A22 /* Extension */,
 			);
 			path = Resources;
@@ -125,6 +131,14 @@
 				E07A20852C98050400557A22 /* CalendarCell.swift */,
 			);
 			path = FSCalendar;
+			sourceTree = "<group>";
+		};
+		E07A20932C9809FD00557A22 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
+			);
+			path = Wrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,7 +222,9 @@
 			files = (
 				E07A20642C98041600557A22 /* ContentView.swift in Sources */,
 				E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */,
+				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
+				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
 				E07A20882C98055F00557A22 /* CalendarView.swift in Sources */,
 				E07A20782C98046500557A22 /* Color + Extension.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
