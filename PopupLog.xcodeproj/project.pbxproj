@@ -23,6 +23,7 @@
 		E07A20902C98062200557A22 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A208F2C98062200557A22 /* Resources.swift */; };
 		E07A20922C98085E00557A22 /* Detents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20912C98085E00557A22 /* Detents.swift */; };
 		E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */; };
+		E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20992C980C5E00557A22 /* BaseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E07A208F2C98062200557A22 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		E07A20912C98085E00557A22 /* Detents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detents.swift; sourceTree = "<group>"; };
 		E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarWrapper.swift; sourceTree = "<group>"; };
+		E07A20992C980C5E00557A22 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				E07A208F2C98062200557A22 /* Resources.swift */,
 				E07A20912C98085E00557A22 /* Detents.swift */,
 				E07A20762C98045D00557A22 /* Extension */,
+				E07A20992C980C5E00557A22 /* BaseViewModel.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
+				E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */,
 				E07A20882C98055F00557A22 /* CalendarView.swift in Sources */,
 				E07A20782C98046500557A22 /* Color + Extension.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,

@@ -8,6 +8,26 @@
 import Foundation
 import Combine
 
-final class CalendarViewModel: ObservableObject {
-    private var subscriptions = Set<AnyCancellable>()
+final class CalendarViewModel: BaseViewModel {
+    var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
+    
+    struct Input {
+        
+    }
+    
+    struct Output {
+        
+    }
+    
+    var input = Input()
+    @Published var output = Output()
+    
+    enum Inputs {
+        
+    }
+    
+    func action(_ input: Inputs) {
+        
+    }
+    
 }
