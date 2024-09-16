@@ -23,10 +23,16 @@ struct CalendarView: View {
                 }
                 SideMenuView(isPresenting: $isPresentingSideMenu,
                              content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
-                    
             }
+            .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
+                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu))
+            })
+            .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 1), destination: {
+                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu))
+            })
             .onAppear {
                 vm.action(.viewOnAppear)
+                vm.action(.sideMenuRowTappedIdx(idx: -1))
                 isPresentingSheet = true
             }
             .navigationBar(leading: {

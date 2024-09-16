@@ -16,12 +16,7 @@ struct MenuContentsView: View {
         HStack {
             VStack(alignment: .leading) {
                 logView()
-                ForEach(Array(Menus.allCases.enumerated()), id: \.element.rawValue) { value in
-                    rowView(value.element)
-                        .onTapGesture {
-                            vm.action(.rowTapped(idx: value.offset))
-                        }
-                }
+                menuListView()
                 Spacer()
             }
             .padding(.top, 80)
@@ -31,6 +26,45 @@ struct MenuContentsView: View {
             Spacer()
         }
         .background(.clear)
+    }
+}
+
+// MARK: MenuCase 정의
+extension MenuContentsView {
+    private enum Menus: Int, CaseIterable {
+        case search = 0
+        case setting
+        
+        var title: String {
+            switch self {
+            case .search:
+                return "검색"
+            case .setting:
+                return "설정"
+            }
+        }
+        
+        var image: Image {
+            switch self {
+            case .search:
+                return Resources.Images.search
+            case .setting:
+                return Resources.Images.setting
+            }
+        }
+    }
+}
+
+// MARK: ViewUI
+extension MenuContentsView {
+    // 메뉴 리스트
+    private func menuListView() -> some View {
+        ForEach(Array(Menus.allCases.enumerated()), id: \.element.rawValue) { value in
+            rowView(value.element)
+                .onTapGesture { // 뷰모델로 선택한 버튼 인덱스값 보내기
+                    vm.action(.sideMenuRowTappedIdx(idx: value.offset))
+                }
+        }
     }
     
     // 기록한 팝업 개수 표출
@@ -60,29 +94,6 @@ struct MenuContentsView: View {
         .padding(.vertical)
         .padding(.trailing, 100)
         .foregroundStyle(.black)
-    }
-    
-    private enum Menus: Int, CaseIterable {
-        case search = 0
-        case setting
-        
-        var title: String {
-            switch self {
-            case .search:
-                return "검색"
-            case .setting:
-                return "설정"
-            }
-        }
-        
-        var image: Image {
-            switch self {
-            case .search:
-                return Resources.Images.search
-            case .setting:
-                return Resources.Images.setting
-            }
-        }
     }
 }
 

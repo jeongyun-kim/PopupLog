@@ -15,11 +15,13 @@ final class CalendarViewModel: BaseViewModel {
         var viewOnAppear = PassthroughSubject<Void, Never>()
         var currentPage = CurrentValueSubject<Date, Never>(Date())
         var todayDate = CurrentValueSubject<Date, Never>(Date())
+        var sideMenuRowTapped = PassthroughSubject<Int, Never>()
     }
     
     struct Output {
         var currentYearMonth = ""
         var randomTitle = ""
+        var tappedMenuIdx = -1
     }
     
     var input = Input()
@@ -29,6 +31,7 @@ final class CalendarViewModel: BaseViewModel {
         case viewOnAppear
         case changeCurrentPage(date: Date)
         case todayDate(date: Date)
+        case sideMenuRowTappedIdx(idx: Int)
     }
     
     func action(_ inputs: Inputs) {
@@ -39,6 +42,8 @@ final class CalendarViewModel: BaseViewModel {
             input.currentPage.send(date)
         case .todayDate(let today):
             input.todayDate.send(today)
+        case .sideMenuRowTappedIdx(let idx):
+            input.sideMenuRowTapped.send(idx)
         }
     }
     
@@ -56,6 +61,12 @@ final class CalendarViewModel: BaseViewModel {
                 let dateComponents = Calendar.current.dateComponents([.month, .year], from: value)
                 guard let month = dateComponents.month, let year = dateComponents.year else { return }
                 self.output.currentYearMonth = "\(year)년 \(month)월"
+            }.store(in: &subscriptions)
+        
+        input.sideMenuRowTapped
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.tappedMenuIdx = value
             }.store(in: &subscriptions)
     }
     
