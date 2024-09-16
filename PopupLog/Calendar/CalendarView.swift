@@ -10,7 +10,7 @@ import SwiftUI
 struct CalendarView: View {
     @StateObject var vm = CalendarViewModel()
     @State private var detentType: PresentationDetent = Detents.mid.detents
-    @State var isPresentingSheet = true
+    @State private var isPresentingSheet = true
     
     var body: some View {
         NavigationStack {
@@ -45,7 +45,7 @@ struct CalendarView: View {
     }
     
     private func calendarView(_ width: CGFloat) -> some View {
-        FSCalendarViewControllerWrapper(vm: vm)
+        FSCalendarViewControllerWrapper(vm: vm, detent: $detentType)
             .frame(height: (width-32))
             .padding(.horizontal)
             .sheet(isPresented: $isPresentingSheet, content: {
@@ -56,9 +56,7 @@ struct CalendarView: View {
                     .presentationCornerRadius(Resources.Radius.bottomSheet)
                     .interactiveDismissDisabled()
             })
-
     }
-    
 }
 
 #Preview {

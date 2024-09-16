@@ -14,6 +14,7 @@ final class CalendarViewModel: BaseViewModel {
     struct Input {
         var viewOnAppear = PassthroughSubject<Void, Never>()
         var currentPage = CurrentValueSubject<Date, Never>(Date())
+        var todayDate = CurrentValueSubject<Date, Never>(Date())
     }
     
     struct Output {
@@ -27,6 +28,7 @@ final class CalendarViewModel: BaseViewModel {
     enum Inputs {
         case viewOnAppear
         case changeCurrentPage(date: Date)
+        case todayDate(date: Date)
     }
     
     func action(_ inputs: Inputs) {
@@ -35,6 +37,8 @@ final class CalendarViewModel: BaseViewModel {
             input.viewOnAppear.send(())
         case .changeCurrentPage(let date):
             input.currentPage.send(date)
+        case .todayDate(let today):
+            input.todayDate.send(today)
         }
     }
     
