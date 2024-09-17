@@ -11,9 +11,9 @@ private struct RoundedTextField: ViewModifier {
     func body(content: Content) -> some View {
         content
             .textFieldStyle(.plain)
-            .clipShape(Capsule())
             .padding()
-            .overlay(RoundedRectangle(cornerRadius: Resources.Radius.textField)
+            .clipShape(Capsule())
+            .overlay(RoundedRectangle(cornerRadius: Resources.Radius.textContents)
                 .strokeBorder(Resources.Colors.lightGray, style: StrokeStyle(lineWidth: 1.0)))
             .padding(.horizontal)
     }
