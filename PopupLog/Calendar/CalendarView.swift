@@ -39,8 +39,8 @@ struct CalendarView: View {
             }, trailing: {
                 trailingBarButtons()
             })
-            .foregroundStyle(Resources.Colors.primaryColor)
         }
+        .tint(Resources.Colors.primaryColor)
     }
 }
 
