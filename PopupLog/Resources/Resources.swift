@@ -15,6 +15,7 @@ enum Resources {
         static let plus = Image(systemName: "plus")
         static let chart = Image(systemName: "chart.bar")
         static let menu = Image(systemName: "line.3.horizontal")
+        static let xmark = Image(systemName: "xmark")
     }
     
     enum Colors {
@@ -36,5 +37,6 @@ enum Resources {
         static let button: CGFloat = 6
         static let textContents: CGFloat = 10
         static let bottomSheet: CGFloat = 42
+        static let image: CGFloat = 12
     }
 }

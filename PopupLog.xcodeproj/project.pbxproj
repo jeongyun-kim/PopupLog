@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D93C2C98897C00D07972 /* RoundedTextField.swift */; };
+		E009D9422C99D28400D07972 /* ImageOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */; };
+		E009D9442C99E92000D07972 /* TagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9432C99E92000D07972 /* TagButton.swift */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20642C98041600557A22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20632C98041600557A22 /* ContentView.swift */; };
 		E07A20662C98041700557A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20652C98041700557A22 /* Assets.xcassets */; };
@@ -37,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		E009D93C2C98897C00D07972 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
+		E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOnChangeWrapper.swift; sourceTree = "<group>"; };
+		E009D9432C99E92000D07972 /* TagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagButton.swift; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20632C98041600557A22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 			children = (
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
+				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
+				E009D9432C99E92000D07972 /* TagButton.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -316,12 +322,14 @@
 				E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
 				E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */,
+				E009D9422C99D28400D07972 /* ImageOnChangeWrapper.swift in Sources */,
 				E07A20882C98055F00557A22 /* CalendarView.swift in Sources */,
 				E07A20782C98046500557A22 /* Color + Extension.swift in Sources */,
 				E07A20B02C98691A00557A22 /* AddView.swift in Sources */,
 				E07A20AA2C98673800557A22 /* SettingView.swift in Sources */,
 				E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
+				E009D9442C99E92000D07972 /* TagButton.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
 				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
 				E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */,
@@ -460,6 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PopupLog/Preview Content\"";
+				DEVELOPMENT_TEAM = L348QC8MG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -493,6 +502,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PopupLog/Preview Content\"";
+				DEVELOPMENT_TEAM = L348QC8MG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
