@@ -15,15 +15,14 @@ struct CalendarView: View {
     
     var body: some View {
         NavigationStack {
-            GeometryReader { proxy in
                 VStack(alignment: .leading, spacing: 8) {
                     currentYearMonth()
                     randomTitle()
-                    calendarView(proxy.size.width)
+                    calendarView()
                 }
                 SideMenuView(isPresenting: $isPresentingSideMenu,
                              content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
-            }
+        
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
                 LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu))
             })
@@ -94,18 +93,20 @@ extension CalendarView {
             .padding(.bottom, 8)
     }
     
-    private func calendarView(_ width: CGFloat) -> some View {
-        FSCalendarViewControllerWrapper(vm: vm, detent: $detentType)
-            .frame(height: (width-32))
-            .padding(.horizontal)
-            .sheet(isPresented: $isPresentingSheet, content: {
-                BottomSheetView()
-                    .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
-                    .presentationBackgroundInteraction(.enabled)
-                    .presentationDragIndicator(.hidden)
-                    .presentationCornerRadius(Resources.Radius.bottomSheet)
-                    .interactiveDismissDisabled()
-            })
+    private func calendarView() -> some View {
+        GeometryReader { proxy in
+            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType)
+                .frame(height: proxy.size.width*0.9)
+                .padding(.horizontal)
+                .sheet(isPresented: $isPresentingSheet, content: {
+                    BottomSheetView()
+                        .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
+                        .presentationBackgroundInteraction(.enabled)
+                        .presentationDragIndicator(.hidden)
+                        .presentationCornerRadius(Resources.Radius.bottomSheet)
+                        .interactiveDismissDisabled()
+                })
+        }
     }
 }
 #Preview {
