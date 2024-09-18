@@ -15,11 +15,12 @@ struct AddView: View {
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var image: Image = Resources.Images.plus
     @State private var visitedDate = Date()
+    @State private var place = ""
     
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 20) {
                     ZStack(alignment: .center) {
                         PhotosPicker(selection: $selectedPhoto) {
                             RoundedRectangle(cornerRadius: Resources.Radius.image)
@@ -27,7 +28,7 @@ struct AddView: View {
                                 .foregroundStyle(Resources.Colors.primaryColor)
                                 .padding()
                                 .frame(width: proxy.size.width,
-                                       height: proxy.size.width*0.7)
+                                       height: proxy.size.width*0.75)
                                 .overlay {
                                     photoPickerImageView()
                                 }
@@ -140,26 +141,40 @@ extension AddView {
     
     // MARK: 방문일 & 팝업검색
     private func popupInfoView() -> some View {
-        HStack(spacing: 20) {
-            HStack(spacing: 0) {
-                Text("방문일")
-                    .font(.callout)
-                    .bold()
-                DatePicker("", selection: $visitedDate, displayedComponents: .date)
-                    .tint(Resources.Colors.primaryColor)
+        VStack(alignment: .leading) {
+            HStack(spacing: 40) {
+                HStack(spacing: 0) {
+                    Text("방문일")
+                        .font(.callout)
+                        .bold()
+                    DatePicker("", selection: $visitedDate, displayedComponents: .date)
+                        .tint(Resources.Colors.primaryColor)
+                }
+                Spacer()
+                searchPopupButton()
             }
-            Spacer()
-            searchPopupButton()
+            .offset(y: -16)
+            HStack {
+                Text("장소")
+                    .font(.headline)
+                ZStack(alignment: .leading) {
+                    Text("장소를 검색해주세요") // 검색 장소
+                        .foregroundStyle(Resources.Colors.lightGray)
+                        .opacity(place.isEmpty ? 1 : 0)
+                    Text(place) // 검색 장소 결과 주소
+                        .font(.callout)
+                }
+            }
         }
         .padding(.horizontal)
-        .offset(y: -12)
+        .padding(.bottom, 6)
     }
     
     private func searchPopupButton() -> some View {
         Button(action: {}, label: {
             HStack(spacing: 4) {
                 Resources.Images.search
-                Text("팝업스토어 검색")
+                Text("장소 검색")
                     .font(.callout)
             }
             .padding(.vertical, 8)
