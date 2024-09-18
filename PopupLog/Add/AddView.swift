@@ -48,6 +48,9 @@ struct AddView: View {
         .onAppear {
             isPresentingSheet.toggle()
         }
+        .onDisappear {
+            isPresentingSheet.toggle()
+        }
         .navigationBar {
             
         } trailing: {
