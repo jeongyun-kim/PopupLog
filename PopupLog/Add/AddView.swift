@@ -9,13 +9,10 @@ import SwiftUI
 import PhotosUI
 
 struct AddView: View {
+    @StateObject private var vm = AddViewModel()
     @Binding var isPresentingSheet: Bool
-    @State private var titleField = ""
-    @State private var contentField = ""
     @State private var selectedPhoto: PhotosPickerItem?
     @State private var image: Image = Resources.Images.plus
-    @State private var visitedDate = Date()
-    @State private var place = ""
     
     var body: some View {
         GeometryReader { proxy in
@@ -35,6 +32,7 @@ struct AddView: View {
                         }
                         .changedImage($selectedPhoto) { value in
                             image = value
+                            vm.action(.image(selected: value))
                         }
                     }
                     .padding(.top)
@@ -54,7 +52,9 @@ struct AddView: View {
         .navigationBar {
             
         } trailing: {
-            Button(action: {}, label: {
+            Button(action: {
+                vm.action(.save)
+            }, label: {
                 Text("저장")
             })
         }
@@ -71,7 +71,8 @@ extension AddView {
             Text("본문")
                 .font(.headline)
             ZStack(alignment: .leading) {
-                if contentField.isEmpty {
+                // TextEditor Placeholder
+                if vm.output.contentField.isEmpty {
                     VStack {
                         Text("내용을 입력해주세요")
                             .foregroundStyle(Resources.Colors.lightGray)
@@ -79,16 +80,17 @@ extension AddView {
                         Spacer()
                     }
                 }
-                TextEditor(text: $contentField)
+                TextEditor(text: $vm.output.contentField)
                     .frame(height: 250)
                     .frame(maxWidth: .infinity)
-                    .opacity(contentField.isEmpty ? 0.3 : 1)
+                    .opacity(vm.output.contentField.isEmpty ? 0.3 : 1) 
                     .padding(8)
                     .overlay {
                         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
                             .strokeBorder(lineWidth: 1)
                             .foregroundStyle(Resources.Colors.lightGray)
                     }
+
             }
         }
         .padding(.horizontal)
@@ -119,10 +121,21 @@ extension AddView {
                 }
                 Button(action: {
                     // sheet 이용해 태그리스트 띄우기
+                    vm.action(.presentTags)
                 }, label: {
                     Text("모두 보기")
                         .font(.callout)
                         .foregroundStyle(Resources.Colors.lightGray)
+                })
+                .sheet(isPresented: $vm.output.presentTagListView, content: {
+                    List {
+                        ForEach(0..<10) { _ in
+                            TagButton(emoji: "💖", tagName: "하트") {
+                                print("heart")
+                                vm.output.presentTagListView = false
+                            }
+                        }
+                    }
                 })
             }
         }
@@ -135,8 +148,7 @@ extension AddView {
             Text("제목")
                 .padding(.horizontal)
                 .font(.headline)
-            
-            TextField("제목을 입력해주세요", text: $titleField)
+            TextField("제목을 입력해주세요", text: $vm.input.titleField)
                 .asRoundedTextField()
         }
         .padding(.bottom, 8)
@@ -150,7 +162,7 @@ extension AddView {
                     Text("방문일")
                         .font(.callout)
                         .bold()
-                    DatePicker("", selection: $visitedDate, displayedComponents: .date)
+                    DatePicker("", selection: $vm.input.visitedDate, in: ...Date(), displayedComponents: .date)
                         .tint(Resources.Colors.primaryColor)
                 }
                 Spacer()
@@ -163,8 +175,8 @@ extension AddView {
                 ZStack(alignment: .leading) {
                     Text("장소를 검색해주세요") // 검색 장소
                         .foregroundStyle(Resources.Colors.lightGray)
-                        .opacity(place.isEmpty ? 1 : 0)
-                    Text(place) // 검색 장소 결과 주소
+                        .opacity(vm.output.place.isEmpty ? 1 : 0) // 선택한 장소가 없다면 '장소를 검색해주세요' 숨기기
+                    Text(vm.output.place) // 검색 장소 결과 주소
                         .font(.callout)
                 }
             }
@@ -174,7 +186,9 @@ extension AddView {
     }
     
     private func searchPopupButton() -> some View {
-        Button(action: {}, label: {
+        Button(action: {
+            vm.action(.placeSearch)
+        }, label: {
             HStack(spacing: 4) {
                 Resources.Images.search
                 Text("장소 검색")
@@ -185,6 +199,9 @@ extension AddView {
             .foregroundStyle(Resources.Colors.black)
             .background(Resources.Colors.systemGray6)
             .clipShape(.rect(cornerRadius: Resources.Radius.button))
+        })
+        .sheet(isPresented: $vm.output.presentPlaceSearchView, content: {
+            
         })
     }
     
