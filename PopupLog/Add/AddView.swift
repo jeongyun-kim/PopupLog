@@ -18,26 +18,8 @@ struct AddView: View {
         GeometryReader { proxy in
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    ZStack(alignment: .center) {
-                        PhotosPicker(selection: $selectedPhoto) {
-                            RoundedRectangle(cornerRadius: Resources.Radius.image)
-                                .fill(Resources.Colors.lightOrange)
-                                .foregroundStyle(Resources.Colors.primaryColor)
-                                .padding()
-                                .frame(width: proxy.size.width,
-                                       height: proxy.size.width*0.75)
-                                .overlay {
-                                    photoPickerImageView()
-                                }
-                        }
-                        .changedImage($selectedPhoto) { value in
-                            image = value
-                            vm.action(.image(selected: value))
-                        }
-                    }
-                    .padding(.top)
+                    photoPickerView(proxy.size.width)
                     popupInfoView()
-                    titleView()
                     tagView()
                     contentsView()
                 }
@@ -60,21 +42,21 @@ struct AddView: View {
         }
         .navigationTitle("기록하기")
         .toolbarRole(.editor)
-        
     }
 }
 
 extension AddView {
+   
     // MARK: 본문
     private func contentsView() -> some View {
         VStack(alignment: .leading) {
-            Text("본문")
+            Text("본문*")
                 .font(.headline)
             ZStack(alignment: .leading) {
                 // TextEditor Placeholder
                 if vm.output.contentField.isEmpty {
                     VStack {
-                        Text("내용을 입력해주세요")
+                        Text("다녀오신 팝업은 어땠나요?\n다양한 이야기를 적어주세요 :)")
                             .foregroundStyle(Resources.Colors.lightGray)
                             .padding()
                         Spacer()
@@ -142,24 +124,12 @@ extension AddView {
         .padding(.horizontal)
     }
     
-    // MARK: 제목
-    private func titleView() -> some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("제목")
-                .padding(.horizontal)
-                .font(.headline)
-            TextField("제목을 입력해주세요", text: $vm.input.titleField)
-                .asRoundedTextField()
-        }
-        .padding(.bottom, 8)
-    }
-    
     // MARK: 방문일 & 팝업검색
     private func popupInfoView() -> some View {
         VStack(alignment: .leading) {
             HStack(spacing: 40) {
                 HStack(spacing: 0) {
-                    Text("방문일")
+                    Text("방문일*")
                         .font(.callout)
                         .bold()
                     DatePicker("", selection: $vm.input.visitedDate, in: ...Date(), displayedComponents: .date)
@@ -169,6 +139,7 @@ extension AddView {
                 searchPopupButton()
             }
             .offset(y: -16)
+            
             HStack {
                 Text("장소")
                     .font(.headline)
@@ -178,6 +149,15 @@ extension AddView {
                         .opacity(vm.output.place.isEmpty ? 1 : 0) // 선택한 장소가 없다면 '장소를 검색해주세요' 숨기기
                     Text(vm.output.place) // 검색 장소 결과 주소
                         .font(.callout)
+                }
+                Spacer()
+                if !vm.output.place.isEmpty {
+                    Button(action: {
+                        vm.action(.removePlace)
+                    }, label: {
+                        Resources.Images.xmark
+                            .foregroundStyle(Resources.Colors.lightGray)
+                    })
                 }
             }
         }
@@ -201,11 +181,60 @@ extension AddView {
             .clipShape(.rect(cornerRadius: Resources.Radius.button))
         })
         .sheet(isPresented: $vm.output.presentPlaceSearchView, content: {
-            
+            VStack {
+                TextField("장소를 검색해보세요", text: $vm.output.placeField)
+                    .asRoundedTextField()
+                    .padding(.top, 32)
+                    .onSubmit(of: .text) {
+                        vm.action(.searchPlace)
+                    }
+                List {
+                    ForEach(vm.output.searchedPlaces, id: \.id) { item in
+                        Button(action: {
+                            vm.action(.selectedPlace(place: item))
+                        }, label: {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(item.replacedTitle)
+                                    .bold()
+                                Text(item.roadAddress)
+                                    .foregroundStyle(Resources.Colors.lightGray)
+                                    .lineLimit(2)
+                            }
+                            .font(.callout)
+                            .padding(.vertical, 8)
+                        })
+                        .listRowSeparator(.hidden)
+                    }
+                }
+                .listStyle(.plain)
+            }
+            .presentationDetents([.medium])
         })
     }
     
+    
     // MARK: 사진
+    private func photoPickerView(_ width: CGFloat) -> some View {
+        ZStack(alignment: .center) {
+            PhotosPicker(selection: $selectedPhoto) {
+                RoundedRectangle(cornerRadius: Resources.Radius.image)
+                    .fill(Resources.Colors.lightOrange)
+                    .foregroundStyle(Resources.Colors.primaryColor)
+                    .padding()
+                    .frame(width: width,
+                           height: width*0.75)
+                    .overlay {
+                        photoPickerImageView()
+                    }
+            }
+            .changedImage($selectedPhoto) { value in
+                image = value
+                vm.action(.image(selected: value))
+            }
+        }
+        .padding(.top)
+    }
+    
     private func photoPickerImageView() -> some View {
         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
             .stroke(style: StrokeStyle(lineWidth: 1, dash: [8]))
