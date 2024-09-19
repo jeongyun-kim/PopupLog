@@ -14,7 +14,7 @@ final class Tag: Object, ObjectKeyIdentifiable {
     @Persisted var tagName: String
     @Persisted var tagColor: String?
     
-    convenience init(emoji: String, tagName: String, tagColor: String?) {
+    convenience init(emoji: String, tagName: String, tagColor: String? = Resources.Colors.systemGray6.toHex()) {
         self.init()
         self.emoji = emoji
         self.tagName = tagName
@@ -24,7 +24,7 @@ final class Tag: Object, ObjectKeyIdentifiable {
 
 struct DefaultTags {
     static let defaultTagList = [
-        Tag(emoji: "😊", tagName: "기타", tagColor: Resources.Colors.systemGray6.toHex()),
+        Tag(emoji: "😊", tagName: "기타"),
         Tag(emoji: "💖", tagName: "캐릭터", tagColor: "F3CCF3"),
         Tag(emoji: "💄", tagName: "뷰티", tagColor: "FED9ED"),
         Tag(emoji: "🧢", tagName: "의류", tagColor: "FBF0B2"),
