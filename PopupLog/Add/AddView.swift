@@ -17,11 +17,12 @@ struct AddView: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 24) {
                     photoPickerView(proxy.size.width)
                     popupInfoView()
                     tagView()
                     contentsView()
+                    Spacer()
                 }
             }
         }
@@ -46,7 +47,6 @@ struct AddView: View {
 }
 
 extension AddView {
-   
     // MARK: 본문
     private func contentsView() -> some View {
         VStack(alignment: .leading) {
@@ -63,7 +63,7 @@ extension AddView {
                     }
                 }
                 TextEditor(text: $vm.output.contentField)
-                    .frame(height: 250)
+                    .frame(height: 300)
                     .frame(maxWidth: .infinity)
                     .opacity(vm.output.contentField.isEmpty ? 0.3 : 1) 
                     .padding(8)
@@ -84,25 +84,29 @@ extension AddView {
             HStack {
                 Text("태그")
                     .font(.headline)
-                // 선택된 태그
-                TagButton(emoji: "⭐️", tagName: "선택된 태그") {
-                    print("tap")
+                // 선택된 태그있으면 보여주기
+                if let tag = vm.output.selectedTag, let tagColor = tag.tagColor {
+                    TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor) {
+                        vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
+                    }
                 }
             }
-            
             HStack {
-                // 사용자가 생성한 태그 리스트
+                // 기본 태그 + 사용자가 생성한 태그 리스트 그리기
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack {
-                        ForEach(0..<10) { _ in
-                            TagButton(emoji: "💖", tagName: "하트") {
-                                print("heart")
+                        ForEach(DefaultTags.defaultTagList, id: \.id) { item in
+                            if let hexString = item.tagColor {
+                                TagButton(emoji: item.emoji, tagName: item.tagName, tagColor: hexString) {
+                                    vm.action(.selectedTag(tag: item))
+                                }
                             }
+                            
                         }
                     }
                 }
                 Button(action: {
-                    // sheet 이용해 태그리스트 띄우기
+                    // sheet 이용해 모든 태그리스트 띄우기
                     vm.action(.presentTags)
                 }, label: {
                     Text("모두 보기")
@@ -112,10 +116,10 @@ extension AddView {
                 .sheet(isPresented: $vm.output.presentTagListView, content: {
                     List {
                         ForEach(0..<10) { _ in
-                            TagButton(emoji: "💖", tagName: "하트") {
-                                print("heart")
-                                vm.output.presentTagListView = false
-                            }
+//                            TagButton(emoji: "💖", tagName: "하트") {
+//                                print("heart")
+//                                vm.output.presentTagListView = false
+//                            }
                         }
                     }
                 })

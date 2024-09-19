@@ -10,6 +10,7 @@ import SwiftUI
 struct TagButton: View {
     let emoji: String
     let tagName: String
+    let tagColor: String
     let action: () -> Void
     
     var body: some View {
@@ -21,7 +22,7 @@ struct TagButton: View {
                     .foregroundStyle(Resources.Colors.black)
             }
             .padding(6)
-            .background(Resources.Colors.systemGray6)
+            .background(Color.init(hex: tagColor))
             .clipShape(.rect(cornerRadius: Resources.Radius.button))
         })
     }

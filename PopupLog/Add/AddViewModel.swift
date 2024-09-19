@@ -26,6 +26,7 @@ final class AddViewModel: BaseViewModel {
         var searchPlace = PassthroughSubject<Void, Never>()
         var selectedPlace = CurrentValueSubject<Place?, Never>(nil)
         var removePlace = PassthroughSubject<Void, Never>()
+        var selectedTag = PassthroughSubject<Tag?, Never>()
     }
     
     enum Inputs {
@@ -37,6 +38,7 @@ final class AddViewModel: BaseViewModel {
         case searchPlace
         case selectedPlace(place: Place)
         case removePlace
+        case selectedTag(tag: Tag?)
     }
     
     func action(_ inputs: Inputs) {
@@ -57,6 +59,8 @@ final class AddViewModel: BaseViewModel {
             return input.selectedPlace.send(place)
         case .removePlace:
             return input.removePlace.send(())
+        case .selectedTag(let tag):
+            return input.selectedTag.send(tag)
         }
     }
     
@@ -67,6 +71,7 @@ final class AddViewModel: BaseViewModel {
         var presentTagListView = false
         var placeField = ""
         var searchedPlaces: [Place] = []
+        var selectedTag: Tag? = nil
     }
     
     init() {
@@ -115,6 +120,12 @@ final class AddViewModel: BaseViewModel {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.output.place = ""
+            }.store(in: &subscriptions)
+        
+        input.selectedTag
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.selectedTag = value
             }.store(in: &subscriptions)
     }
 }
