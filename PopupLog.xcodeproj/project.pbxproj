@@ -18,6 +18,9 @@
 		E009D95F2C9BFD9400D07972 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D95E2C9BFD9400D07972 /* Tag.swift */; };
 		E009D96A2C9C02CB00D07972 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E009D9692C9C02CB00D07972 /* RealmSwift */; };
 		E009D96B2C9C02D700D07972 /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E009D9692C9C02CB00D07972 /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		E009D96E2C9C8BB500D07972 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96D2C9C8BB500D07972 /* Log.swift */; };
+		E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96F2C9C8E9F00D07972 /* LogRepository.swift */; };
+		E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20642C98041600557A22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20632C98041600557A22 /* ContentView.swift */; };
 		E07A20662C98041700557A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20652C98041700557A22 /* Assets.xcassets */; };
@@ -68,6 +71,9 @@
 		E009D9522C9B34CB00D07972 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		E009D95A2C9B36CC00D07972 /* SearchPlaceResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPlaceResults.swift; sourceTree = "<group>"; };
 		E009D95E2C9BFD9400D07972 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		E009D96D2C9C8BB500D07972 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		E009D96F2C9C8E9F00D07972 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
+		E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20632C98041600557A22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				E009D95D2C9BFD9000D07972 /* Model */,
+				E009D96F2C9C8E9F00D07972 /* LogRepository.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				E009D95E2C9BFD9400D07972 /* Tag.swift */,
+				E009D96D2C9C8BB500D07972 /* Log.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
 				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
 				E009D9432C99E92000D07972 /* TagButton.swift */,
+				E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */,
 			);
 			path = Wrapper;
 			sourceTree = "<group>";
@@ -395,8 +404,10 @@
 				E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */,
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
 				E07A20A42C981F1D00557A22 /* Texts.swift in Sources */,
+				E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */,
 				E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */,
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
+				E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */,
 				E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */,
 				E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
@@ -419,6 +430,7 @@
 				E07A20862C98050400557A22 /* CalendarCell.swift in Sources */,
 				E009D9532C9B34CB00D07972 /* NetworkService.swift in Sources */,
 				E07A208B2C98058D00557A22 /* CalendarViewModel.swift in Sources */,
+				E009D96E2C9C8BB500D07972 /* Log.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
