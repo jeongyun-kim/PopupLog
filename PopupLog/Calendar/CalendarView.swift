@@ -23,7 +23,9 @@ struct CalendarView: View {
                 }
                 SideMenuView(isPresenting: $isPresentingSideMenu,
                              content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
-                
+                .changedBool($isPresentingSideMenu) {
+                    isPresentingSheet = !isPresentingSideMenu
+                }
             }
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
                 LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu))
@@ -61,6 +63,7 @@ extension CalendarView {
             image
         })
         .padding(8)
+        .disabled(!isPresentingSheet)
     }
     
     private func leadingBarButton() -> some View {
