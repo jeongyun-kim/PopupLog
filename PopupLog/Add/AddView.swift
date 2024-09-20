@@ -9,10 +9,9 @@ import SwiftUI
 import PhotosUI
 
 struct AddView: View {
+    @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @StateObject private var vm = AddViewModel()
     @Binding var isPresentingSheet: Bool
-    @State private var selectedPhoto: PhotosPickerItem?
-    @State private var image: Image = Resources.Images.plus
     
     var body: some View {
         GeometryReader { proxy in
@@ -37,9 +36,11 @@ struct AddView: View {
         } trailing: {
             Button(action: {
                 vm.action(.save)
+                dismiss()
             }, label: {
                 Text("저장")
             })
+            .disabled(vm.output.contentField.isEmpty) // 본문 비어있으면 저장 X
         }
         .navigationTitle("기록하기")
         .toolbarRole(.editor)
@@ -72,7 +73,6 @@ extension AddView {
                             .strokeBorder(lineWidth: 1)
                             .foregroundStyle(Resources.Colors.lightGray)
                     }
-
             }
         }
         .padding(.horizontal)
@@ -131,6 +131,7 @@ extension AddView {
     // MARK: 방문일 & 팝업검색
     private func popupInfoView() -> some View {
         VStack(alignment: .leading) {
+            // 방문일뷰
             HStack(spacing: 40) {
                 HStack(spacing: 0) {
                     Text("방문일*")
@@ -138,12 +139,13 @@ extension AddView {
                         .bold()
                     DatePicker("", selection: $vm.input.visitedDate, in: ...Date(), displayedComponents: .date)
                         .tint(Resources.Colors.primaryColor)
+                        .environment(\.locale, Locale(identifier: "ko_KR"))
                 }
                 Spacer()
-                searchPopupButton()
+                searchPlaceButton()
             }
             .offset(y: -16)
-            
+            // 장소뷰
             HStack {
                 Text("장소")
                     .font(.headline)
@@ -155,6 +157,7 @@ extension AddView {
                         .font(.callout)
                 }
                 Spacer()
+                // 선택한 장소가 있다면 장소가 있다면 장소 지울 수 있게
                 if !vm.output.place.isEmpty {
                     Button(action: {
                         vm.action(.removePlace)
@@ -169,7 +172,7 @@ extension AddView {
         .padding(.bottom, 6)
     }
     
-    private func searchPopupButton() -> some View {
+    private func searchPlaceButton() -> some View {
         Button(action: {
             vm.action(.placeSearch)
         }, label: {
@@ -192,35 +195,39 @@ extension AddView {
                     .onSubmit(of: .text) {
                         vm.action(.searchPlace)
                     }
-                List {
-                    ForEach(vm.output.searchedPlaces, id: \.id) { item in
-                        Button(action: {
-                            vm.action(.selectedPlace(place: item))
-                        }, label: {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text(item.replacedTitle)
-                                    .bold()
-                                Text(item.roadAddress)
-                                    .foregroundStyle(Resources.Colors.lightGray)
-                                    .lineLimit(2)
-                            }
-                            .font(.callout)
-                            .padding(.vertical, 8)
-                        })
-                        .listRowSeparator(.hidden)
-                    }
-                }
-                .listStyle(.plain)
+                searchPlaceListView()
             }
             .presentationDetents([.medium])
         })
+    }
+    
+    private func searchPlaceListView() -> some View {
+        List {
+            ForEach(vm.output.searchedPlaces, id: \.id) { item in
+                Button(action: {
+                    vm.action(.selectedPlace(place: item))
+                }, label: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(item.replacedTitle)
+                            .bold()
+                        Text(item.roadAddress)
+                            .foregroundStyle(Resources.Colors.lightGray)
+                            .lineLimit(2)
+                    }
+                    .font(.callout)
+                    .padding(.vertical, 8)
+                })
+                .listRowSeparator(.hidden)
+            }
+        }
+        .listStyle(.plain)
     }
     
     
     // MARK: 사진
     private func photoPickerView(_ width: CGFloat) -> some View {
         ZStack(alignment: .center) {
-            PhotosPicker(selection: $selectedPhoto) {
+            PhotosPicker(selection: $vm.output.selectedPhotoItem, matching: .images) {
                 RoundedRectangle(cornerRadius: Resources.Radius.image)
                     .fill(Resources.Colors.lightOrange)
                     .foregroundStyle(Resources.Colors.primaryColor)
@@ -231,8 +238,7 @@ extension AddView {
                         photoPickerImageView()
                     }
             }
-            .changedImage($selectedPhoto) { value in
-                image = value
+            .changedImage($vm.output.selectedPhotoItem) { value in
                 vm.action(.image(selected: value))
             }
         }
@@ -242,9 +248,9 @@ extension AddView {
     private func photoPickerImageView() -> some View {
         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
             .stroke(style: StrokeStyle(lineWidth: 1, dash: [8]))
-            .opacity(image == Resources.Images.plus ? 1 : 0)
+            .opacity(vm.output.isSelectedImage ? 0 : 1)
             .overlay {
-                if image == Resources.Images.plus {
+                if !vm.output.isSelectedImage {
                     emptyImageView()
                 } else {
                     // 사용자가 이미지를 선택한 경우
@@ -257,12 +263,12 @@ extension AddView {
     
     private func nonEmptyImageView() -> some View {
         ZStack(alignment: .topTrailing) {
-            image // 사용자 선택 이미지
+            vm.output.selectedImage // 사용자 선택 이미지
                 .resizable()
                 .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.image))
             // 변경한 사진 제거
             Button(action: {
-                image = Resources.Images.plus
+                vm.action(.image(selected: Resources.Images.plus))
             }, label: {
                 Resources.Images.xmark
                     .resizable()

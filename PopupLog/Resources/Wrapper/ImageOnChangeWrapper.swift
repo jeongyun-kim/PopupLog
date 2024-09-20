@@ -17,8 +17,9 @@ struct ImageOnChangeWrapper: ViewModifier {
         if #available(iOS 17.0, *) {
             content
                 .onChange(of: pickerItem) {
+                    guard let pickerItem else { return }
                     Task {
-                        if let image = try? await pickerItem?.loadTransferable(type: Image.self) {
+                        if let image = try? await pickerItem.loadTransferable(type: Image.self) {
                             action(image)
                         } else {
                             print("Failed")
@@ -28,8 +29,9 @@ struct ImageOnChangeWrapper: ViewModifier {
         } else {
             content
                 .onChange(of: pickerItem, perform: { _ in
+                    guard let pickerItem else { return }
                     Task {
-                        if let image = try? await pickerItem?.loadTransferable(type: Image.self) {
+                        if let image = try? await pickerItem.loadTransferable(type: Image.self) {
                             action(image)
                         } else {
                             print("Failed")

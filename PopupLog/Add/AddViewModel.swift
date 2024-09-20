@@ -6,32 +6,31 @@
 //
 
 import SwiftUI
-import Combine
 import PhotosUI
+import Combine
+import RealmSwift
 
 final class AddViewModel: BaseViewModel {
+    private let logRepo = LogRepository.shared
     var subscriptions = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
     
     struct Input {
         var logId: UUID? = nil
-        var titleField = ""
-        var visitedDate = Date()
-        var selectedImage = CurrentValueSubject<Image, Never>(Resources.Images.plus)
-        var saveBtnTapped = PassthroughSubject<Void, Never>()
-        var textEditorTapped = PassthroughSubject<Void, Never>()
-        var placeSearchBtnTapped = PassthroughSubject<Void, Never>()
-        var presentTagsBtnTapped = PassthroughSubject<Void, Never>()
-        var searchPlace = PassthroughSubject<Void, Never>()
-        var selectedPlace = CurrentValueSubject<Place?, Never>(nil)
-        var removePlace = PassthroughSubject<Void, Never>()
-        var selectedTag = PassthroughSubject<Tag?, Never>()
+        var visitedDate = Date() // 방문일
+        var selectedImage = CurrentValueSubject<Image, Never>(Resources.Images.plus) // 선택한 이미지
+        var saveBtnTapped = PassthroughSubject<Void, Never>() // 저장버튼 탭
+        var placeSearchBtnTapped = PassthroughSubject<Void, Never>() // 장소검색 버튼 탭
+        var presentTagsBtnTapped = PassthroughSubject<Void, Never>() // 태그 모두보기 탭
+        var searchPlace = PassthroughSubject<Void, Never>() // 장소검색 돌리기
+        var selectedPlace = CurrentValueSubject<Place?, Never>(nil) // 선택된 장소
+        var removePlace = PassthroughSubject<Void, Never>() // 장소 지우기 탭
+        var selectedTag = PassthroughSubject<Tag?, Never>() // 선택된 태그
     }
     
     enum Inputs {
         case save
-        case textEditor
         case image(selected: Image)
         case placeSearch
         case presentTags
@@ -45,8 +44,6 @@ final class AddViewModel: BaseViewModel {
         switch inputs {
         case .save:
             return input.saveBtnTapped.send(())
-        case .textEditor:
-            return input.textEditorTapped.send(())
         case .image(let selectedImage):
             return input.selectedImage.send(selectedImage)
         case .placeSearch:
@@ -65,19 +62,29 @@ final class AddViewModel: BaseViewModel {
     }
     
     struct Output {
-        var place = ""
-        var contentField = ""
-        var presentPlaceSearchView = false
-        var presentTagListView = false
-        var placeField = ""
-        var searchedPlaces: [Place] = []
-        var selectedTag: Tag? = nil
+        var contentField = "" // 본문
+        var placeField = "" // 검색할 장소명
+        var presentPlaceSearchView = false // 장소검색뷰 보여줄지 말지
+        var searchedPlaces: [Place] = [] // 검색장소 리스트
+        var place = "" // 사용자에게 보여줄 현재 장소명
+        var selectedPlace: Place? = nil // 현재 선택된 장소
+        var presentTagListView = false // 태그뷰 보여줄지 말지
+        var selectedTag: Tag? = nil // 선택 태그
+        var isSelectedImage = false // 사진이 선택된 상태인지
+        var selectedImage: Image = Resources.Images.plus // 현재 사진
+        var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
     }
     
     init() {
         input.saveBtnTapped
-            .sink { _ in
-                print(self.input.selectedImage.value)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                let place = self.output.selectedPlace
+                let tag = self.output.selectedTag
+                let log = Log(content: self.output.contentField, mapX: place?.mapx, 
+                              mapY: place?.mapy, tag: tag,
+                              thumb: nil, visitDate: self.input.visitedDate)
+                logRepo.addLog(log)
             }.store(in: &subscriptions)
         
         input.placeSearchBtnTapped
@@ -110,7 +117,8 @@ final class AddViewModel: BaseViewModel {
         input.selectedPlace
             .sink { [weak self] value in
                 guard let self, let value else { return }
-                self.output.place = value.replacedTitle // 장소 정보 가져와 보여주기 
+                self.output.selectedPlace = value
+                self.output.place = value.replacedTitle // 장소 정보 가져와 보여주기
                 self.output.presentPlaceSearchView.toggle() // sheet 내리기
                 self.output.searchedPlaces = [] // 검색결과 비워주고
                 self.output.placeField = "" // 검색 키워드 비워주기
@@ -120,12 +128,23 @@ final class AddViewModel: BaseViewModel {
             .sink { [weak self] _ in
                 guard let self else { return }
                 self.output.place = ""
+                self.output.selectedPlace = nil
             }.store(in: &subscriptions)
         
         input.selectedTag
             .sink { [weak self] value in
                 guard let self else { return }
                 self.output.selectedTag = value
+            }.store(in: &subscriptions)
+        
+        input.selectedImage
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.isSelectedImage = value != Resources.Images.plus
+                self.output.selectedImage = value
+                // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
+                guard !self.output.isSelectedImage else { return }
+                self.output.selectedPhotoItem = nil
             }.store(in: &subscriptions)
     }
 }
