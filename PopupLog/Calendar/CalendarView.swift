@@ -12,6 +12,7 @@ struct CalendarView: View {
     @State private var detentType: PresentationDetent = Resources.Detents.mid.detents
     @State private var isPresentingSheet = true
     @State private var isPresentingSideMenu = false
+    @State private var isMainView = true
     
     var body: some View {
         NavigationStack {
@@ -24,18 +25,19 @@ struct CalendarView: View {
                 SideMenuView(isPresenting: $isPresentingSideMenu,
                              content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
                 .changedBool($isPresentingSideMenu) {
+                    guard isMainView else { return }
                     isPresentingSheet = !isPresentingSideMenu
                 }
             }
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
-                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu))
+                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView, isPresentingSheet: $isPresentingSheet))
             })
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 1), destination: {
-                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu))
+                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView, isPresentingSheet: $isPresentingSheet))
             })
             .onAppear {
                 vm.action(.viewOnAppear)
-                vm.action(.sideMenuRowTappedIdx(idx: -1))
+                isMainView = true
             }
             .navigationBar(leading: {
                 leadingBarButton()
@@ -103,7 +105,7 @@ extension CalendarView {
                 .frame(height: proxy.size.width*0.9)
                 .padding(.horizontal)
                 .sheet(isPresented: $isPresentingSheet, content: {
-                    BottomSheetView()
+                    BottomSheetView(vm: vm)
                         .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
                         .presentationBackgroundInteraction(.enabled)
                         .presentationDragIndicator(.hidden)
@@ -113,6 +115,7 @@ extension CalendarView {
         }
     }
 }
-#Preview {
-    CalendarView()
-}
+
+//#Preview {
+//    CalendarView()
+//}
