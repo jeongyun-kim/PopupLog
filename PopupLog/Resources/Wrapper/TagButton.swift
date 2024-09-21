@@ -18,7 +18,7 @@ struct TagButton: View {
             HStack(spacing: 4) {
                 Text(emoji)
                 Text(tagName)
-                    .font(.callout)
+                    .font(Resources.Fonts.font14)
                     .foregroundStyle(Resources.Colors.black)
             }
             .padding(6)

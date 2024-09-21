@@ -31,6 +31,7 @@ enum Resources {
     enum Fonts {
         static let bold15 = UIFont.systemFont(ofSize: 15, weight: .bold)
         static let regular14 = UIFont.systemFont(ofSize: 14)
+        static let font14: Font = .system(size: 14)
     }
     
     enum Radius {
@@ -38,5 +39,6 @@ enum Resources {
         static let textContents: CGFloat = 10
         static let bottomSheet: CGFloat = 42
         static let image: CGFloat = 12
+        static let ticket: CGFloat = 20
     }
 }
