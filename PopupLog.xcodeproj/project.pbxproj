@@ -21,6 +21,7 @@
 		E009D96E2C9C8BB500D07972 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96D2C9C8BB500D07972 /* Log.swift */; };
 		E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96F2C9C8E9F00D07972 /* LogRepository.swift */; };
 		E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */; };
+		E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9772C9EAA5F00D07972 /* DBPlace.swift */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20642C98041600557A22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20632C98041600557A22 /* ContentView.swift */; };
 		E07A20662C98041700557A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20652C98041700557A22 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AC2C98690F00557A22 /* ChartView.swift */; };
 		E07A20B02C98691A00557A22 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AF2C98691A00557A22 /* AddView.swift */; };
 		E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20B12C98693C00557A22 /* LazyNavigationView.swift */; };
+		E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +76,7 @@
 		E009D96D2C9C8BB500D07972 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		E009D96F2C9C8E9F00D07972 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
 		E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolOnChangeWrapper.swift; sourceTree = "<group>"; };
+		E009D9772C9EAA5F00D07972 /* DBPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPlace.swift; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20632C98041600557A22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		E07A20AC2C98690F00557A22 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E07A20AF2C98691A00557A22 /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		E07A20B12C98693C00557A22 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
+		E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 			children = (
 				E009D95D2C9BFD9000D07972 /* Model */,
 				E009D96F2C9C8E9F00D07972 /* LogRepository.swift */,
+				E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -147,6 +152,7 @@
 			children = (
 				E009D95E2C9BFD9400D07972 /* Tag.swift */,
 				E009D96D2C9C8BB500D07972 /* Log.swift */,
+				E009D9772C9EAA5F00D07972 /* DBPlace.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -418,7 +424,9 @@
 				E07A20B02C98691A00557A22 /* AddView.swift in Sources */,
 				E07A20AA2C98673800557A22 /* SettingView.swift in Sources */,
 				E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */,
+				E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
+				E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */,
 				E009D9442C99E92000D07972 /* TagButton.swift in Sources */,
 				E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */,
 				E009D9512C9B342500D07972 /* APIKey.swift in Sources */,
