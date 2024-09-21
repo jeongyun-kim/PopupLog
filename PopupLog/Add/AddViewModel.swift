@@ -79,11 +79,15 @@ final class AddViewModel: BaseViewModel {
         input.saveBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
-                let place = self.output.selectedPlace
+                let content = self.output.contentField
+                let data = self.output.selectedPlace
+                let place = DBPlace(title: data?.replacedTitle, roadAddress: data?.roadAddress, mapX: data?.mapx, mapY: data?.mapy)
                 let tag = self.output.selectedTag
-                let log = Log(content: self.output.contentField, mapX: place?.mapx, 
-                              mapY: place?.mapy, tag: tag,
-                              thumb: nil, visitDate: self.input.visitedDate)
+                let date = self.input.visitedDate
+                let log = Log(content: content, place: place, tag: tag, visitDate: date)
+                if self.output.isSelectedImage {
+                    DocumentManager.shared.saveImage(id: "\(log.id)", image: self.output.selectedImage)
+                }
                 logRepo.addLog(log)
             }.store(in: &subscriptions)
         
