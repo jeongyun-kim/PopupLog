@@ -7,9 +7,13 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 final class CalendarViewModel: BaseViewModel {
+    private let logRepo = LogRepository.shared
     var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
+    var input = Input()
+    @Published var output = Output()
     
     struct Input {
         var viewOnAppear = PassthroughSubject<Void, Never>()
@@ -17,15 +21,6 @@ final class CalendarViewModel: BaseViewModel {
         var todayDate = CurrentValueSubject<Date, Never>(Date())
         var sideMenuRowTapped = PassthroughSubject<Int, Never>()
     }
-    
-    struct Output {
-        var currentYearMonth = ""
-        var randomTitle = ""
-        var tappedMenuIdx = -1
-    }
-    
-    var input = Input()
-    @Published var output = Output()
     
     enum Inputs {
         case viewOnAppear
@@ -47,12 +42,24 @@ final class CalendarViewModel: BaseViewModel {
         }
     }
     
+    struct Output {
+        var currentYearMonth = ""
+        var randomTitle = ""
+        var tappedMenuIdx = -1
+        var logList: [Log] = []
+    }
+    
     init() {
         input.viewOnAppear
             .sink { [weak self] _ in
                 guard let self else { return }
                 guard let title = Resources.titles.randomElement() else { return }
+                // 제목 랜덤 지정
                 self.output.randomTitle = title
+                // 사이드메뉴 누른 항목 초기화
+                self.output.tappedMenuIdx = -1
+                // 현재 선택되어있는 날짜로 다시 로그리스트 가져오기
+                self.output.logList = logRepo.getSelectedDateLogs(input.todayDate.value)
             }.store(in: &subscriptions)
         
         input.currentPage
@@ -67,6 +74,12 @@ final class CalendarViewModel: BaseViewModel {
             .sink { [weak self] value in
                 guard let self else { return }
                 self.output.tappedMenuIdx = value
+            }.store(in: &subscriptions)
+        
+        input.todayDate
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.logList = logRepo.getSelectedDateLogs(value)
             }.store(in: &subscriptions)
     }
     

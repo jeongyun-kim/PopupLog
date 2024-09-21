@@ -26,7 +26,7 @@ final class LogRepository {
         $logList.remove(log)
     }
     
-    func getFilteredLogs(_ date: Date) -> [Log] {
+    func getSelectedDateLogs(_ date: Date) -> [Log] {
         let logs = readAllLogs()
         let result = logs.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == date.formatted(date: .numeric, time: .omitted) }
         return result

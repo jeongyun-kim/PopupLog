@@ -44,6 +44,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             calendar.delegate = self
             calendar.dataSource = self
             calendar.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.identifier)
+            calendar.locale = Locale(identifier: "ko_KR")
             
             calendar.headerHeight = 0
             calendar.appearance.borderRadius = 0.5
@@ -78,7 +79,9 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
         
         // BottomSheet에 따른 달력 모드 변경(mid -> 월간, large -> 주간)
         func changeScopeByDetent(_ data: Resources.Detents) {
-            calendar.scope = data == .mid ? .month : .week
+            DispatchQueue.main.async {
+                self.calendar.scope = data == .mid ? .month : .week
+            }
         }
         
         // MARK: FSCalendar Extension
