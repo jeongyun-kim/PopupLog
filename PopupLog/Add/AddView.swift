@@ -19,6 +19,7 @@ struct AddView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     photoPickerView(proxy.size.width)
                     popupInfoView()
+                    titleView()
                     tagView()
                     contentsView()
                     Spacer()
@@ -31,23 +32,39 @@ struct AddView: View {
         .onDisappear {
             isPresentingSheet.toggle()
         }
-        .navigationBar {
-            
-        } trailing: {
-            Button(action: {
-                vm.action(.save)
-                dismiss()
-            }, label: {
-                Text("저장")
-            })
-            .disabled(vm.output.contentField.isEmpty) // 본문 비어있으면 저장 X
+        .navigationBar { } trailing: {
+           saveButton()
         }
         .navigationTitle("기록하기")
         .toolbarRole(.editor)
     }
 }
 
+// MARK: ViewUI
 extension AddView {
+    private func saveButton() -> some View {
+        Button(action: {
+            vm.action(.save)
+            dismiss()
+        }, label: {
+            Text("저장")
+        })
+        // 제목 / 본문 비어있으면 저장 X
+        .disabled(vm.output.contentField.isEmpty || vm.output.titleField.isEmpty)
+    }
+    
+    // MARK: 제목
+    private func titleView() -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("제목*")
+                .padding(.horizontal)
+                .font(.headline)
+            TextField("제목을 입력해주세요", text: $vm.output.titleField)
+                .asRoundedTextField()
+        }
+        .padding(.bottom, 8)
+    }
+    
     // MARK: 본문
     private func contentsView() -> some View {
         VStack(alignment: .leading) {
@@ -101,7 +118,6 @@ extension AddView {
                                     vm.action(.selectedTag(tag: item))
                                 }
                             }
-                            
                         }
                     }
                 }
@@ -132,7 +148,7 @@ extension AddView {
     private func popupInfoView() -> some View {
         VStack(alignment: .leading) {
             // 방문일뷰
-            HStack(spacing: 40) {
+            HStack(spacing: 30) {
                 HStack(spacing: 0) {
                     Text("방문일*")
                         .font(.callout)
@@ -223,7 +239,6 @@ extension AddView {
         .listStyle(.plain)
     }
     
-    
     // MARK: 사진
     private func photoPickerView(_ width: CGFloat) -> some View {
         ZStack(alignment: .center) {
@@ -232,8 +247,7 @@ extension AddView {
                     .fill(Resources.Colors.lightOrange)
                     .foregroundStyle(Resources.Colors.primaryColor)
                     .padding()
-                    .frame(width: width,
-                           height: width*0.75)
+                    .frame(width: width, height: width)
                     .overlay {
                         photoPickerImageView()
                     }
@@ -261,6 +275,7 @@ extension AddView {
             .padding()
     }
     
+    // 선택한 이미지 있을 때
     private func nonEmptyImageView() -> some View {
         ZStack(alignment: .topTrailing) {
             vm.output.selectedImage // 사용자 선택 이미지
@@ -279,6 +294,7 @@ extension AddView {
         }
     }
     
+    // 선택한 이미지 없을 때
     private func emptyImageView() -> some View {
         VStack(spacing: 4) {
             Resources.Images.plus

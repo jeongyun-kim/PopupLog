@@ -73,18 +73,20 @@ final class AddViewModel: BaseViewModel {
         var isSelectedImage = false // 사진이 선택된 상태인지
         var selectedImage: Image = Resources.Images.plus // 현재 사진
         var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
+        var titleField = ""
     }
     
     init() {
         input.saveBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
+                let title = self.output.titleField
                 let content = self.output.contentField
                 let data = self.output.selectedPlace
                 let place = DBPlace(title: data?.replacedTitle, roadAddress: data?.roadAddress, mapX: data?.mapx, mapY: data?.mapy)
                 let tag = self.output.selectedTag
                 let date = self.input.visitedDate
-                let log = Log(content: content, place: place, tag: tag, visitDate: date)
+                let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
                 if self.output.isSelectedImage {
                     DocumentManager.shared.saveImage(id: "\(log.id)", image: self.output.selectedImage)
                 }

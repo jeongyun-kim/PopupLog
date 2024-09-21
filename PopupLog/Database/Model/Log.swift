@@ -10,14 +10,16 @@ import RealmSwift
 
 final class Log: Object, ObjectKeyIdentifiable {
     @Persisted (primaryKey: true) var id: ObjectId
+    @Persisted var title: String
     @Persisted var content: String
     @Persisted var place: DBPlace?
     @Persisted var tag: Tag?
     @Persisted var visitDate: Date
     @Persisted var regDate: Date
     
-    convenience init(content: String, place: DBPlace?, tag: Tag? = nil, visitDate: Date) {
+    convenience init(title: String, content: String, place: DBPlace?, tag: Tag? = nil, visitDate: Date) {
         self.init()
+        self.title = title
         self.content = content
         self.place = place
         self.tag = tag
