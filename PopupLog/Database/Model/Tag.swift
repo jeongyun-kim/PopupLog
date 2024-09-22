@@ -13,18 +13,19 @@ final class Tag: Object, ObjectKeyIdentifiable {
     @Persisted var emoji: String
     @Persisted var tagName: String
     @Persisted var tagColor: String?
+    @Persisted var isDefault: Bool
     
-    convenience init(emoji: String, tagName: String, tagColor: String? = Resources.Colors.systemGray6.toHex()) {
+    convenience init(emoji: String, tagName: String, tagColor: String? = Resources.Colors.systemGray6.toHex(), isDefault: Bool = true) {
         self.init()
         self.emoji = emoji
         self.tagName = tagName
         self.tagColor = tagColor
+        self.isDefault = isDefault
     }
 }
 
 struct DefaultTags {
     static let defaultTagList = [
-        Tag(emoji: "😊", tagName: "기타"),
         Tag(emoji: "💖", tagName: "캐릭터", tagColor: "F3CCF3"),
         Tag(emoji: "💄", tagName: "뷰티", tagColor: "FED9ED"),
         Tag(emoji: "🧢", tagName: "의류", tagColor: "FBF0B2"),

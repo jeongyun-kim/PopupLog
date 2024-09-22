@@ -72,6 +72,7 @@ final class CalendarViewModel: BaseViewModel {
                 self.output.randomTitle = title
                 // 사이드메뉴 누른 항목 초기화
                 self.output.tappedMenuIdx = -1
+                TagRepository.shared.addDefaultTags()
             }.store(in: &subscriptions)
         
         input.currentPage
