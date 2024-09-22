@@ -18,12 +18,14 @@ final class DetailViewModel: BaseViewModel {
         let deleteBtnTapped = PassthroughSubject<Void, Never>()
         let flip = PassthroughSubject<Void, Never>()
         let logData = PassthroughSubject<Log, Never>()
+        let viewOnAppear = PassthroughSubject<Void, Never>()
     }
     
     enum Inputs {
-        case deleteLog
-        case flip
-        case logData(log: Log)
+        case deleteLog // 로그 삭제 
+        case flip // 화면 앞/뒤면 상태
+        case logData(log: Log) // 이전 뷰로부터 온 데이터
+        case viewOnAppear // 변경된 데이터 업데이트
     }
     
     func action(_ inputs: Inputs) {
@@ -34,6 +36,8 @@ final class DetailViewModel: BaseViewModel {
             return input.flip.send(())
         case .logData(let log):
             return input.logData.send(log)
+        case .viewOnAppear:
+            return input.viewOnAppear.send(())
         }
     }
     
@@ -60,6 +64,13 @@ final class DetailViewModel: BaseViewModel {
             .sink { [weak self] value in
                 guard let self else { return }
                 self.output.log = value
+            }.store(in: &subscriptions)
+        
+        input.viewOnAppear
+            .sink { [weak self] _ in
+                guard let self else { return }
+                guard let newLog = LogRepository.shared.getUpdatedLog(self.output.log) else { return }
+                self.output.log = newLog
             }.store(in: &subscriptions)
     }
 }

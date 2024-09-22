@@ -17,7 +17,6 @@ final class AddViewModel: BaseViewModel {
     @Published var output = Output()
     
     struct Input {
-        var logId: UUID? = nil
         var visitedDate = Date() // 방문일
         var selectedImage = CurrentValueSubject<Image, Never>(Resources.Images.plus) // 선택한 이미지
         var saveBtnTapped = PassthroughSubject<Void, Never>() // 저장버튼 탭
@@ -27,6 +26,7 @@ final class AddViewModel: BaseViewModel {
         var selectedPlace = CurrentValueSubject<Place?, Never>(nil) // 선택된 장소
         var removePlace = PassthroughSubject<Void, Never>() // 장소 지우기 탭
         var selectedTag = PassthroughSubject<Tag?, Never>() // 선택된 태그
+        var logToEdit = CurrentValueSubject<Log?, Never>(nil)
     }
     
     enum Inputs {
@@ -38,6 +38,7 @@ final class AddViewModel: BaseViewModel {
         case selectedPlace(place: Place)
         case removePlace
         case selectedTag(tag: Tag?)
+        case logToEdit(log: Log)
     }
     
     func action(_ inputs: Inputs) {
@@ -58,6 +59,8 @@ final class AddViewModel: BaseViewModel {
             return input.removePlace.send(())
         case .selectedTag(let tag):
             return input.selectedTag.send(tag)
+        case .logToEdit(let log):
+            return input.logToEdit.send(log)
         }
     }
     
@@ -74,6 +77,7 @@ final class AddViewModel: BaseViewModel {
         var selectedImage: Image = Resources.Images.plus // 현재 사진
         var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
         var titleField = ""
+        var isEditMode = false
     }
     
     init() {
@@ -86,11 +90,13 @@ final class AddViewModel: BaseViewModel {
                 let place = DBPlace(title: data?.replacedTitle, roadAddress: data?.roadAddress, mapX: data?.mapx, mapY: data?.mapy)
                 let tag = self.output.selectedTag
                 let date = self.input.visitedDate
-                let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
-                if self.output.isSelectedImage {
-                    DocumentManager.shared.saveImage(id: "\(log.id)", image: self.output.selectedImage)
+                
+                if output.isEditMode {
+                    logRepo.updateLog(input.logToEdit.value, title: title, content: content, place: place, tag: tag, visitDate: date)
+                } else {
+                    let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
+                    logRepo.addLog(log)
                 }
-                logRepo.addLog(log)
             }.store(in: &subscriptions)
         
         input.placeSearchBtnTapped
@@ -151,6 +157,19 @@ final class AddViewModel: BaseViewModel {
                 // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
                 guard !self.output.isSelectedImage else { return }
                 self.output.selectedPhotoItem = nil
+            }.store(in: &subscriptions)
+        
+        input.logToEdit
+            .sink { [weak self] value in
+                guard let self else { return }
+                guard let value else { return }
+                self.output.isEditMode = true
+                self.output.titleField = value.title
+                self.output.contentField = value.content
+                self.output.selectedTag = value.tag
+                self.input.visitedDate = value.visitDate
+                guard let place = value.place, let title = place.title else { return }
+                self.output.place = title
             }.store(in: &subscriptions)
     }
 }

@@ -54,7 +54,7 @@ extension CalendarView {
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
             trailingBarButton(AnyView(ChartView(isPresentingSheet: $bottomSheetPresenting.isPresenting)), image: Resources.Images.chart)
-            trailingBarButton(AnyView(AddView()), image: Resources.Images.plus)
+            trailingBarButton(AnyView(AddOrEditView()), image: Resources.Images.plus)
         }
     }
     

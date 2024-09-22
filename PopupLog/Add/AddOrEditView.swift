@@ -1,5 +1,5 @@
 //
-//  AddView.swift
+//  AddOrEditView.swift
 //  PopupLog
 //
 //  Created by 김정윤 on 9/16/24.
@@ -8,10 +8,16 @@
 import SwiftUI
 import PhotosUI
 
-struct AddView: View {
+struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
     @ObservedObject private var vm = AddViewModel()
+    
+    init(logToEdit: Log? = nil) {
+        if let logToEdit {
+            vm.action(.logToEdit(log: logToEdit))
+        }
+    }
     
     var body: some View {
         GeometryReader { proxy in
@@ -27,10 +33,16 @@ struct AddView: View {
             }
         }
         .onAppear {
-            isPresentingSheet.isPresenting.toggle()
+            // 기록을 추가할 때에는 BottomSheet를 내려야하지만 기록을 업데이트 할 때에는 BottomSheet가 내려가면 네비게이션 연결이 끊기므로 CalendarView로 돌아옴
+            // 이를 방지하기 위해, 현재 뷰의 상태를 구분지어 줘야 함
+            if !vm.output.isEditMode {
+                isPresentingSheet.isPresenting.toggle()
+            }
         }
         .onDisappear {
-            isPresentingSheet.isPresenting.toggle()
+            if !vm.output.isEditMode {
+                isPresentingSheet.isPresenting.toggle()
+            }
         }
         .navigationBar { } trailing: {
             saveButton()
@@ -41,7 +53,7 @@ struct AddView: View {
 }
 
 // MARK: ViewUI
-extension AddView {
+extension AddOrEditView {
     private func saveButton() -> some View {
         Button(action: {
             vm.action(.save)

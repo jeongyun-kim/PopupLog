@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     @ObservedObject private var vm = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
-
+    
     init(selectedLog: Log) {
         vm.action(.logData(log: selectedLog))
     }
@@ -27,6 +27,10 @@ struct DetailView: View {
                 dismissButton()
             } trailing: {
                 menuView()
+            }
+            .onAppear {
+                // 변경된 데이터 업데이트
+                vm.action(.viewOnAppear)
             }
         }
     }
@@ -73,19 +77,22 @@ extension DetailView {
     // MARK: 앞면 (이미지, 제목, 태그)
     func frontView(_ width: CGFloat) -> some View {
         VStack {
-            Image("ticketDefaultImage", bundle: nil)
+            Image("logo", bundle: nil)
                 .resizable()
-                .frame(width: width, height: width)
+                .frame(width: width, height: width*0.9)
                 .background(.blue)
+            Spacer()
             VStack(spacing: 8) {
                 Text(vm.output.log.title)
                     .font(.headline)
                     .lineLimit(2)
-                if let place = vm.output.log.place, let title = place.title {
-                    Text(title)
-                }
-                HStack {
-                    Spacer()
+                HStack(spacing: 8) {
+                    if let place = vm.output.log.place, let title = place.title {
+                        Text(title)
+                            .font(.callout)
+                            .foregroundStyle(Resources.Colors.lightGray)
+                            .lineLimit(2)
+                    }
                     if let tag = vm.output.log.tag, let tagColor = tag.tagColor {
                         TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor, action: {})
                             .disabled(true)
@@ -93,7 +100,9 @@ extension DetailView {
                 }
             }
             .padding(.horizontal, 32)
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: 뒷면 (제목, 내용)
@@ -120,7 +129,7 @@ extension DetailView {
         Menu {
             // 편집뷰로 이동
             NavigationLink {
-                LazyNavigationView(AddView(isPresentingSheet: .constant(false)))
+                LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
             } label: {
                 Text("편집")
             }
@@ -147,4 +156,3 @@ extension DetailView {
         })
     }
 }
-

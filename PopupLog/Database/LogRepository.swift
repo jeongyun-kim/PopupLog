@@ -13,6 +13,7 @@ final class LogRepository {
     static let shared = LogRepository()
     
     @ObservedResults(Log.self) private var logList
+    private let realm = try! Realm()
     
     func readAllLogs() -> [Log] {
         return Array(logList)
@@ -26,10 +27,22 @@ final class LogRepository {
         $logList.remove(log)
     }
     
-    func getSelectedDateLogs(_ date: Date) -> [Log] {
-        let logs = readAllLogs()
-        let result = logs.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == date.formatted(date: .numeric, time: .omitted) }
-        return result
+    func updateLog(_ log: Log?, title: String, content: String, place: DBPlace?, tag: Tag?, visitDate: Date) {
+        guard let log else { return }
+        
+        do {
+            try realm.write {
+                let value = ["id": log.id, "title": title, "tag": tag, "place": place, "visitDate": visitDate]
+                realm.create(Log.self, value: value, update: .modified)
+            }
+        } catch {
+            print("update fail")
+        }
+    }
+    
+    func getUpdatedLog(_ before: Log) -> Log? {
+        let newLog = realm.object(ofType: Log.self, forPrimaryKey: before.id)
+        return newLog
     }
     
     func searchLogs(_ keyword: String) -> [Log] {
