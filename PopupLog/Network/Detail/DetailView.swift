@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct DetailView: View {
+    @ObservedObject private var vm = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
-    @State var isFlipped = false
-    @Binding var log: Log
+
+    init(selectedLog: Log) {
+        vm.action(.logData(log: selectedLog))
+    }
     
     var body: some View {
         NavigationStack {
@@ -33,7 +36,7 @@ struct DetailView: View {
 extension DetailView {
     // MARK: 날짜뷰
     private func dateView() -> some View {
-        Text(log.visitDate.formatted(date: .numeric, time: .omitted))
+        Text(vm.output.log.visitDate.formatted(date: .numeric, time: .omitted))
             .padding(.horizontal)
             .padding(.top, 24)
             .padding(.bottom, 8)
@@ -49,20 +52,20 @@ extension DetailView {
                 .fill(.white)
                 .frame(height: proxy.size.height*0.8)
                 .overlay {
-                    if !isFlipped {
+                    if !vm.output.isFlipped {
                         frontView(proxy.size.width)
                     } else {
                         backView()
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .scaleEffect(x: isFlipped ? -1 : 1)
+                .scaleEffect(x: vm.output.isFlipped ? -1 : 1)
                 .padding(.horizontal)
                 .shadow(color: Resources.Colors.lightGray, radius: 12)
-                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-                .animation(.easeInOut(duration: 0.5), value: isFlipped)
+                .rotation3DEffect(.degrees(vm.output.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+                .animation(.easeInOut(duration: 0.5), value: vm.output.isFlipped)
                 .onTapGesture {
-                    isFlipped.toggle()
+                    vm.action(.flip)
                 }
         }
     }
@@ -75,15 +78,15 @@ extension DetailView {
                 .frame(width: width, height: width)
                 .background(.blue)
             VStack(spacing: 8) {
-                Text(log.title)
+                Text(vm.output.log.title)
                     .font(.headline)
                     .lineLimit(2)
-                if let place = log.place, let title = place.title {
+                if let place = vm.output.log.place, let title = place.title {
                     Text(title)
                 }
                 HStack {
                     Spacer()
-                    if let tag = log.tag, let tagColor = tag.tagColor {
+                    if let tag = vm.output.log.tag, let tagColor = tag.tagColor {
                         TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor, action: {})
                             .disabled(true)
                     }
@@ -97,14 +100,14 @@ extension DetailView {
     func backView() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                Text("✏️ \(log.title)")
+                Text("✏️ \(vm.output.log.title)")
                     .font(.title3)
                     .bold()
                     .lineLimit(nil)
                 Rectangle()
                     .fill(Resources.Colors.lightGray.opacity(0.5))
                     .frame(height: 1)
-                Text(log.content)
+                Text(vm.output.log.content)
             }
         }
         .scrollIndicators(.hidden)
@@ -123,12 +126,13 @@ extension DetailView {
             }
             // 현재 기록 삭제
             Button(action: {
-                print("delete")
+                vm.action(.deleteLog)
+                dismiss()
             }, label: {
                 Text("삭제")
             })
         } label: {
-            Image(systemName: "ellipsis.circle")
+            Resources.Images.more
                 .frame(width: 40, height: 40)
         }
     }

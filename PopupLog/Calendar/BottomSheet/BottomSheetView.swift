@@ -46,7 +46,7 @@ struct BottomSheetView: View {
             }
         }
         .fullScreenCover(isPresented: $vm.output.isPresentingFullCover, content: {
-            LazyNavigationView(DetailView(log: $vm.output.selectedLog))
+            LazyNavigationView(DetailView(selectedLog: vm.output.selectedLog))
         })
         .padding(.top, 32)
         .background(Resources.Colors.lightOrange)

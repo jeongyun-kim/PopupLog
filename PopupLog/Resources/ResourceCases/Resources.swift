@@ -16,6 +16,7 @@ enum Resources {
         static let chart = Image(systemName: "chart.bar")
         static let menu = Image(systemName: "line.3.horizontal")
         static let xmark = Image(systemName: "xmark")
+        static let more = Image(systemName: "ellipsis.circle")
     }
     
     enum Colors {
