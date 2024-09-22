@@ -20,6 +20,9 @@ final class CalendarViewModel: BaseViewModel {
         var currentPage = CurrentValueSubject<Date, Never>(Date())
         var todayDate = CurrentValueSubject<Date, Never>(Date())
         var sideMenuRowTapped = PassthroughSubject<Int, Never>()
+        var deleteLog = PassthroughSubject<Log, Never>()
+        var selectedLog = PassthroughSubject<Log, Never>()
+        var toggleFullCover = PassthroughSubject<Void, Never>()
     }
     
     enum Inputs {
@@ -27,6 +30,9 @@ final class CalendarViewModel: BaseViewModel {
         case changeCurrentPage(date: Date)
         case todayDate(date: Date)
         case sideMenuRowTappedIdx(idx: Int)
+        case deleteLog(log: Log)
+        case selectLog(log: Log)
+        case toggleFullCover
     }
     
     func action(_ inputs: Inputs) {
@@ -39,6 +45,12 @@ final class CalendarViewModel: BaseViewModel {
             input.todayDate.send(today)
         case .sideMenuRowTappedIdx(let idx):
             input.sideMenuRowTapped.send(idx)
+        case .deleteLog(let log):
+            input.deleteLog.send(log)
+        case .selectLog(let log):
+            input.selectedLog.send(log)
+        case .toggleFullCover:
+            input.toggleFullCover.send(())
         }
     }
     
@@ -46,7 +58,9 @@ final class CalendarViewModel: BaseViewModel {
         var currentYearMonth = ""
         var randomTitle = ""
         var tappedMenuIdx = -1
-        var logList: [Log] = []
+        var selectedDate = ""
+        var selectedLog = Log(title: "", content: "", place: nil, visitDate: Date())
+        var isPresentingFullCover = false
     }
     
     init() {
@@ -58,8 +72,6 @@ final class CalendarViewModel: BaseViewModel {
                 self.output.randomTitle = title
                 // 사이드메뉴 누른 항목 초기화
                 self.output.tappedMenuIdx = -1
-                // 현재 선택되어있는 날짜로 다시 로그리스트 가져오기
-                self.output.logList = logRepo.getSelectedDateLogs(input.todayDate.value)
             }.store(in: &subscriptions)
         
         input.currentPage
@@ -79,7 +91,25 @@ final class CalendarViewModel: BaseViewModel {
         input.todayDate
             .sink { [weak self] value in
                 guard let self else { return }
-                self.output.logList = logRepo.getSelectedDateLogs(value)
+                self.output.selectedDate = value.formatted(date: .numeric, time: .omitted)
+            }.store(in: &subscriptions)
+        
+        input.deleteLog
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.logRepo.deleteLog(value)
+            }.store(in: &subscriptions)
+        
+        input.selectedLog
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.selectedLog = value
+            }.store(in: &subscriptions)
+        
+        input.toggleFullCover
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.output.isPresentingFullCover.toggle()
             }.store(in: &subscriptions)
     }
     

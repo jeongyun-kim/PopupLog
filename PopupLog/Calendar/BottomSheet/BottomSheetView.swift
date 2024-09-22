@@ -6,29 +6,47 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct BottomSheetView: View {
+    @ObservedResults(Log.self) private var logList
     @ObservedObject var vm: CalendarViewModel
-    @State private var isPresentingFullCover = false
-    @State private var selectedLog: Log = Log(title: "", content: "", place: nil, visitDate: Date())
-    
+ 
     var body: some View {
         GeometryReader { proxy in
-            ScrollView {
-                LazyVStack(spacing: 30) {
-                    ForEach(vm.output.logList, id: \.id) { item in
-                        rowView(proxy.size.width, item: item)
-                            .onTapGesture {
-                                selectedLog = item
-                                isPresentingFullCover.toggle()
+            List {
+                ForEach(
+                    logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                ) { item in
+                    rowView(proxy.size.width, item: item)
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Resources.Colors.lightOrange)
+                        .onTapGesture {
+                            vm.action(.selectLog(log: item))
+                            vm.action(.toggleFullCover)
+                        }
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                vm.action(.deleteLog(log: item))
+                            } label: {
+                                Text("삭제")
                             }
-                    }
+                        }
                 }
-                .padding(.horizontal)
+            }
+            .listStyle(.plain)
+            .background(Resources.Colors.lightOrange)
+            .overlay { // 리스트에 부합하는 데이터 없을 때
+                let data = logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                if data.isEmpty {
+                    Rectangle()
+                        .fill(Resources.Colors.lightOrange)
+                        .ignoresSafeArea()
+                }
             }
         }
-        .fullScreenCover(isPresented: $isPresentingFullCover, content: {
-            LazyNavigationView(DetailView(log: $selectedLog))
+        .fullScreenCover(isPresented: $vm.output.isPresentingFullCover, content: {
+            LazyNavigationView(DetailView(log: $vm.output.selectedLog))
         })
         .padding(.top, 32)
         .background(Resources.Colors.lightOrange)
@@ -87,7 +105,6 @@ extension BottomSheetView {
                     .foregroundStyle(Resources.Colors.lightGray)
                 if let tag = item.tag, let tagColor = tag.tagColor {
                     TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor, action: {})
-                        .disabled(true)
                         .padding(.vertical, 8)
                         .padding(.trailing, 8)
                 }
