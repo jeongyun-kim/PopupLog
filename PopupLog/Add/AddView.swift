@@ -10,8 +10,8 @@ import PhotosUI
 
 struct AddView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
-    @StateObject private var vm = AddViewModel()
-    @Binding var isPresentingSheet: Bool
+    @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
+    @ObservedObject private var vm = AddViewModel()
     
     var body: some View {
         GeometryReader { proxy in
@@ -27,13 +27,13 @@ struct AddView: View {
             }
         }
         .onAppear {
-            isPresentingSheet.toggle()
+            isPresentingSheet.isPresenting.toggle()
         }
         .onDisappear {
-            isPresentingSheet.toggle()
+            isPresentingSheet.isPresenting.toggle()
         }
         .navigationBar { } trailing: {
-           saveButton()
+            saveButton()
         }
         .navigationTitle("기록하기")
         .toolbarRole(.editor)
@@ -83,7 +83,7 @@ extension AddView {
                 TextEditor(text: $vm.output.contentField)
                     .frame(height: 300)
                     .frame(maxWidth: .infinity)
-                    .opacity(vm.output.contentField.isEmpty ? 0.3 : 1) 
+                    .opacity(vm.output.contentField.isEmpty ? 0.3 : 1)
                     .padding(8)
                     .overlay {
                         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
@@ -132,10 +132,10 @@ extension AddView {
                 .sheet(isPresented: $vm.output.presentTagListView, content: {
                     List {
                         ForEach(0..<10) { _ in
-//                            TagButton(emoji: "💖", tagName: "하트") {
-//                                print("heart")
-//                                vm.output.presentTagListView = false
-//                            }
+                            //                            TagButton(emoji: "💖", tagName: "하트") {
+                            //                                print("heart")
+                            //                                vm.output.presentTagListView = false
+                            //                            }
                         }
                     }
                 })
@@ -302,8 +302,4 @@ extension AddView {
         }
         .padding(.top)
     }
-}
-
-#Preview {
-    AddView(isPresentingSheet: .constant(true))
 }

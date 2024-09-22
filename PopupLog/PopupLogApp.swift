@@ -12,6 +12,11 @@ struct PopupLogApp: App {
     var body: some Scene {
         WindowGroup {
             CalendarView()
+                .environmentObject(CalendarViewSheetPresent())
         }
     }
+}
+
+final class CalendarViewSheetPresent: ObservableObject {
+    @Published var isPresenting = true
 }

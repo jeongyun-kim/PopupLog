@@ -9,8 +9,8 @@ import SwiftUI
 
 struct CalendarView: View {
     @StateObject var vm = CalendarViewModel()
+    @EnvironmentObject var bottomSheetPresenting: CalendarViewSheetPresent
     @State private var detentType: PresentationDetent = Resources.Detents.mid.detents
-    @State private var isPresentingSheet = true
     @State private var isPresentingSideMenu = false
     @State private var isMainView = true
     
@@ -26,14 +26,14 @@ struct CalendarView: View {
                              content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
                 .changedBool($isPresentingSideMenu) {
                     guard isMainView else { return }
-                    isPresentingSheet = !isPresentingSideMenu
+                    bottomSheetPresenting.isPresenting = !isPresentingSideMenu
                 }
             }
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
-                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView, isPresentingSheet: $isPresentingSheet))
+                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView))
             })
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 1), destination: {
-                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView, isPresentingSheet: $isPresentingSheet))
+                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView))
             })
             .onAppear {
                 vm.action(.viewOnAppear)
@@ -53,8 +53,8 @@ struct CalendarView: View {
 extension CalendarView {
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
-            trailingBarButton(AnyView(ChartView(isPresentingSheet: $isPresentingSheet)), image: Resources.Images.chart)
-            trailingBarButton(AnyView(AddView(isPresentingSheet: $isPresentingSheet)), image: Resources.Images.plus)
+            trailingBarButton(AnyView(ChartView(isPresentingSheet: $bottomSheetPresenting.isPresenting)), image: Resources.Images.chart)
+            trailingBarButton(AnyView(AddView()), image: Resources.Images.plus)
         }
     }
     
@@ -65,13 +65,13 @@ extension CalendarView {
             image
         })
         .padding(8)
-        .disabled(!isPresentingSheet)
+        .disabled(!bottomSheetPresenting.isPresenting)
     }
     
     private func leadingBarButton() -> some View {
         Button(action: {
             isPresentingSideMenu.toggle()
-            isPresentingSheet = !isPresentingSideMenu
+            bottomSheetPresenting.isPresenting = !isPresentingSideMenu
         }, label: {
             Resources.Images.menu
                 .foregroundStyle(Resources.Colors.primaryColor)
@@ -104,7 +104,7 @@ extension CalendarView {
             FSCalendarViewControllerWrapper(vm: vm, detent: $detentType)
                 .frame(height: proxy.size.width*0.9)
                 .padding(.horizontal)
-                .sheet(isPresented: $isPresentingSheet, content: {
+                .sheet(isPresented: $bottomSheetPresenting.isPresenting, content: {
                     BottomSheetView(vm: vm)
                         .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
                         .presentationBackgroundInteraction(.enabled)

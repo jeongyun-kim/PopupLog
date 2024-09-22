@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @Binding var isPresentingSideMenu: Bool
     @Binding var isMainView: Bool
-    @Binding var isPresentingSheet: Bool
+    @EnvironmentObject var isPresentingSheet: CalendarViewSheetPresent
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
@@ -19,12 +19,8 @@ struct SearchView: View {
                 isMainView = false
             }
             .onDisappear {
-                isPresentingSheet = true
+                isPresentingSheet.isPresenting = true
             }
             .toolbarRole(.editor)
     }
 }
-
-//#Preview {
-//    SearchView(isPresentingSideMenu: .constant(true))
-//}
