@@ -108,7 +108,7 @@ final class AddViewModel: BaseViewModel {
         input.presentTagsBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
-                self.output.presentTagListView = true
+                self.output.presentTagListView.toggle()
             }.store(in: &subscriptions)
         
         input.searchPlace

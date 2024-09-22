@@ -22,6 +22,7 @@ enum Resources {
     enum Colors {
         static let primaryColor = Color(hex: "FF8911")
         static let lightOrange = Color(hex: "FCECC7")
+        static let moreLightOrange = Color(hex: "FFF6E3")
         static let primaryColorUK = UIColor(red: 1.00, green: 0.54, blue: 0.07, alpha: 1.00)
         static let white: Color = .white
         static let black: Color = .black

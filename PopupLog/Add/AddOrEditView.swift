@@ -7,11 +7,13 @@
 
 import SwiftUI
 import PhotosUI
+import RealmSwift
 
 struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
     @ObservedObject private var vm = AddViewModel()
+    @ObservedResults(Tag.self) private var tagList
     
     init(logToEdit: Log? = nil) {
         if let logToEdit {
@@ -119,20 +121,7 @@ extension AddOrEditView {
                         vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
                     }
                 }
-            }
-            HStack {
-                // 기본 태그 + 사용자가 생성한 태그 리스트 그리기
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack {
-                        ForEach(DefaultTags.defaultTagList, id: \.id) { item in
-                            if let hexString = item.tagColor {
-                                TagButton(emoji: item.emoji, tagName: item.tagName, tagColor: hexString) {
-                                    vm.action(.selectedTag(tag: item))
-                                }
-                            }
-                        }
-                    }
-                }
+                Spacer()
                 Button(action: {
                     // sheet 이용해 모든 태그리스트 띄우기
                     vm.action(.presentTags)
@@ -141,19 +130,65 @@ extension AddOrEditView {
                         .font(.callout)
                         .foregroundStyle(Resources.Colors.lightGray)
                 })
-                .sheet(isPresented: $vm.output.presentTagListView, content: {
-                    List {
-                        ForEach(0..<10) { _ in
-                            //                            TagButton(emoji: "💖", tagName: "하트") {
-                            //                                print("heart")
-                            //                                vm.output.presentTagListView = false
-                            //                            }
+            }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack {
+                    ForEach(tagList, id: \.id) { item in
+                        if let hexString = item.tagColor {
+                            TagButton(emoji: item.emoji, tagName: item.tagName, tagColor: hexString) {
+                                vm.action(.selectedTag(tag: item))
+                            }
                         }
                     }
-                })
+                }
             }
         }
         .padding(.horizontal)
+        .sheet(isPresented: $vm.output.presentTagListView, content: {
+            NavigationStack {
+                VStack {
+                    sheetPushTagSettingView()
+                    sheetTagListView()
+                }
+                .background(Resources.Colors.moreLightOrange)
+                .navigationTitle("태그 목록")
+                .navigationBarTitleDisplayMode(.inline)
+            }
+        })
+    }
+    
+    // MARK: 태그 리스트 -> 태그 관리
+    private func sheetPushTagSettingView() -> some View {
+        HStack {
+            Spacer()
+            NavigationLink {
+                LazyNavigationView(TagSettingView())
+            } label: {
+                HStack(spacing: 4) {
+                    Resources.Images.setting
+                    Text("태그 관리")
+                        .font(.callout)
+                }
+            }
+        }
+        .padding(.horizontal)
+    }
+    
+    // MARK: 모든 태그 리스트
+    private func sheetTagListView() -> some View {
+        List {
+            ForEach(tagList, id: \.id) { tag in
+                if let tagColor = tag.tagColor {
+                    TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor) {
+                        vm.action(.selectedTag(tag: tag))
+                        vm.action(.presentTags)
+                    }
+                    .listRowSeparator(.hidden)
+                }
+            }
+        }
+        .scrollContentBackground(.hidden)
     }
     
     // MARK: 방문일 & 팝업검색
@@ -200,6 +235,7 @@ extension AddOrEditView {
         .padding(.bottom, 6)
     }
     
+    // MARK: 검색 버튼
     private func searchPlaceButton() -> some View {
         Button(action: {
             vm.action(.placeSearch)
@@ -229,6 +265,7 @@ extension AddOrEditView {
         })
     }
     
+    // MARK: 검색결과 리스트
     private func searchPlaceListView() -> some View {
         List {
             ForEach(vm.output.searchedPlaces, id: \.id) { item in
@@ -271,6 +308,7 @@ extension AddOrEditView {
         .padding(.top)
     }
     
+    // MARK: PhotoPickerLabel
     private func photoPickerImageView() -> some View {
         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
             .stroke(style: StrokeStyle(lineWidth: 1, dash: [8]))
@@ -287,7 +325,7 @@ extension AddOrEditView {
             .padding()
     }
     
-    // 선택한 이미지 있을 때
+    // MARK: 선택한 이미지 O
     private func nonEmptyImageView() -> some View {
         ZStack(alignment: .topTrailing) {
             vm.output.selectedImage // 사용자 선택 이미지
@@ -306,7 +344,7 @@ extension AddOrEditView {
         }
     }
     
-    // 선택한 이미지 없을 때
+    // MARK: 선택 이미지 X
     private func emptyImageView() -> some View {
         VStack(spacing: 4) {
             Resources.Images.plus
