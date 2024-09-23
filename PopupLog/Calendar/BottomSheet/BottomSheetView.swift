@@ -103,8 +103,8 @@ extension BottomSheetView {
                 Text(item.place?.title ?? "")
                     .font(.caption)
                     .foregroundStyle(Resources.Colors.lightGray)
-                if let tag = item.tag, let tagColor = tag.tagColor {
-                    TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor, action: {})
+                if let tag = item.tag {
+                    TagButton(tag: tag, action: {})
                         .padding(.vertical, 8)
                         .padding(.trailing, 8)
                 }

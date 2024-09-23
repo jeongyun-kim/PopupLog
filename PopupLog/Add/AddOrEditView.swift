@@ -13,7 +13,6 @@ struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
     @ObservedObject private var vm = AddViewModel()
-    @ObservedResults(Tag.self) private var tagList
     
     init(logToEdit: Log? = nil) {
         if let logToEdit {
@@ -116,8 +115,8 @@ extension AddOrEditView {
                 Text("태그")
                     .font(.headline)
                 // 선택된 태그있으면 보여주기
-                if let tag = vm.output.selectedTag, let tagColor = tag.tagColor {
-                    TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor) {
+                if let tag = vm.output.selectedTag {
+                    TagButton(tag: tag) {
                         vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
                     }
                 }
@@ -134,11 +133,9 @@ extension AddOrEditView {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
-                    ForEach(tagList, id: \.id) { item in
-                        if let hexString = item.tagColor {
-                            TagButton(emoji: item.emoji, tagName: item.tagName, tagColor: hexString) {
-                                vm.action(.selectedTag(tag: item))
-                            }
+                    ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
+                        TagButton(tag: tag) {
+                            vm.action(.selectedTag(tag: tag))
                         }
                     }
                 }
@@ -177,18 +174,27 @@ extension AddOrEditView {
     
     // MARK: 모든 태그 리스트
     private func sheetTagListView() -> some View {
-        List {
-            ForEach(tagList, id: \.id) { tag in
-                if let tagColor = tag.tagColor {
-                    TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor) {
-                        vm.action(.selectedTag(tag: tag))
-                        vm.action(.presentTags)
+        ScrollView(showsIndicators: false) {
+            ZStack {
+                RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                    .fill(Resources.Colors.white)
+                LazyVStack(alignment: .leading) {
+                    ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
+                        HStack {
+                            TagButton(tag: tag) {
+                                vm.action(.selectedTag(tag: tag))
+                                vm.action(.presentTags)
+                            }
+                            Spacer()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .padding(4)
                     }
-                    .listRowSeparator(.hidden)
                 }
+                .padding()
             }
+            .padding()
         }
-        .scrollContentBackground(.hidden)
     }
     
     // MARK: 방문일 & 팝업검색
