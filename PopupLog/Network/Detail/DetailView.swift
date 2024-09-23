@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct DetailView: View {
     @ObservedObject private var vm = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
-    
-    init(selectedLog: Log) {
-        vm.action(.logData(log: selectedLog))
-    }
+    @ObservedRealmObject var selectedLog: Log
     
     var body: some View {
         NavigationStack {
@@ -29,8 +27,8 @@ struct DetailView: View {
                 menuView()
             }
             .onAppear {
-                // 변경된 데이터 업데이트
-                vm.action(.viewOnAppear)
+                // 수정할 데이터 보내기
+                vm.action(.logData(log: selectedLog))
             }
         }
     }
@@ -40,7 +38,7 @@ struct DetailView: View {
 extension DetailView {
     // MARK: 날짜뷰
     private func dateView() -> some View {
-        Text(vm.output.log.visitDate.formatted(date: .numeric, time: .omitted))
+        Text(selectedLog.visitDate.formatted(date: .numeric, time: .omitted))
             .padding(.horizontal)
             .padding(.top, 24)
             .padding(.bottom, 8)
@@ -83,18 +81,18 @@ extension DetailView {
                 .background(.blue)
             Spacer()
             VStack(spacing: 8) {
-                Text(vm.output.log.title)
+                Text(selectedLog.title)
                     .font(.headline)
                     .lineLimit(2)
                 HStack(spacing: 8) {
-                    if let place = vm.output.log.place, let title = place.title {
+                    if let place = selectedLog.place, let title = place.title {
                         Text(title)
                             .font(.callout)
                             .foregroundStyle(Resources.Colors.lightGray)
                             .lineLimit(2)
                     }
-                    if let tag = vm.output.log.tag, let tagColor = tag.tagColor {
-                        TagButton(emoji: tag.emoji, tagName: tag.tagName, tagColor: tagColor, action: {})
+                    if let tag = selectedLog.tag {
+                       TagButton(tag: tag, action: {})
                             .disabled(true)
                     }
                 }
@@ -109,7 +107,7 @@ extension DetailView {
     func backView() -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
-                Text("✏️ \(vm.output.log.title)")
+                Text("✏️ \(selectedLog.title)")
                     .font(.title3)
                     .bold()
                     .lineLimit(nil)
