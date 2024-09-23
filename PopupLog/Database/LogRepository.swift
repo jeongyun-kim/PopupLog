@@ -18,7 +18,7 @@ final class LogRepository {
     func readAllLogs() -> [Log] {
         return Array(logList)
     }
-    
+
     func addLog(_ log: Log) {
         $logList.append(log)
     }
@@ -32,17 +32,12 @@ final class LogRepository {
         
         do {
             try realm.write {
-                let value = ["id": log.id, "title": title, "tag": tag, "place": place, "visitDate": visitDate]
+                let value = ["id": log.id, "title": title, "content": content, "tag": tag, "place": place, "visitDate": visitDate]
                 realm.create(Log.self, value: value, update: .modified)
             }
         } catch {
             print("update fail")
         }
-    }
-    
-    func getUpdatedLog(_ before: Log) -> Log? {
-        let newLog = realm.object(ofType: Log.self, forPrimaryKey: before.id)
-        return newLog
     }
     
     func searchLogs(_ keyword: String) -> [Log] {
