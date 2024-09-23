@@ -105,10 +105,10 @@ extension BottomSheetView {
                     .foregroundStyle(Resources.Colors.lightGray)
                 if let tag = item.tag {
                     TagButton(tag: tag, action: {})
-                        .padding(.vertical, 8)
-                        .padding(.trailing, 8)
                 }
             }
+            .padding(.vertical, 8)
+            .padding(.trailing, 8)
         }
     }
 }
