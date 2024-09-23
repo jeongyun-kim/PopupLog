@@ -9,14 +9,13 @@ import SwiftUI
 import RealmSwift
 
 struct BottomSheetView: View {
-    @ObservedResults(Log.self) private var logList
     @ObservedObject var vm: CalendarViewModel
  
     var body: some View {
         GeometryReader { proxy in
             List {
                 ForEach(
-                    logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                    vm.logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
                 ) { item in
                     rowView(proxy.size.width, item: item)
                         .listRowSeparator(.hidden)
@@ -37,7 +36,7 @@ struct BottomSheetView: View {
             .listStyle(.plain)
             .background(Resources.Colors.lightOrange)
             .overlay { // 리스트에 부합하는 데이터 없을 때
-                let data = logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                let data = vm.logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
                 if data.isEmpty {
                     Rectangle()
                         .fill(Resources.Colors.lightOrange)

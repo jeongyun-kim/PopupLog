@@ -11,6 +11,7 @@ import RealmSwift
 
 final class CalendarViewModel: BaseViewModel {
     private let logRepo = LogRepository.shared
+    @ObservedResults(Log.self) var logList
     var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
