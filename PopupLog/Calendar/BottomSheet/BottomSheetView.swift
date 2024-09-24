@@ -79,7 +79,7 @@ extension BottomSheetView {
     private func contentsView(_ width: CGFloat, item: Log) -> some View {
         ZStack(alignment: .bottomTrailing) {
             HStack(alignment: .top, spacing: 8) {
-                Image("ticketDefaultImage", bundle: nil)
+                Image(uiImage: DocumentManager.shared.loadImage(id: "\(item.id)"))
                     .resizable()
                     .frame(maxWidth: width*0.35, maxHeight: .infinity)
                     .background(.gray)
@@ -103,7 +103,9 @@ extension BottomSheetView {
                     .font(.caption)
                     .foregroundStyle(Resources.Colors.lightGray)
                 if let tag = item.tag {
-                    TagButton(tag: tag, action: {})
+                    TagButton(tag: tag, action: {
+                        
+                    })
                 }
             }
             .padding(.vertical, 8)

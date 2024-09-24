@@ -12,11 +12,14 @@ enum Resources {
     enum Images {
         static let setting = Image(systemName: "gearshape.fill")
         static let search = Image(systemName: "magnifyingglass")
+        static let plusUK = UIImage(systemName: "plus")!
         static let plus = Image(systemName: "plus")
         static let chart = Image(systemName: "chart.bar")
         static let menu = Image(systemName: "line.3.horizontal")
         static let xmark = Image(systemName: "xmark")
         static let more = Image(systemName: "ellipsis.circle")
+        static let next = Image(systemName: "chevron.right")
+        static let ticket = UIImage(named: "ticketDefaultImage")!
     }
     
     enum Colors {

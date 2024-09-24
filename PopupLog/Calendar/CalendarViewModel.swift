@@ -100,6 +100,7 @@ final class CalendarViewModel: BaseViewModel {
             .sink { [weak self] value in
                 guard let self else { return }
                 self.logRepo.deleteLog(value)
+                DocumentManager.shared.removeImage(id: "\(value.id)")
             }.store(in: &subscriptions)
         
         input.selectedLog

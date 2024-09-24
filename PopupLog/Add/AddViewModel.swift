@@ -18,7 +18,7 @@ final class AddViewModel: BaseViewModel {
     
     struct Input {
         var visitedDate = Date() // 방문일
-        var selectedImage = CurrentValueSubject<Image, Never>(Resources.Images.plus) // 선택한 이미지
+        var selectedImage = CurrentValueSubject<UIImage, Never>(Resources.Images.plusUK) // 선택한 이미지
         var saveBtnTapped = PassthroughSubject<Void, Never>() // 저장버튼 탭
         var placeSearchBtnTapped = PassthroughSubject<Void, Never>() // 장소검색 버튼 탭
         var presentTagsBtnTapped = PassthroughSubject<Void, Never>() // 태그 모두보기 탭
@@ -31,7 +31,7 @@ final class AddViewModel: BaseViewModel {
     
     enum Inputs {
         case save
-        case image(selected: Image)
+        case image(selected: UIImage)
         case placeSearch
         case presentTags
         case searchPlace
@@ -74,7 +74,7 @@ final class AddViewModel: BaseViewModel {
         var presentTagListView = false // 태그뷰 보여줄지 말지
         var selectedTag: Tag? = nil // 선택 태그
         var isSelectedImage = false // 사진이 선택된 상태인지
-        var selectedImage: Image = Resources.Images.plus // 현재 사진
+        var selectedImage: UIImage = Resources.Images.plusUK // 현재 사진
         var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
         var titleField = ""
         var isEditMode = false
@@ -90,13 +90,26 @@ final class AddViewModel: BaseViewModel {
                 let place = DBPlace(title: data?.replacedTitle, roadAddress: data?.roadAddress, mapX: data?.mapx, mapY: data?.mapy)
                 let tag = self.output.selectedTag
                 let date = self.input.visitedDate
+                let image = self.input.selectedImage.value
                 
-                if output.isEditMode {
-                    logRepo.updateLog(input.logToEdit.value, title: title, content: content, place: place, tag: tag, visitDate: date)
-                } else {
+                
+                guard let log = input.logToEdit.value else {
+                    // 추가할 때
                     let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
                     logRepo.addLog(log)
+                    if self.output.isSelectedImage {
+                        DocumentManager.shared.saveImage(id: "\(log.id)", image: image)
+                    }
+                    return
                 }
+                
+                // 수정할 때
+                if self.output.isSelectedImage {
+                    DocumentManager.shared.saveImage(id: "\(log.id)", image: image)
+                } else {
+                    DocumentManager.shared.removeImage(id: "\(log.id)")
+                }
+                logRepo.updateLog(input.logToEdit.value, title: title, content: content, place: place, tag: tag, visitDate: date)
             }.store(in: &subscriptions)
         
         input.placeSearchBtnTapped
@@ -152,7 +165,8 @@ final class AddViewModel: BaseViewModel {
         input.selectedImage
             .sink { [weak self] value in
                 guard let self else { return }
-                self.output.isSelectedImage = value != Resources.Images.plus
+                self.output.isSelectedImage = value != Resources.Images.plusUK
+                print(self.output.isSelectedImage)
                 self.output.selectedImage = value
                 // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
                 guard !self.output.isSelectedImage else { return }
@@ -168,6 +182,15 @@ final class AddViewModel: BaseViewModel {
                 self.output.contentField = value.content
                 self.output.selectedTag = value.tag
                 self.input.visitedDate = value.visitDate
+                
+                // 이미지 찾아왔는데, 그 이미지가 기본 이미지인지 여부 확인
+                let image = DocumentManager.shared.loadImage(id: "\(value.id)")
+                self.output.isSelectedImage = image != Resources.Images.ticket
+                // 사용자 선택 이미지가 있다면 받아온 이미지 넣어주기
+                if self.output.isSelectedImage {
+                    self.output.selectedImage = image
+                }
+                
                 guard let place = value.place, let title = place.title else { return }
                 self.output.place = title
             }.store(in: &subscriptions)
