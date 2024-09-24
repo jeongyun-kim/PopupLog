@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CalendarView: View {
     @StateObject var vm = CalendarViewModel()
@@ -53,19 +54,22 @@ struct CalendarView: View {
 extension CalendarView {
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
-            trailingBarButton(AnyView(ChartView(isPresentingSheet: $bottomSheetPresenting.isPresenting)), image: Resources.Images.chart)
-            trailingBarButton(AnyView(AddOrEditView()), image: Resources.Images.plus)
+            NavigationLink {
+                LazyNavigationView(ChartView(isPresentingSheet: $bottomSheetPresenting.isPresenting))
+            } label: {
+                Resources.Images.chart
+                    .padding(8)
+                    .disabled(!bottomSheetPresenting.isPresenting)
+            }
+
+            NavigationLink {
+                LazyNavigationView(AddOrEditView())
+            } label: {
+                Resources.Images.plus
+                    .padding(8)
+                    .disabled(!bottomSheetPresenting.isPresenting)
+            }
         }
-    }
-    
-    private func trailingBarButton(_ view: AnyView, image: Image) -> some View {
-        return NavigationLink(destination: {
-            LazyNavigationView(view)
-        }, label: {
-            image
-        })
-        .padding(8)
-        .disabled(!bottomSheetPresenting.isPresenting)
     }
     
     private func leadingBarButton() -> some View {
