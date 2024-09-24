@@ -8,16 +8,15 @@
 import SwiftUI
 
 struct ChartView: View {
-    @Binding var isPresentingSheet: Bool
+    @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             .onAppear {
-                isPresentingSheet.toggle()
+                isPresentingSheet.isPresenting.toggle()
+            }
+            .onDisappear {
+                isPresentingSheet.isPresenting.toggle()
             }
     }
-}
-
-#Preview {
-    ChartView(isPresentingSheet: .constant(true))
 }
