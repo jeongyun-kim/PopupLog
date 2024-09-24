@@ -12,6 +12,7 @@ struct DetailView: View {
     @ObservedObject private var vm = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
     @ObservedRealmObject var selectedLog: Log
+    @ObservedResults (Log.self) private var logList
     
     var body: some View {
         NavigationStack {
@@ -133,7 +134,7 @@ extension DetailView {
             }
             // 현재 기록 삭제
             Button(action: {
-                vm.action(.deleteLog)
+                $logList.remove(selectedLog)
                 dismiss()
             }, label: {
                 Text("삭제")

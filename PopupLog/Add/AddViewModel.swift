@@ -11,7 +11,6 @@ import Combine
 import RealmSwift
 
 final class AddViewModel: BaseViewModel {
-    private let logRepo = LogRepository.shared
     var subscriptions = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -78,6 +77,7 @@ final class AddViewModel: BaseViewModel {
         var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
         var titleField = ""
         var isEditMode = false
+        var logForSave = Log()
     }
     
     init() {
@@ -91,25 +91,18 @@ final class AddViewModel: BaseViewModel {
                 let tag = self.output.selectedTag
                 let date = self.input.visitedDate
                 let image = self.input.selectedImage.value
+                let isValidImage = self.output.isSelectedImage
                 
-                
-                guard let log = input.logToEdit.value else {
-                    // 추가할 때
-                    let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
-                    logRepo.addLog(log)
-                    if self.output.isSelectedImage {
-                        DocumentManager.shared.saveImage(id: "\(log.id)", image: image)
-                    }
-                    return
-                }
-                
-                // 수정할 때
-                if self.output.isSelectedImage {
-                    DocumentManager.shared.saveImage(id: "\(log.id)", image: image)
+                if let log = input.logToEdit.value {
+                    // 수정 모드
+                    managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
+                    LogRepository.shared.updateLog(log, title: title, content: content, place: place, tag: tag, visitDate: date)
                 } else {
-                    DocumentManager.shared.removeImage(id: "\(log.id)")
+                    let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
+                    self.output.logForSave = log
+                    managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
                 }
-                logRepo.updateLog(input.logToEdit.value, title: title, content: content, place: place, tag: tag, visitDate: date)
+           
             }.store(in: &subscriptions)
         
         input.placeSearchBtnTapped
@@ -166,7 +159,6 @@ final class AddViewModel: BaseViewModel {
             .sink { [weak self] value in
                 guard let self else { return }
                 self.output.isSelectedImage = value != Resources.Images.plusUK
-                print(self.output.isSelectedImage)
                 self.output.selectedImage = value
                 // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
                 guard !self.output.isSelectedImage else { return }
@@ -194,5 +186,13 @@ final class AddViewModel: BaseViewModel {
                 guard let place = value.place, let title = place.title else { return }
                 self.output.place = title
             }.store(in: &subscriptions)
+    }
+    
+    private func managingImage(isValid: Bool, id: String, image: UIImage?) {
+        guard let image, isValid else {
+            DocumentManager.shared.removeImage(id: id)
+            return
+        }
+        DocumentManager.shared.saveImage(id: id, image: image)
     }
 }

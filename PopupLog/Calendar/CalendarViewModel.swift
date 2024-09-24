@@ -11,7 +11,6 @@ import RealmSwift
 
 final class CalendarViewModel: BaseViewModel {
     private let logRepo = LogRepository.shared
-    @ObservedResults(Log.self) var logList
     var subscriptions: Set<AnyCancellable> = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -21,7 +20,7 @@ final class CalendarViewModel: BaseViewModel {
         var currentPage = CurrentValueSubject<Date, Never>(Date())
         var todayDate = CurrentValueSubject<Date, Never>(Date())
         var sideMenuRowTapped = PassthroughSubject<Int, Never>()
-        var deleteLog = PassthroughSubject<Log, Never>()
+        var deleteLogImage = PassthroughSubject<String, Never>()
         var selectedLog = PassthroughSubject<Log, Never>()
         var toggleFullCover = PassthroughSubject<Void, Never>()
     }
@@ -31,7 +30,7 @@ final class CalendarViewModel: BaseViewModel {
         case changeCurrentPage(date: Date)
         case todayDate(date: Date)
         case sideMenuRowTappedIdx(idx: Int)
-        case deleteLog(log: Log)
+        case deleteLogImage(id: String)
         case selectLog(log: Log)
         case toggleFullCover
     }
@@ -46,8 +45,8 @@ final class CalendarViewModel: BaseViewModel {
             input.todayDate.send(today)
         case .sideMenuRowTappedIdx(let idx):
             input.sideMenuRowTapped.send(idx)
-        case .deleteLog(let log):
-            input.deleteLog.send(log)
+        case .deleteLogImage(let id):
+            input.deleteLogImage.send(id)
         case .selectLog(let log):
             input.selectedLog.send(log)
         case .toggleFullCover:
@@ -96,11 +95,10 @@ final class CalendarViewModel: BaseViewModel {
                 self.output.selectedDate = value.formatted(date: .numeric, time: .omitted)
             }.store(in: &subscriptions)
         
-        input.deleteLog
+        input.deleteLogImage
             .sink { [weak self] value in
                 guard let self else { return }
-                self.logRepo.deleteLog(value)
-                DocumentManager.shared.removeImage(id: "\(value.id)")
+                DocumentManager.shared.removeImage(id: value)
             }.store(in: &subscriptions)
         
         input.selectedLog

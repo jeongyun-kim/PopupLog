@@ -55,20 +55,20 @@ extension CalendarView {
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
             NavigationLink {
-                LazyNavigationView(ChartView(isPresentingSheet: $bottomSheetPresenting.isPresenting))
+                LazyNavigationView(ChartView())
             } label: {
                 Resources.Images.chart
                     .padding(8)
-                    .disabled(!bottomSheetPresenting.isPresenting)
             }
+            .disabled(!bottomSheetPresenting.isPresenting)
 
             NavigationLink {
                 LazyNavigationView(AddOrEditView())
             } label: {
                 Resources.Images.plus
                     .padding(8)
-                    .disabled(!bottomSheetPresenting.isPresenting)
             }
+            .disabled(!bottomSheetPresenting.isPresenting)
         }
     }
     

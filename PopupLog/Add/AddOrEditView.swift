@@ -13,6 +13,7 @@ struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
     @ObservedObject private var vm = AddViewModel()
+    @ObservedResults (Log.self) private var logList
     
     init(logToEdit: Log? = nil) {
         if let logToEdit {
@@ -58,6 +59,9 @@ extension AddOrEditView {
     private func saveButton() -> some View {
         Button(action: {
             vm.action(.save)
+            if !vm.output.isEditMode {
+                $logList.append(vm.output.logForSave)
+            }
             dismiss()
         }, label: {
             Text("저장")
@@ -334,12 +338,13 @@ extension AddOrEditView {
     // MARK: 선택한 이미지 O
     private func nonEmptyImageView() -> some View {
         ZStack(alignment: .topTrailing) {
-            vm.output.selectedImage // 사용자 선택 이미지
+            // 사용자 선택 이미지
+            Image(uiImage: vm.output.selectedImage)
                 .resizable()
                 .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.image))
             // 변경한 사진 제거
             Button(action: {
-                vm.action(.image(selected: Resources.Images.plus))
+                vm.action(.image(selected: Resources.Images.plusUK))
             }, label: {
                 Resources.Images.xmark
                     .resizable()

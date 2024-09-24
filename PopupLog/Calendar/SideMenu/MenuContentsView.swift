@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct MenuContentsView: View {
+    @ObservedResults(Log.self) private var logList
+    
     // 사이드메뉴의 표출 여부
     @Binding var isPresenting: Bool
     @ObservedObject var vm: CalendarViewModel
@@ -74,7 +77,7 @@ extension MenuContentsView {
                 .font(.title3)
                 .foregroundStyle(Resources.Colors.lightGray)
                 .bold()
-            Text("5개")
+            Text("\(logList.count)개")
                 .font(.title2)
                 .bold()
                 .foregroundStyle(Resources.Colors.black)
@@ -95,8 +98,4 @@ extension MenuContentsView {
         .padding(.trailing, 100)
         .foregroundStyle(.black)
     }
-}
-
-#Preview {
-    MenuContentsView(isPresenting: .constant(true), vm: CalendarViewModel())
 }

@@ -47,7 +47,7 @@ final class DetailViewModel: BaseViewModel {
             .sink { [weak self] _ in
                 guard let self else { return }
                 let log = self.output.log
-                LogRepository.shared.deleteLog(log)
+                DocumentManager.shared.removeImage(id: "\(log.id)")
             }.store(in: &subscriptions)
         
         input.flip
