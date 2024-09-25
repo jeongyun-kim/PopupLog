@@ -128,7 +128,7 @@ extension DetailView {
         Menu {
             // 편집뷰로 이동
             NavigationLink {
-                LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
+                //  LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
             } label: {
                 Text("편집")
             }

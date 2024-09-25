@@ -25,6 +25,11 @@
 		E035D0B82C9F07FE0018AD8C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
+		E035D0C02CA061F00018AD8C /* TagAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* TagAddView.swift */; };
+		E035D0C22CA062990018AD8C /* TagEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C12CA062990018AD8C /* TagEditView.swift */; };
+		E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C92CA312400018AD8C /* View + Extension.swift */; };
+		E035D0D02CA394820018AD8C /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E035D0CF2CA394820018AD8C /* EmojiPicker */; };
+		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20642C98041600557A22 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20632C98041600557A22 /* ContentView.swift */; };
 		E07A20662C98041700557A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20652C98041700557A22 /* Assets.xcassets */; };
@@ -52,6 +57,7 @@
 		E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20B12C98693C00557A22 /* LazyNavigationView.swift */; };
 		E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
 		E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BE2C9ED37E005EC98B /* DetailView.swift */; };
+		E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +90,9 @@
 		E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		E035D0B92CA04B100018AD8C /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
+		E035D0BF2CA061F00018AD8C /* TagAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddView.swift; sourceTree = "<group>"; };
+		E035D0C12CA062990018AD8C /* TagEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEditView.swift; sourceTree = "<group>"; };
+		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20632C98041600557A22 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +119,7 @@
 		E07A20B12C98693C00557A22 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
 		E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
 		E08002BE2C9ED37E005EC98B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +129,10 @@
 			files = (
 				E009D96A2C9C02CB00D07972 /* RealmSwift in Frameworks */,
 				E009D9562C9B34DE00D07972 /* Alamofire in Frameworks */,
+				E035D0D02CA394820018AD8C /* EmojiPicker in Frameworks */,
 				E07A207F2C9804BE00557A22 /* SnapKit in Frameworks */,
 				E07A20822C9804C600557A22 /* FSCalendar in Frameworks */,
+				E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +142,6 @@
 		E009D94F2C9B341E00D07972 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				E08002BD2C9ED357005EC98B /* Detail */,
 				E009D9572C9B368D00D07972 /* Model */,
 				E009D9502C9B342500D07972 /* APIKey.swift */,
 				E009D9522C9B34CB00D07972 /* NetworkService.swift */,
@@ -200,6 +211,7 @@
 				E009D95C2C9BFD8500D07972 /* Database */,
 				E009D94F2C9B341E00D07972 /* Network */,
 				E07A20AE2C98691400557A22 /* Add */,
+				E08002BD2C9ED357005EC98B /* Detail */,
 				E07A20AB2C98690800557A22 /* Chart */,
 				E07A20A82C98673100557A22 /* Setting */,
 				E07A20A52C98659F00557A22 /* Search */,
@@ -237,6 +249,8 @@
 			isa = PBXGroup;
 			children = (
 				E07A20772C98046500557A22 /* Color + Extension.swift */,
+				E035D0C92CA312400018AD8C /* View + Extension.swift */,
+				E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -304,6 +318,8 @@
 			children = (
 				E07A20A92C98673800557A22 /* SettingView.swift */,
 				E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */,
+				E035D0BF2CA061F00018AD8C /* TagAddView.swift */,
+				E035D0C12CA062990018AD8C /* TagEditView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -364,6 +380,8 @@
 				E07A20812C9804C600557A22 /* FSCalendar */,
 				E009D9552C9B34DE00D07972 /* Alamofire */,
 				E009D9692C9C02CB00D07972 /* RealmSwift */,
+				E035D0CF2CA394820018AD8C /* EmojiPicker */,
+				E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */,
 			);
 			productName = PopupLog;
 			productReference = E07A205E2C98041600557A22 /* PopupLog.app */;
@@ -398,6 +416,8 @@
 				E07A20802C9804C600557A22 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 				E009D9542C9B34DE00D07972 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E009D9682C9C02CB00D07972 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				E035D0CE2CA394810018AD8C /* XCRemoteSwiftPackageReference "EmojiPicker" */,
+				E064A99F2CA3ABDD00A4AE8C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
 			);
 			productRefGroup = E07A205F2C98041600557A22 /* Products */;
 			projectDirPath = "";
@@ -429,12 +449,15 @@
 				E07A20642C98041600557A22 /* ContentView.swift in Sources */,
 				E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */,
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
+				E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */,
 				E07A20A42C981F1D00557A22 /* Texts.swift in Sources */,
 				E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */,
 				E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */,
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
 				E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */,
 				E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */,
+				E035D0C22CA062990018AD8C /* TagEditView.swift in Sources */,
+				E035D0C02CA061F00018AD8C /* TagAddView.swift in Sources */,
 				E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
 				E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */,
@@ -445,6 +468,7 @@
 				E07A20B02C98691A00557A22 /* AddOrEditView.swift in Sources */,
 				E07A20AA2C98673800557A22 /* SettingView.swift in Sources */,
 				E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */,
+				E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */,
 				E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */,
 				E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
@@ -696,6 +720,22 @@
 				version = 20.0.0;
 			};
 		};
+		E035D0CE2CA394810018AD8C /* XCRemoteSwiftPackageReference "EmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kelvas09/EmojiPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+		E064A99F2CA3ABDD00A4AE8C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/izyumkin/MCEmojiPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.3;
+			};
+		};
 		E07A207D2C9804BE00557A22 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -724,6 +764,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E009D9682C9C02CB00D07972 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		E035D0CF2CA394820018AD8C /* EmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E035D0CE2CA394810018AD8C /* XCRemoteSwiftPackageReference "EmojiPicker" */;
+			productName = EmojiPicker;
+		};
+		E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E064A99F2CA3ABDD00A4AE8C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */;
+			productName = MCEmojiPicker;
 		};
 		E07A207E2C9804BE00557A22 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
