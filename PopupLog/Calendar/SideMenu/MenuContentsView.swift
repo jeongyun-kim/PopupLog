@@ -43,7 +43,7 @@ extension MenuContentsView {
             case .search:
                 return "검색"
             case .setting:
-                return "설정"
+                return "태그 관리"
             }
         }
         
@@ -52,7 +52,7 @@ extension MenuContentsView {
             case .search:
                 return Resources.Images.search
             case .setting:
-                return Resources.Images.setting
+                return Resources.Images.tagSetting
             }
         }
     }

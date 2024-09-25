@@ -10,7 +10,7 @@ import UIKit
 
 enum Resources {
     enum Images {
-        static let setting = Image(systemName: "gearshape.fill")
+        static let tagSetting = Image(systemName: "tag.fill")
         static let search = Image(systemName: "magnifyingglass")
         static let plusUK = UIImage(systemName: "plus")!
         static let plus = Image(systemName: "plus")
