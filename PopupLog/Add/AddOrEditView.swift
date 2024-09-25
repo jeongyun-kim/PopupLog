@@ -34,6 +34,7 @@ struct AddOrEditView: View {
                 }
             }
         }
+        .onTapGesture(count: 99) {}
         .onTapGesture {
             self.endTextEditing()
         }
@@ -170,7 +171,7 @@ extension AddOrEditView {
                 LazyNavigationView(TagSettingView())
             } label: {
                 HStack(spacing: 4) {
-                    Resources.Images.setting
+                    Resources.Images.tagSetting
                     Text("태그 관리")
                         .font(.callout)
                 }
@@ -367,3 +368,4 @@ extension AddOrEditView {
         .padding(.top)
     }
 }
+
