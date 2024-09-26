@@ -57,6 +57,7 @@
 		E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BE2C9ED37E005EC98B /* DetailView.swift */; };
 		E0A7E1742CA466F500390718 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1732CA466F500390718 /* Date + Extension.swift */; };
 		E0A7E1762CA5C0B100390718 /* StackViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1752CA5C0B100390718 /* StackViewType.swift */; };
+		E0A7E1782CA5C7C800390718 /* TicketRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1772CA5C7C800390718 /* TicketRowView.swift */; };
 		E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,7 @@
 		E08002BE2C9ED37E005EC98B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E0A7E1732CA466F500390718 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		E0A7E1752CA5C0B100390718 /* StackViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewType.swift; sourceTree = "<group>"; };
+		E0A7E1772CA5C7C800390718 /* TicketRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRowView.swift; sourceTree = "<group>"; };
 		E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				E07A20B12C98693C00557A22 /* LazyNavigationView.swift */,
+				E0A7E1772CA5C7C800390718 /* TicketRowView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */,
 				E0A7E1762CA5C0B100390718 /* StackViewType.swift in Sources */,
 				E009D95B2C9B36CC00D07972 /* SearchPlaceResults.swift in Sources */,
+				E0A7E1782CA5C7C800390718 /* TicketRowView.swift in Sources */,
 				E009D95F2C9BFD9400D07972 /* Tag.swift in Sources */,
 				E07A20862C98050400557A22 /* CalendarCell.swift in Sources */,
 				E009D9532C9B34CB00D07972 /* NetworkService.swift in Sources */,
