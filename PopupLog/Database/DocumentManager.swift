@@ -28,6 +28,8 @@ final class DocumentManager {
             } catch {
                 print("failed to create folder")
             }
+        } else {
+            return 
         }
     }
     
@@ -36,7 +38,7 @@ final class DocumentManager {
         createFolder()
         
         // 이미지 데이터 불러오기
-        guard let data = image.jpegData(compressionQuality: 0.5) else { return }
+        guard let data = image.jpegData(compressionQuality: 0.3) else { return }
         let imageName = "\(id).jpg"
         let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
         
@@ -52,6 +54,7 @@ final class DocumentManager {
         guard let folderPath = getFolderPath() else {
             return Resources.Images.ticket
         }
+        
         let imageName = "\(id).jpg"
         let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
         
@@ -68,9 +71,12 @@ final class DocumentManager {
     func removeImage(id: String) {
         guard let folderPath = getFolderPath() else { return }
         
-        if fileManager.fileExists(atPath: folderPath.path()) {
+        let imageName = "\(id).jpg"
+        let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
+        
+        if fileManager.fileExists(atPath: fileURL.path()) {
             do {
-                try fileManager.removeItem(atPath: folderPath.path())
+                try fileManager.removeItem(atPath: fileURL.path())
             } catch {
                 print("file remove error", error)
             }
