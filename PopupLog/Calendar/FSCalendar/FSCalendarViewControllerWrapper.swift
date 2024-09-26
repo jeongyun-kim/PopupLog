@@ -14,14 +14,17 @@ import SnapKit
 struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     @ObservedObject var vm: CalendarViewModel
     @Binding var detent: PresentationDetent
+    @Binding var disappearedDetailView: Bool
 
     func makeUIViewController(context: Context) -> some UIViewController {
         FSCalendarViewController(vm: vm)
     }
     
-    // BottomSheet 높이 변할 때마다 달력의 형태도 변경 
+    // - BottomSheet 높이 변할 때마다 달력의 형태도 변경
+    // - 상세뷰에서 편집 후 이미지 변경 시, 바로 썸네일 반영되도록 calendar.reloadData()
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         guard let vc = uiViewController as? FSCalendarViewController else { return }
+        vc.reloadCalendar(disappearedDetailView)
         guard let detentType = Resources.Detents.allCases.filter({ $0.detents == detent }).first else { return }
         vc.changeScopeByDetent(detentType)
     }
@@ -118,6 +121,15 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             let detent = Resources.Detents.allCases[Int(calendar.scope.rawValue)]
             guard detent == .mid else { return }
             vm.action(.changeCurrentPage(date: calendar.currentPage))
+        }
+        
+        func reloadCalendar(_ disappeared: Bool) {
+            DispatchQueue.main.async {
+                if disappeared {
+                    self.calendar.reloadData()
+                    self.vm.action(.disappearedDetailView(disappeared: false))
+                }
+            }
         }
     }
 }

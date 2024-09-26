@@ -34,7 +34,7 @@ struct CalendarView: View {
                 LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView))
             })
             .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 1), destination: {
-                LazyNavigationView(SettingView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView))
+                LazyNavigationView(TagSettingView())
             })
             .onAppear {
                 vm.action(.viewOnAppear)
@@ -61,7 +61,7 @@ extension CalendarView {
                     .padding(8)
             }
             .disabled(!bottomSheetPresenting.isPresenting)
-
+            
             NavigationLink {
                 LazyNavigationView(AddOrEditView())
             } label: {
@@ -105,7 +105,7 @@ extension CalendarView {
     
     private func calendarView() -> some View {
         GeometryReader { proxy in
-            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType)
+            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, disappearedDetailView: $vm.output.disappearedDetailView)
                 .frame(height: proxy.size.width*0.9)
                 .padding(.horizontal)
                 .sheet(isPresented: $bottomSheetPresenting.isPresenting, content: {
@@ -119,7 +119,3 @@ extension CalendarView {
         }
     }
 }
-
-//#Preview {
-//    CalendarView()
-//}
