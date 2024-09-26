@@ -39,7 +39,7 @@ struct DetailView: View {
 extension DetailView {
     // MARK: 날짜뷰
     private func dateView() -> some View {
-        Text(selectedLog.visitDate.formatted(date: .numeric, time: .omitted))
+        Text(selectedLog.visitDate.formattedDate)
             .padding(.horizontal)
             .padding(.top, 24)
             .padding(.bottom, 8)
@@ -128,7 +128,7 @@ extension DetailView {
         Menu {
             // 편집뷰로 이동
             NavigationLink {
-                //  LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
+                LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
             } label: {
                 Text("편집")
             }

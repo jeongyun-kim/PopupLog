@@ -16,7 +16,7 @@ struct BottomSheetView: View {
         GeometryReader { proxy in
             List {
                 ForEach(
-                    logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                    logList.filter { $0.visitDate.formattedDate == vm.output.selectedDate }
                     , id: \.id
                 ) { item in
                     rowView(proxy.size.width, item: item)
@@ -39,7 +39,7 @@ struct BottomSheetView: View {
             .listStyle(.plain)
             .background(Resources.Colors.lightOrange)
             .overlay { // 리스트에 부합하는 데이터 없을 때
-                let data = logList.filter { $0.visitDate.formatted(date: .numeric, time: .omitted) == vm.output.selectedDate }
+                let data = logList.filter { $0.visitDate.formattedDate == vm.output.selectedDate }
                 if data.isEmpty {
                     Rectangle()
                         .fill(Resources.Colors.lightOrange)

@@ -92,7 +92,7 @@ final class CalendarViewModel: BaseViewModel {
         input.todayDate
             .sink { [weak self] value in
                 guard let self else { return }
-                self.output.selectedDate = value.formatted(date: .numeric, time: .omitted)
+                self.output.selectedDate = value.formattedDate
             }.store(in: &subscriptions)
         
         input.deleteLogImage
