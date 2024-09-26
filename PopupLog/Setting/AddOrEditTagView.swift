@@ -39,12 +39,19 @@ struct AddOrEditTagView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
-                    Button(selectedEmoji) {
-                        isPresentingEmojiView.toggle()
-                    }.emojiPicker(
-                        isPresented: $isPresentingEmojiView,
-                        selectedEmoji: $selectedEmoji
-                    )
+                    ZStack {
+                        RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                            .fill(Resources.Colors.white)
+                            .frame(width: 56, height: 56)
+                        Button(selectedEmoji) {
+                            isPresentingEmojiView.toggle()
+                        }.emojiPicker(
+                            isPresented: $isPresentingEmojiView,
+                            selectedEmoji: $selectedEmoji
+                        )
+                        .font(.title)
+                    }
+                    
                     TextField("등록할 태그명을 입력해주세요", text: $tagName)
                         .frame(maxWidth: .infinity)
                         .frame(height: 56)
@@ -88,23 +95,46 @@ struct AddOrEditTagView: View {
    
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Resources.Colors.moreLightOrange)
-        .navigationTitle("태그 생성")
-        .navigationBar(leading: {}, trailing: {
+        .navigationTitle(isEditMode == false ? "태그 생성" : "태그 편집")
+        .navigationBar(leading: {
+            
+        }, trailing: {
+            trailingButtons()
+        })
+        .toolbarRole(.editor)
+    }
+    
+    private func trailingButtons() -> some View {
+        HStack {
+            if isEditMode {
+                Button(action: {
+                    $tagList.remove(tagForEdit)
+                    dismiss()
+                }, label: {
+                    Text("삭제")
+                })
+            }
             Button(action: {
                 let tagColor = tagColor.toHex()
-                if isEditMode {
-                    $tagForEdit.tagName.wrappedValue = tagName
-                    $tagForEdit.emoji.wrappedValue = selectedEmoji
-                    $tagForEdit.tagColor.wrappedValue = tagColor
-                } else {
-                    let tag = Tag(emoji: selectedEmoji, tagName: tagName, tagColor: tagColor, isDefault: false)
-                    $tagList.append(tag)
-                }
+                isEditMode == false ? saveTag(tagColor) : editTag(tagColor)
                 dismiss()
             }) {
                 Text("저장")
             }
-        })
-        .toolbarRole(.editor)
+        }
+    }
+    
+    func editTag(_ tagColor: String?) {
+        $tagForEdit.tagName.wrappedValue = tagName
+        $tagForEdit.emoji.wrappedValue = selectedEmoji
+        $tagForEdit.tagColor.wrappedValue = tagColor
+    }
+    
+    func saveTag(_ tagColor: String?) {
+        tagForEdit.tagName = tagName
+        tagForEdit.emoji = selectedEmoji
+        tagForEdit.tagColor = tagColor
+        tagForEdit.isDefault = false
+        $tagList.append(tagForEdit)
     }
 }
