@@ -15,9 +15,10 @@ final class CalendarCell: FSCalendarCell {
     
     let thumbImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.opacity = 0.2
+        imageView.layer.opacity = 0.5
+        imageView.layer.cornerRadius = Resources.Radius.image
         return imageView
     }()
     
@@ -25,16 +26,12 @@ final class CalendarCell: FSCalendarCell {
         super.init(frame: frame)
         setupHierarhchy()
         setupConstraints()
-        setupUI()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         thumbImageView.image = nil
+        thumbImageView.layer.opacity = 0.5
     }
     
     private func setupHierarhchy() {
@@ -44,23 +41,23 @@ final class CalendarCell: FSCalendarCell {
     private func setupConstraints() {
         thumbImageView.snp.makeConstraints { make in
             make.center.equalTo(titleLabel)
-            make.size.equalTo(getMinSize())
+            make.size.equalTo((contentView.bounds.height-12))
         }
     }
     
-    private func setupUI() {
-        thumbImageView.layer.cornerRadius = getMinSize() / 2
+    func configureCell(_ log: Log?) {
+        guard let log else { return }
+        thumbImageView.image = DocumentManager.shared.loadImage(id: "\(log.id)")
     }
-    
-    private func getMinSize() -> CGFloat {
-        let width = contentView.bounds.width
-        let height = contentView.bounds.height
-        let result = width < height ? width : height
-        return result - 8
-    }
-    
-    func configureCell(_ isToday: Bool) {
-        thumbImageView.layer.opacity = isToday ? 0.05 : 0.2
+
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                thumbImageView.layer.opacity = 0.1
+            } else {
+                thumbImageView.layer.opacity = 0.5
+            }
+        }
     }
     
     required init!(coder aDecoder: NSCoder!) {

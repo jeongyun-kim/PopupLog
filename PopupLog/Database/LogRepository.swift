@@ -25,4 +25,12 @@ final class LogRepository {
             print("update fail")
         }
     }
+    
+    func getLogData(_ date: Date) -> Log? {
+        let logs = Array(realm.objects(Log.self))
+        let dateFormatter = DateFormatter()
+        let result = logs.filter { $0.visitDate.formattedDate == date.formattedDate }
+        guard let firstData = result.first else { return nil }
+        return firstData
+    }
 }

@@ -45,6 +45,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             calendar.dataSource = self
             calendar.register(CalendarCell.self, forCellReuseIdentifier: CalendarCell.identifier)
             calendar.locale = Locale(identifier: "ko_KR")
+            calendar.select(Date())
             
             calendar.headerHeight = 0
             calendar.appearance.borderRadius = 0.5
@@ -67,6 +68,11 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             setupConstraints()
         }
         
+        override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            calendar.reloadData()
+        }
+        
         private func setupHierarchy() {
             view.addSubview(calendar)
         }
@@ -87,6 +93,8 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
         // MARK: FSCalendar Extension
         func calendar(_ calendar: FSCalendar, cellFor date: Date, at position: FSCalendarMonthPosition) -> FSCalendarCell {
             guard let cell = calendar.dequeueReusableCell(withIdentifier: CalendarCell.identifier, for: date, at: position) as? CalendarCell else { return FSCalendarCell() }
+            let data = LogRepository.shared.getLogData(date)
+            cell.configureCell(data)
             return cell
         }
         
