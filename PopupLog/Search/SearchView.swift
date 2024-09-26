@@ -8,18 +8,16 @@
 import SwiftUI
 
 struct SearchView: View {
-    @Binding var isPresentingSideMenu: Bool
-    @Binding var isMainView: Bool
-    @EnvironmentObject var isPresentingSheet: CalendarViewSheetPresent
+    @EnvironmentObject var viewStatus: CalendarViewStatus
     
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
             .onAppear {
-                isPresentingSideMenu = false
-                isMainView = false
+                viewStatus.isPresentingSideMenu = false
+                viewStatus.isMainView = false
             }
             .onDisappear {
-                isPresentingSheet.isPresenting = true
+                viewStatus.isPresentingBottomSheet = true
             }
             .toolbarRole(.editor)
     }

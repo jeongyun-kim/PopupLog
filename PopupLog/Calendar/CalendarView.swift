@@ -8,37 +8,40 @@
 import SwiftUI
 import RealmSwift
 
+
+
 struct CalendarView: View {
+    @EnvironmentObject private var stack: ViewPath
     @StateObject var vm = CalendarViewModel()
-    @EnvironmentObject var bottomSheetPresenting: CalendarViewSheetPresent
+    @EnvironmentObject var viewStatus: CalendarViewStatus
     @State private var detentType: PresentationDetent = Resources.Detents.mid.detents
-    @State private var isPresentingSideMenu = false
-    @State private var isMainView = true
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $stack.path) {
             ZStack {
                 VStack(alignment: .leading, spacing: 8) {
                     currentYearMonth()
                     randomTitle()
                     calendarView()
                 }
-                SideMenuView(isPresenting: $isPresentingSideMenu,
-                             content: AnyView(MenuContentsView(isPresenting: $isPresentingSideMenu, vm: vm)))
-                .changedBool($isPresentingSideMenu) {
-                    guard isMainView else { return }
-                    bottomSheetPresenting.isPresenting = !isPresentingSideMenu
+                SideMenuView(isPresenting: $viewStatus.isPresentingSideMenu,
+                             content: AnyView(MenuContentsView(vm: vm)))
+                .changedBool($viewStatus.isPresentingSideMenu) {
+                    guard viewStatus.isMainView else { return }
+                    viewStatus.isPresentingBottomSheet = !viewStatus.isPresentingSideMenu
                 }
             }
-            .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 0), destination: {
-                LazyNavigationView(SearchView(isPresentingSideMenu: $isPresentingSideMenu, isMainView: $isMainView))
-            })
-            .navigationDestination(isPresented: .constant(vm.output.tappedMenuIdx == 1), destination: {
-                LazyNavigationView(TagSettingView())
+            .navigationDestination(for: StackViewType.self, destination: { viewType in
+                switch viewType {
+                case .searchView:
+                    LazyNavigationView(SearchView())
+                case .tagSettingView:
+                    LazyNavigationView(TagSettingView())
+                }
             })
             .onAppear {
                 vm.action(.viewOnAppear)
-                isMainView = true
+                viewStatus.isMainView = true
             }
             .navigationBar(leading: {
                 leadingBarButton()
@@ -60,22 +63,21 @@ extension CalendarView {
                 Resources.Images.chart
                     .padding(8)
             }
-            .disabled(!bottomSheetPresenting.isPresenting)
-            
+            .disabled(!viewStatus.isPresentingBottomSheet)
             NavigationLink {
                 LazyNavigationView(AddOrEditView())
             } label: {
                 Resources.Images.plus
                     .padding(8)
             }
-            .disabled(!bottomSheetPresenting.isPresenting)
+            .disabled(!viewStatus.isPresentingBottomSheet)
         }
     }
     
     private func leadingBarButton() -> some View {
         Button(action: {
-            isPresentingSideMenu.toggle()
-            bottomSheetPresenting.isPresenting = !isPresentingSideMenu
+            viewStatus.isPresentingSideMenu.toggle()
+            viewStatus.isPresentingBottomSheet = !viewStatus.isPresentingSideMenu
         }, label: {
             Resources.Images.menu
                 .foregroundStyle(Resources.Colors.primaryColor)
@@ -108,7 +110,7 @@ extension CalendarView {
             FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, disappearedDetailView: $vm.output.disappearedDetailView)
                 .frame(height: proxy.size.width*0.9)
                 .padding(.horizontal)
-                .sheet(isPresented: $bottomSheetPresenting.isPresenting, content: {
+                .sheet(isPresented: $viewStatus.isPresentingBottomSheet, content: {
                     BottomSheetView(vm: vm)
                         .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
                         .presentationBackgroundInteraction(.enabled)

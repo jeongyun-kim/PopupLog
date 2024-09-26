@@ -26,7 +26,6 @@ extension CalendarViewModel {
         var viewOnAppear = PassthroughSubject<Void, Never>()
         var currentPage = CurrentValueSubject<Date, Never>(Date()) // 현재 캘린더의 년월
         var todayDate = CurrentValueSubject<Date, Never>(Date()) // 오늘 날짜
-        var sideMenuRowTapped = PassthroughSubject<Int, Never>() // 사이드메뉴 탭한 뷰 인덱스
         var deleteLogImage = PassthroughSubject<String, Never>() // 이미지 삭제 버튼 탭
         var selectedLog = PassthroughSubject<Log, Never>() // 선택한 로그 -> 디테일뷰
         var toggleFullCover = PassthroughSubject<Void, Never>() // DetailView 띄우기
@@ -36,7 +35,6 @@ extension CalendarViewModel {
     struct Output {
         var currentYearMonth = "" // 캘린더의 현재 달력 년월
         var randomTitle = "" // 캘린더뷰 내 타이틀
-        var tappedMenuIdx = -1 // 선택한 사이드메뉴바 뷰 인덱스
         var selectedDate = "" // 선택 날짜
         var selectedLog = Log(title: "", content: "", place: nil, visitDate: Date()) // DetailView로 넘겨줄 데이터
         var isPresentingFullCover = false // detailView presenting 상태
@@ -50,7 +48,6 @@ extension CalendarViewModel {
         case viewOnAppear
         case changeCurrentPage(date: Date)
         case todayDate(date: Date)
-        case sideMenuRowTappedIdx(idx: Int)
         case deleteLogImage(id: String)
         case selectLog(log: Log)
         case toggleFullCover
@@ -65,8 +62,6 @@ extension CalendarViewModel {
             input.currentPage.send(date)
         case .todayDate(let today):
             input.todayDate.send(today)
-        case .sideMenuRowTappedIdx(let idx):
-            input.sideMenuRowTapped.send(idx)
         case .deleteLogImage(let id):
             input.deleteLogImage.send(id)
         case .selectLog(let log):
@@ -89,16 +84,7 @@ extension CalendarViewModel {
                 guard let title = Resources.titles.randomElement() else { return }
                 // 제목 랜덤 지정
                 self.output.randomTitle = title
-                // 사이드메뉴 누른 항목 초기화
-                self.output.tappedMenuIdx = -1
                 TagRepository.shared.addDefaultTags()
-            }.store(in: &subscriptions)
-        
-        // 사이드메뉴 탭한 뷰 인덱스
-        input.sideMenuRowTapped
-            .sink { [weak self] value in
-                guard let self else { return }
-                self.output.tappedMenuIdx = value
             }.store(in: &subscriptions)
         
         aboutCalendar()

@@ -9,9 +9,8 @@ import SwiftUI
 import RealmSwift
 
 struct MenuContentsView: View {
+    @EnvironmentObject private var stack: ViewPath
     @ObservedResults(Log.self) private var logList
-    // 사이드메뉴의 표출 여부
-    @Binding var isPresenting: Bool
     @ObservedObject var vm: CalendarViewModel
     
     var body: some View {
@@ -64,7 +63,16 @@ extension MenuContentsView {
     private func menuListView() -> some View {
         ForEach(Array(Menus.allCases.enumerated()), id: \.element.rawValue) { value in
             Button(action: {
-                vm.action(.sideMenuRowTappedIdx(idx: value.offset))
+                let viewType = StackViewType.allCases[value.offset]
+                switch viewType {
+                case .searchView:
+                    stack.path.append(.searchView)
+                case .tagSettingView:
+                    stack.path.append(.tagSettingView)
+                }
+                
+               
+                //vm.action(.sideMenuRowTappedIdx(idx: value.offset))
             }, label: {
                 rowView(value.element)
             })

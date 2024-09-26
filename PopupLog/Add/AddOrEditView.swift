@@ -11,7 +11,7 @@ import RealmSwift
 
 struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
-    @EnvironmentObject private var isPresentingSheet: CalendarViewSheetPresent
+    @EnvironmentObject private var viewStatus: CalendarViewStatus
     @ObservedObject private var vm = AddViewModel()
     @ObservedResults (Log.self) private var logList
     
@@ -42,12 +42,12 @@ struct AddOrEditView: View {
             // 기록을 추가할 때에는 BottomSheet를 내려야하지만 기록을 업데이트 할 때에는 BottomSheet가 내려가면 네비게이션 연결이 끊기므로 CalendarView로 돌아옴
             // 이를 방지하기 위해, 현재 뷰의 상태를 구분지어 줘야 함
             if !vm.output.isEditMode {
-                isPresentingSheet.isPresenting.toggle()
+                viewStatus.isPresentingBottomSheet.toggle()
             }
         }
         .onDisappear {
             if !vm.output.isEditMode {
-                isPresentingSheet.isPresenting.toggle()
+                viewStatus.isPresentingBottomSheet.toggle()
             }
         }
         .navigationBar { } trailing: {

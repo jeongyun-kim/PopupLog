@@ -6,17 +6,26 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 @main
 struct PopupLogApp: App {
     var body: some Scene {
         WindowGroup {
+    //        TagSettingView()
             CalendarView()
-                .environmentObject(CalendarViewSheetPresent())
+                .environmentObject(CalendarViewStatus())
+                .environmentObject(ViewPath())
         }
     }
 }
 
-final class CalendarViewSheetPresent: ObservableObject {
-    @Published var isPresenting = true
+final class CalendarViewStatus: ObservableObject {
+    @Published var isPresentingBottomSheet = true
+    @Published var isPresentingSideMenu = false
+    @Published var isMainView = true
+}
+
+final class ViewPath: ObservableObject {
+    @Published var path: [StackViewType] = []
 }

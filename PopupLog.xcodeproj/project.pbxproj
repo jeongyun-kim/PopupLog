@@ -56,6 +56,7 @@
 		E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
 		E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BE2C9ED37E005EC98B /* DetailView.swift */; };
 		E0A7E1742CA466F500390718 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1732CA466F500390718 /* Date + Extension.swift */; };
+		E0A7E1762CA5C0B100390718 /* StackViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1752CA5C0B100390718 /* StackViewType.swift */; };
 		E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
 		E08002BE2C9ED37E005EC98B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		E0A7E1732CA466F500390718 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		E0A7E1752CA5C0B100390718 /* StackViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewType.swift; sourceTree = "<group>"; };
 		E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 				E07A208F2C98062200557A22 /* Resources.swift */,
 				E07A20912C98085E00557A22 /* Detents.swift */,
 				E07A20A32C981F1D00557A22 /* Texts.swift */,
+				E0A7E1752CA5C0B100390718 /* StackViewType.swift */,
 			);
 			path = ResourceCases;
 			sourceTree = "<group>";
@@ -476,6 +479,7 @@
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
 				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
 				E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */,
+				E0A7E1762CA5C0B100390718 /* StackViewType.swift in Sources */,
 				E009D95B2C9B36CC00D07972 /* SearchPlaceResults.swift in Sources */,
 				E009D95F2C9BFD9400D07972 /* Tag.swift in Sources */,
 				E07A20862C98050400557A22 /* CalendarCell.swift in Sources */,

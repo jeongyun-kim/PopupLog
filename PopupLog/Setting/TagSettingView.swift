@@ -9,101 +9,102 @@ import SwiftUI
 import RealmSwift
 
 struct TagSettingView: View {
-    @EnvironmentObject var isPresentingSheet: CalendarViewSheetPresent
+    @EnvironmentObject var viewStatus: CalendarViewStatus
     @ObservedResults (Tag.self) private var tagList
     @State private var color = Color.red
     
-    private let deinitDetector = DeinitDetector<Self>() {
-            // deinit 시 하고싶은 일들~
-        print("tag setting view deinit")
-    }
-    
     var body: some View {
-        NavigationStack {
-            ScrollView(showsIndicators: false, content: {
-                VStack(alignment: .leading) {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                            .fill(Resources.Colors.white)
-                        NavigationLink {
-                            LazyNavigationView(AddOrEditTagView())
-                        } label: {
+        ScrollView(showsIndicators: false, content: {
+            VStack(alignment: .leading) {
+                ZStack {
+                    RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                        .fill(Resources.Colors.white)
+                    NavigationLink {
+                        LazyNavigationView(AddOrEditTagView())
+                    } label: {
+                        HStack {
+                            Text("태그 생성")
+                                .foregroundStyle(Resources.Colors.black)
+                                .padding()
+                            Spacer()
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .padding()
+                
+                Text("기본 태그 목록")
+                    .font(.caption)
+                    .foregroundStyle(Resources.Colors.lightGray)
+                    .padding(.horizontal, 24)
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                        .fill(Resources.Colors.white)
+                    LazyVStack(alignment: .leading) {
+                        ForEach(tagList.filter { $0.isDefault }, id: \.id) { tag in
                             HStack {
-                                Text("태그 생성")
-                                    .foregroundStyle(Resources.Colors.black)
-                                    .padding()
+                                TagButton(tag: tag, action: {})
+                                    .disabled(true)
                                 Spacer()
                             }
+                            .frame(maxWidth: .infinity)
+                            .padding(4)
                         }
-                        .frame(maxWidth: .infinity)
                     }
-                    .padding()
-                    
-                    Text("기본 태그 목록")
-                        .font(.caption)
-                        .foregroundStyle(Resources.Colors.lightGray)
-                        .padding(.horizontal, 24)
-                    
-                    ZStack {
-                        RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                            .fill(Resources.Colors.white)
-                        LazyVStack(alignment: .leading) {
-                            ForEach(tagList.filter { $0.isDefault }, id: \.id) { tag in
+                    .padding(8)
+                }
+                .padding(.horizontal)
+                
+                Text("사용자 태그 목록")
+                    .font(.caption)
+                    .foregroundStyle(Resources.Colors.lightGray)
+                    .padding(.horizontal, 24)
+                    .padding(.top)
+                ZStack {
+                    RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                        .fill(Resources.Colors.white)
+                        .overlay {
+                            if tagList.filter({ !$0.isDefault }).isEmpty {
+                                RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                                    .fill(Resources.Colors.moreLightOrange)
+                            }
+                        }
+                    LazyVStack {
+                        ForEach(tagList.filter { !$0.isDefault }, id: \.id) { tag in
+                            NavigationLink {
+                                LazyNavigationView(AddOrEditTagView(tag: tag))
+                            } label: {
                                 HStack {
                                     TagButton(tag: tag, action: {})
                                         .disabled(true)
                                     Spacer()
+                                    Resources.Images.next
+                                        .foregroundStyle(Resources.Colors.lightGray)
                                 }
-                                .frame(maxWidth: .infinity)
                                 .padding(4)
                             }
+                            .frame(maxWidth: .infinity)
                         }
-                        .padding(8)
                     }
-                    .padding(.horizontal)
-                    
-                    Text("사용자 태그 목록")
-                        .font(.caption)
-                        .foregroundStyle(Resources.Colors.lightGray)
-                        .padding(.horizontal, 24)
-                        .padding(.top)
-                    ZStack {
-                        RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                            .fill(Resources.Colors.white)
-                            .overlay {
-                                if tagList.filter({ !$0.isDefault }).isEmpty {
-                                    RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                                        .fill(Resources.Colors.moreLightOrange)
-                                }
-                            }
-                        LazyVStack {
-                            ForEach(tagList.filter { !$0.isDefault }, id: \.id) { tag in
-                                NavigationLink {
-                                    LazyNavigationView(AddOrEditTagView(tag: tag))
-                                } label: {
-                                    HStack {
-                                        TagButton(tag: tag, action: {})
-                                            .disabled(true)
-                                        Spacer()
-                                        Resources.Images.next
-                                            .foregroundStyle(Resources.Colors.lightGray)
-                                    }
-                                    .padding(4)
-                                }
-                                .frame(maxWidth: .infinity)
-                            }
-                        }
-                        .padding(8)
-                    }
-                    .padding(.horizontal)
-                   
-                    
+                    .padding(8)
                 }
-            })
-            .background(Resources.Colors.moreLightOrange)
-            .navigationTitle("태그 관리")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarRole(.editor)
+                .padding(.horizontal)
+                
+                
+            }
+        })
+        .background(Resources.Colors.moreLightOrange)
+        .navigationTitle("태그 관리")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarRole(.editor)
+        .onAppear {
+            viewStatus.isPresentingSideMenu = false
+            viewStatus.isMainView = false
         }
+        .onDisappear {
+            viewStatus.isPresentingBottomSheet = true
+        }
+        
     }
 }
