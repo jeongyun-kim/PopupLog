@@ -1,5 +1,5 @@
 //
-//  TagAddView.swift
+//  AddOrEditTagView.swift
 //  PopupLog
 //
 //  Created by 김정윤 on 9/22/24.
@@ -9,30 +9,41 @@ import SwiftUI
 import RealmSwift
 import MCEmojiPicker
 
-struct TagAddView: View {
-    @ObservedResults (Tag.self) private var tagList
+struct AddOrEditTagView: View {
+    @ObservedResults (Tag.self) private var tagList // 태그 DB
+    @ObservedRealmObject var tagForEdit: Tag = Tag() // 편집할 태그
     @Environment(\.dismiss) private var dismiss
-    @State private var emoji: String = "😊"
-    @State private var tagName = ""
-    @State private var isPresenting = false
-    @State private var tagColor: Color = Resources.Colors.systemGray6
-    @EnvironmentObject var isPresentingSheet: CalendarViewSheetPresent
-    
+    @State private var selectedEmoji: String = "😊" // 사용자 선택 이모지
+    @State private var tagName = "" // 보여질 태그명
+    @State private var tagColor: Color = Resources.Colors.systemGray6 // 보여질 태그 컬러
+    @State private var isPresentingEmojiView = false // emoji picker presenting
+    private var isEditMode = false
     
     private let deinitDetector = DeinitDetector<Self>() {
             // deinit 시 하고싶은 일들~
         print("tag add view deinit")
     }
     
+    init(tag: Tag? = nil) {
+        // 만약 수정할 태그를 가지고 온다면 
+        if let tag, let color = tag.tagColor {
+            tagForEdit = tag
+            self._selectedEmoji = State(initialValue: tag.emoji)
+            self._tagName = State(initialValue: tag.tagName)
+            self._tagColor = State(initialValue: Color.init(hex: color))
+            isEditMode.toggle()
+        }
+    }
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
-                    Button(emoji) {
-                        isPresenting.toggle()
+                    Button(selectedEmoji) {
+                        isPresentingEmojiView.toggle()
                     }.emojiPicker(
-                        isPresented: $isPresenting,
-                        selectedEmoji: $emoji
+                        isPresented: $isPresentingEmojiView,
+                        selectedEmoji: $selectedEmoji
                     )
                     TextField("등록할 태그명을 입력해주세요", text: $tagName)
                         .frame(maxWidth: .infinity)
@@ -81,16 +92,19 @@ struct TagAddView: View {
         .navigationBar(leading: {}, trailing: {
             Button(action: {
                 let tagColor = tagColor.toHex()
-                let tag = Tag(emoji: emoji, tagName: tagName, tagColor: tagColor, isDefault: false)
-                $tagList.append(tag)
+                if isEditMode {
+                    $tagForEdit.tagName.wrappedValue = tagName
+                    $tagForEdit.emoji.wrappedValue = selectedEmoji
+                    $tagForEdit.tagColor.wrappedValue = tagColor
+                } else {
+                    let tag = Tag(emoji: selectedEmoji, tagName: tagName, tagColor: tagColor, isDefault: false)
+                    $tagList.append(tag)
+                }
                 dismiss()
             }) {
                 Text("저장")
             }
         })
         .toolbarRole(.editor)
-        .onAppear {
-            isPresentingSheet.isPresenting = false
-        }
     }
 }

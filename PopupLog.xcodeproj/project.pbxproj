@@ -25,8 +25,7 @@
 		E035D0B82C9F07FE0018AD8C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
-		E035D0C02CA061F00018AD8C /* TagAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* TagAddView.swift */; };
-		E035D0C22CA062990018AD8C /* TagEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C12CA062990018AD8C /* TagEditView.swift */; };
+		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
 		E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C92CA312400018AD8C /* View + Extension.swift */; };
 		E035D0D02CA394820018AD8C /* EmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E035D0CF2CA394820018AD8C /* EmojiPicker */; };
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
@@ -51,12 +50,12 @@
 		E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A12C981DD300557A22 /* SideMenuView.swift */; };
 		E07A20A42C981F1D00557A22 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A32C981F1D00557A22 /* Texts.swift */; };
 		E07A20A72C9865A500557A22 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A62C9865A500557A22 /* SearchView.swift */; };
-		E07A20AA2C98673800557A22 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20A92C98673800557A22 /* SettingView.swift */; };
 		E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AC2C98690F00557A22 /* ChartView.swift */; };
 		E07A20B02C98691A00557A22 /* AddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20AF2C98691A00557A22 /* AddOrEditView.swift */; };
 		E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20B12C98693C00557A22 /* LazyNavigationView.swift */; };
 		E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
 		E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BE2C9ED37E005EC98B /* DetailView.swift */; };
+		E0A7E1742CA466F500390718 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1732CA466F500390718 /* Date + Extension.swift */; };
 		E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,8 +89,7 @@
 		E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		E035D0B92CA04B100018AD8C /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
-		E035D0BF2CA061F00018AD8C /* TagAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagAddView.swift; sourceTree = "<group>"; };
-		E035D0C12CA062990018AD8C /* TagEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagEditView.swift; sourceTree = "<group>"; };
+		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
 		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
@@ -113,12 +111,12 @@
 		E07A20A12C981DD300557A22 /* SideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		E07A20A32C981F1D00557A22 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
 		E07A20A62C9865A500557A22 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		E07A20A92C98673800557A22 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		E07A20AC2C98690F00557A22 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		E07A20AF2C98691A00557A22 /* AddOrEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditView.swift; sourceTree = "<group>"; };
 		E07A20B12C98693C00557A22 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
 		E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentManager.swift; sourceTree = "<group>"; };
 		E08002BE2C9ED37E005EC98B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E0A7E1732CA466F500390718 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeinitDetector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -251,6 +249,7 @@
 				E07A20772C98046500557A22 /* Color + Extension.swift */,
 				E035D0C92CA312400018AD8C /* View + Extension.swift */,
 				E0D40C4C2CA3B13D000EB4D6 /* DeinitDetector.swift */,
+				E0A7E1732CA466F500390718 /* Date + Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -316,10 +315,8 @@
 		E07A20A82C98673100557A22 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				E07A20A92C98673800557A22 /* SettingView.swift */,
 				E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */,
-				E035D0BF2CA061F00018AD8C /* TagAddView.swift */,
-				E035D0C12CA062990018AD8C /* TagEditView.swift */,
+				E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -456,8 +453,8 @@
 				E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */,
 				E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */,
 				E07A20AD2C98690F00557A22 /* ChartView.swift in Sources */,
-				E035D0C22CA062990018AD8C /* TagEditView.swift in Sources */,
-				E035D0C02CA061F00018AD8C /* TagAddView.swift in Sources */,
+				E0A7E1742CA466F500390718 /* Date + Extension.swift in Sources */,
+				E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */,
 				E07A20B22C98693C00557A22 /* LazyNavigationView.swift in Sources */,
 				E07A20922C98085E00557A22 /* Detents.swift in Sources */,
 				E07A209A2C980C5E00557A22 /* BaseViewModel.swift in Sources */,
@@ -466,7 +463,6 @@
 				E07A20782C98046500557A22 /* Color + Extension.swift in Sources */,
 				E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */,
 				E07A20B02C98691A00557A22 /* AddOrEditView.swift in Sources */,
-				E07A20AA2C98673800557A22 /* SettingView.swift in Sources */,
 				E07A20A22C981DD300557A22 /* SideMenuView.swift in Sources */,
 				E0D40C4D2CA3B13D000EB4D6 /* DeinitDetector.swift in Sources */,
 				E08002BC2C9EB8CF005EC98B /* DocumentManager.swift in Sources */,
@@ -623,6 +619,7 @@
 				DEVELOPMENT_TEAM = L348QC8MG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "팝업로그";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -657,6 +654,7 @@
 				DEVELOPMENT_TEAM = L348QC8MG7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "팝업로그";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

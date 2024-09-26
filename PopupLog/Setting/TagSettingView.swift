@@ -26,7 +26,7 @@ struct TagSettingView: View {
                         RoundedRectangle(cornerRadius: Resources.Radius.textContents)
                             .fill(Resources.Colors.white)
                         NavigationLink {
-                            LazyNavigationView(TagAddView())
+                            LazyNavigationView(AddOrEditTagView())
                         } label: {
                             HStack {
                                 Text("태그 생성")
@@ -79,7 +79,7 @@ struct TagSettingView: View {
                         LazyVStack {
                             ForEach(tagList.filter { !$0.isDefault }, id: \.id) { tag in
                                 NavigationLink {
-                                    LazyNavigationView(TagEditView(tag: tag))
+                                    LazyNavigationView(AddOrEditTagView(tag: tag))
                                 } label: {
                                     HStack {
                                         TagButton(tag: tag, action: {})
