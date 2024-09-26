@@ -64,7 +64,7 @@ extension AddOrEditView {
         Button(action: {
             vm.action(.save)
             if !vm.output.isEditMode {
-                $logList.append(vm.output.logForSave)
+                $logList.append(vm.output.logToSave)
             }
             dismiss()
         }, label: {

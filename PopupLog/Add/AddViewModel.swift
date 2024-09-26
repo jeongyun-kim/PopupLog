@@ -77,7 +77,7 @@ final class AddViewModel: BaseViewModel {
         var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
         var titleField = ""
         var isEditMode = false
-        var logForSave = Log()
+        var logToSave = Log()
     }
     
     init() {
@@ -99,7 +99,7 @@ final class AddViewModel: BaseViewModel {
                     LogRepository.shared.updateLog(log, title: title, content: content, place: place, tag: tag, visitDate: date)
                 } else {
                     let log = Log(title: title, content: content, place: place, tag: tag, visitDate: date)
-                    self.output.logForSave = log
+                    self.output.logToSave = log
                     managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
                 }
            
