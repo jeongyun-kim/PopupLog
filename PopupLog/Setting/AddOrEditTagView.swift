@@ -19,11 +19,6 @@ struct AddOrEditTagView: View {
     @State private var isPresentingEmojiView = false // emoji picker presenting
     private var isEditMode = false
     
-    private let deinitDetector = DeinitDetector<Self>() {
-            // deinit 시 하고싶은 일들~
-        print("tag add view deinit")
-    }
-    
     init(tag: Tag? = nil) {
         // 만약 수정할 태그를 가지고 온다면 
         if let tag, let color = tag.tagColor {
@@ -39,71 +34,102 @@ struct AddOrEditTagView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                            .fill(Resources.Colors.white)
-                            .frame(width: 56, height: 56)
-                        Button(selectedEmoji) {
-                            isPresentingEmojiView.toggle()
-                        }.emojiPicker(
-                            isPresented: $isPresentingEmojiView,
-                            selectedEmoji: $selectedEmoji
-                        )
-                        .font(.title)
-                    }
-                    
-                    TextField("등록할 태그명을 입력해주세요", text: $tagName)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 56)
-                        .padding(.horizontal)
-                        .disabled(tagName.count > 10)
-                        .autocorrectionDisabled()
-                        .tint(Resources.Colors.primaryColor)
-                        .background(Resources.Colors.white)
-                        .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.textContents))
+                    emojiView()
+                    tagNameTextField()
                 }
-                
                 HStack {
-                    ColorPicker(selection: $tagColor) {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: Resources.Radius.textContents)
-                                .fill(tagColor)
-                                .frame(height: 56)
-                            Text("태그 색상을 지정해보세요")
-                                .padding(8)
-                                .onTapGesture {
-                                    self.endTextEditing()
-                                }
-                        
-                        }
-                    }
+                    colorPickerView()
                     Spacer()
                 }
-                
-                VStack {
-                    Spacer()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .onTapGesture {
-                    self.endTextEditing()
-                }
-                
-                
+                spacerView()
             }
             .padding()
         }
-   
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Resources.Colors.moreLightOrange)
         .navigationTitle(isEditMode == false ? "태그 생성" : "태그 편집")
-        .navigationBar(leading: {
-            
-        }, trailing: {
+        .navigationBar(leading: {}, trailing: {
             trailingButtons()
         })
         .toolbarRole(.editor)
     }
     
+    // Tag 편집
+    func editTag(_ tagColor: String?) {
+        $tagForEdit.tagName.wrappedValue = tagName
+        $tagForEdit.emoji.wrappedValue = selectedEmoji
+        $tagForEdit.tagColor.wrappedValue = tagColor
+    }
+    
+    // Tag 저장
+    func saveTag(_ tagColor: String?) {
+        tagForEdit.tagName = tagName
+        tagForEdit.emoji = selectedEmoji
+        tagForEdit.tagColor = tagColor
+        tagForEdit.isDefault = false
+        $tagList.append(tagForEdit)
+    }
+}
+
+// MARK: ViewUI
+extension AddOrEditTagView {
+    // MARK: 이모지
+    private func emojiView() -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                .fill(Resources.Colors.white)
+                .frame(width: 56, height: 56)
+            Button(selectedEmoji) {
+                isPresentingEmojiView.toggle()
+            }.emojiPicker(
+                isPresented: $isPresentingEmojiView,
+                selectedEmoji: $selectedEmoji
+            )
+            .font(.title)
+        }
+    }
+    
+    // MARK: 태그명
+    private func tagNameTextField() -> some View {
+        TextField("등록할 태그명을 입력해주세요", text: $tagName)
+            .frame(maxWidth: .infinity)
+            .frame(height: 56)
+            .padding(.horizontal)
+            .disabled(tagName.count > 10)
+            .autocorrectionDisabled()
+            .tint(Resources.Colors.primaryColor)
+            .background(Resources.Colors.white)
+            .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.textContents))
+    }
+    
+    // MARK: 태그 색상
+    private func colorPickerView() -> some View {
+        ColorPicker(selection: $tagColor) {
+            ZStack {
+                RoundedRectangle(cornerRadius: Resources.Radius.textContents)
+                    .fill(tagColor)
+                    .frame(height: 56)
+                Text("태그 색상을 지정해보세요")
+                    .padding(8)
+                    .onTapGesture {
+                        self.endTextEditing()
+                    }
+            }
+        }
+    }
+    
+    // MARK: 키보드 내리기 위한 빈뷰
+    private func spacerView() -> some View {
+        VStack {
+            Spacer()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onTapGesture {
+            self.endTextEditing()
+        }
+    }
+    
+    // MARK: NavigationTrailing
     private func trailingButtons() -> some View {
         HStack {
             if isEditMode {
@@ -121,20 +147,7 @@ struct AddOrEditTagView: View {
             }) {
                 Text("저장")
             }
+            .disabled(tagName.isEmpty)
         }
-    }
-    
-    func editTag(_ tagColor: String?) {
-        $tagForEdit.tagName.wrappedValue = tagName
-        $tagForEdit.emoji.wrappedValue = selectedEmoji
-        $tagForEdit.tagColor.wrappedValue = tagColor
-    }
-    
-    func saveTag(_ tagColor: String?) {
-        tagForEdit.tagName = tagName
-        tagForEdit.emoji = selectedEmoji
-        tagForEdit.tagColor = tagColor
-        tagForEdit.isDefault = false
-        $tagList.append(tagForEdit)
     }
 }
