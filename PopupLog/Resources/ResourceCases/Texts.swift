@@ -8,10 +8,6 @@
 import Foundation
 
 extension Resources {
-    enum Texts: String {
-        case record = "✏️ 지금까지의 기록"
-    }
-    
     static let titles = [
         "✨ 오늘은 어떤 팝업을 다녀오셨나요?",
         "🔥 오늘도 화이팅하세요!",
