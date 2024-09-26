@@ -70,9 +70,6 @@ extension MenuContentsView {
                 case .tagSettingView:
                     stack.path.append(.tagSettingView)
                 }
-                
-               
-                //vm.action(.sideMenuRowTappedIdx(idx: value.offset))
             }, label: {
                 rowView(value.element)
             })

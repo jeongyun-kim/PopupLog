@@ -53,8 +53,46 @@ struct CalendarView: View {
     }
 }
 
-// MARK: NavigationBarButton
+// MARK: ViewUI
 extension CalendarView {
+    // MARK: 현재 보고있는 캘린더의 년월
+    private func currentYearMonth() -> some View {
+        Text(vm.output.currentYearMonth) // Output : 현재 페이지 날짜
+            .font(.callout)
+            .foregroundStyle(Resources.Colors.lightGray)
+            .padding(.horizontal)
+            .padding(.top, 16)
+            .padding(.bottom, 4)
+    }
+    
+    // MARK: 랜덤 타이틀 멘트
+    private func randomTitle() -> some View {
+        Text(vm.output.randomTitle) // Output : 랜덤 제목
+            .font(.title2)
+            .foregroundStyle(Resources.Colors.black)
+            .bold()
+            .padding(.horizontal)
+            .padding(.bottom, 8)
+    }
+    
+    // MARK: 캘린더
+    private func calendarView() -> some View {
+        GeometryReader { proxy in
+            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, disappearedDetailView: $vm.output.disappearedDetailView)
+                .frame(height: proxy.size.width*0.9)
+                .padding(.horizontal)
+                .sheet(isPresented: $viewStatus.isPresentingBottomSheet, content: {
+                    BottomSheetView(vm: vm)
+                        .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
+                        .presentationBackgroundInteraction(.enabled)
+                        .presentationDragIndicator(.hidden)
+                        .presentationCornerRadius(Resources.Radius.bottomSheet)
+                        .interactiveDismissDisabled()
+                })
+        }
+    }
+    
+    // MARK: NavigationTrailing
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
             NavigationLink {
@@ -74,6 +112,7 @@ extension CalendarView {
         }
     }
     
+    // MARK: NavigationLeading
     private func leadingBarButton() -> some View {
         Button(action: {
             viewStatus.isPresentingSideMenu.toggle()
@@ -82,42 +121,5 @@ extension CalendarView {
             Resources.Images.menu
                 .foregroundStyle(Resources.Colors.primaryColor)
         })
-    }
-}
-
-// MARK: ViewUI
-extension CalendarView {
-    private func currentYearMonth() -> some View {
-        Text(vm.output.currentYearMonth) // Output : 현재 페이지 날짜
-            .font(.callout)
-            .foregroundStyle(Resources.Colors.lightGray)
-            .padding(.horizontal)
-            .padding(.top, 16)
-            .padding(.bottom, 4)
-    }
-    
-    private func randomTitle() -> some View {
-        Text(vm.output.randomTitle) // Output : 랜덤 제목
-            .font(.title2)
-            .foregroundStyle(Resources.Colors.black)
-            .bold()
-            .padding(.horizontal)
-            .padding(.bottom, 8)
-    }
-    
-    private func calendarView() -> some View {
-        GeometryReader { proxy in
-            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, disappearedDetailView: $vm.output.disappearedDetailView)
-                .frame(height: proxy.size.width*0.9)
-                .padding(.horizontal)
-                .sheet(isPresented: $viewStatus.isPresentingBottomSheet, content: {
-                    BottomSheetView(vm: vm)
-                        .presentationDetents([Resources.Detents.mid.detents, Resources.Detents.large.detents], selection: $detentType)
-                        .presentationBackgroundInteraction(.enabled)
-                        .presentationDragIndicator(.hidden)
-                        .presentationCornerRadius(Resources.Radius.bottomSheet)
-                        .interactiveDismissDisabled()
-                })
-        }
     }
 }
