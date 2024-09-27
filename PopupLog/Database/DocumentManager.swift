@@ -50,21 +50,22 @@ final class DocumentManager {
         }
     }
     
-    func loadImage(id: String) -> UIImage {
+    func loadImage(id: String) -> UIImage? {
         guard let folderPath = getFolderPath() else {
-            return Resources.Images.ticket
+            return nil
         }
         
         let imageName = "\(id).jpg"
         let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
         
+        // 이미지 있을 경우 이미지 보내고 아니면 다 nil
         if fileManager.fileExists(atPath: fileURL.path()) {
             guard let result =  UIImage(contentsOfFile: fileURL.path()) else {
-                return Resources.Images.ticket
+                return nil
             }
             return result
         } else {
-            return Resources.Images.ticket
+            return nil
         }
     }
     

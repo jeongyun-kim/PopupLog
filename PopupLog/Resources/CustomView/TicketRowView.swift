@@ -47,13 +47,12 @@ struct TicketRowView: View {
     private func contentsView(_ width: CGFloat, item: Log) -> some View {
         ZStack(alignment: .bottomTrailing) {
             HStack(alignment: .top, spacing: 8) {
-                Image(uiImage: DocumentManager.shared.loadImage(id: "\(item.id)"))
+                imageView(id: "\(item.id)")
                     .resizable()
                     .frame(maxWidth: width*0.35, maxHeight: .infinity)
                     .background(.gray)
                     .clipShape(
-                        .rect(topLeadingRadius: Resources.Radius.ticket, bottomLeadingRadius: Resources.Radius.ticket, bottomTrailingRadius: 0, topTrailingRadius: 0)
-                    )
+                        .rect(topLeadingRadius: Resources.Radius.ticket, bottomLeadingRadius: Resources.Radius.ticket, bottomTrailingRadius: 0, topTrailingRadius: 0))
                 LazyVStack(alignment: .leading, spacing: 4) {
                     Text(item.title)
                         .lineLimit(1)
@@ -80,5 +79,10 @@ struct TicketRowView: View {
             .padding(.vertical, 8)
             .padding(.trailing, 8)
         }
+    }
+    
+    private func imageView(id: String) -> Image {
+        let image = DocumentManager.shared.loadImage(id: "\(id)") ?? Resources.Images.ticket
+        return Image(uiImage: image)
     }
 }

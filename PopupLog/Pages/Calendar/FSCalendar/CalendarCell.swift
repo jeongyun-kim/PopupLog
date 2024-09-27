@@ -47,7 +47,8 @@ final class CalendarCell: FSCalendarCell {
     
     func configureCell(_ log: Log?) {
         guard let log else { return }
-        thumbImageView.image = DocumentManager.shared.loadImage(id: "\(log.id)")
+        var image = DocumentManager.shared.loadImage(id: "\(log.id)") ?? Resources.Images.ticket
+        thumbImageView.image = image
     }
 
     override var isSelected: Bool {
