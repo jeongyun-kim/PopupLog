@@ -12,12 +12,18 @@ struct MenuContentsView: View {
     @EnvironmentObject private var stack: ViewPath
     @ObservedResults(Log.self) private var logList
     @ObservedObject var vm: CalendarViewModel
+    @Environment(\.openURL) var openURL
+    private let email = SupportEmail(email: Email().value, title: "건의하기")
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
                 logView()
                 menuListView()
+                Spacer()
+                Spacer()
+                emailAndVersionView()
+                Spacer()
                 Spacer()
             }
             .padding(.top, 90)
@@ -59,7 +65,7 @@ extension MenuContentsView {
 
 // MARK: ViewUI
 extension MenuContentsView {
-    // 메뉴 리스트
+    // MARK: 메뉴 리스트
     private func menuListView() -> some View {
         ForEach(Array(Menus.allCases.enumerated()), id: \.element.rawValue) { value in
             Button(action: {
@@ -76,14 +82,13 @@ extension MenuContentsView {
         }
     }
     
-    // 기록한 팝업 개수 표출
+    // MARK: 기록한 팝업 개수 표출
     private func logView() -> some View {
-        VStack(alignment: .center, spacing: 4) {
-            Text("✨ 지금까지 \(logList.count)개의")
+        let logCnt = logList.count > 999 ? "999+" : "\(logList.count)"
+        return VStack(alignment: .center, spacing: 4) {
+            Text("✨ 지금까지 \(logCnt)개의")
                 .font(.callout)
                 .foregroundStyle(Resources.Colors.lightGray)
-                .lineLimit(2)
-            
             Text("기록을 남겼어요")
                 .font(.callout)
                 .foregroundStyle(Resources.Colors.lightGray)
@@ -91,7 +96,7 @@ extension MenuContentsView {
         .padding(.vertical, 24)
     }
     
-    // 페이지 이동 버튼
+    // MARK: 페이지 이동 버튼
     private func rowView(_ item: Menus) -> some View {
         HStack(spacing: 8) {
             item.image
@@ -104,5 +109,21 @@ extension MenuContentsView {
         .frame(width: 130)
         .padding(.vertical, 12)
         .foregroundStyle(.black)
+    }
+    
+    // MARK: 건의하기 + 버전 정보
+    private func emailAndVersionView() -> some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button(action: {
+                email.send(openURL: openURL)
+            }, label: {
+                Text("건의하기")
+                    .font(.callout)
+                    .foregroundStyle(Resources.Colors.lightGray)
+            })
+            Text("버전 1.0.0")
+                .font(.caption)
+                .foregroundStyle(Resources.Colors.lightGray)
+        }
     }
 }

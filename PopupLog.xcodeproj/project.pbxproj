@@ -59,6 +59,8 @@
 		E0A7E17A2CA639C300390718 /* StringOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */; };
 		E0A7E1862CA6511A00390718 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1852CA6511A00390718 /* SearchViewModel.swift */; };
 		E0A7E1892CA6B12800390718 /* SwiftyCrop in Frameworks */ = {isa = PBXBuildFile; productRef = E0A7E1882CA6B12800390718 /* SwiftyCrop */; };
+		E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1902CA7160D00390718 /* SupportEmail.swift */; };
+		E0A7E1952CA7175400390718 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1942CA7175400390718 /* Email.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +124,8 @@
 		E0A7E1772CA5C7C800390718 /* TicketRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketRowView.swift; sourceTree = "<group>"; };
 		E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E0A7E1852CA6511A00390718 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		E0A7E1902CA7160D00390718 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
+		E0A7E1942CA7175400390718 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 				E07A20632C98041600557A22 /* ContentView.swift */,
 				E07A20652C98041700557A22 /* Assets.xcassets */,
 				E07A20672C98041700557A22 /* Preview Content */,
+				E0A7E1942CA7175400390718 /* Email.swift */,
 			);
 			path = PopupLog;
 			sourceTree = "<group>";
@@ -338,6 +343,7 @@
 			children = (
 				E07A20B12C98693C00557A22 /* LazyNavigationView.swift */,
 				E0A7E1772CA5C7C800390718 /* TicketRowView.swift */,
+				E0A7E1902CA7160D00390718 /* SupportEmail.swift */,
 			);
 			name = CustomView;
 			path = Resources/CustomView;
@@ -455,6 +461,7 @@
 			files = (
 				E07A20642C98041600557A22 /* ContentView.swift in Sources */,
 				E07A208D2C9805BF00557A22 /* BottomSheetView.swift in Sources */,
+				E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */,
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
 				E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */,
 				E07A20A42C981F1D00557A22 /* Texts.swift in Sources */,
@@ -492,6 +499,7 @@
 				E07A20862C98050400557A22 /* CalendarCell.swift in Sources */,
 				E009D9532C9B34CB00D07972 /* NetworkService.swift in Sources */,
 				E07A208B2C98058D00557A22 /* CalendarViewModel.swift in Sources */,
+				E0A7E1952CA7175400390718 /* Email.swift in Sources */,
 				E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */,
 				E0A7E17A2CA639C300390718 /* StringOnChangeWrapper.swift in Sources */,
 				E009D96E2C9C8BB500D07972 /* Log.swift in Sources */,
