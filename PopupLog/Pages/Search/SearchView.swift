@@ -22,16 +22,14 @@ struct SearchView: View {
     var body: some View {
         VStack {
             searchTextField()
+                .padding()
             ZStack {
                 searchListView()
                 if searchList.isEmpty {
                     emptySearchView()
                 }
-                
             }
-            .padding(.top)
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Resources.Colors.moreLightOrange)
         .navigationTitle("기록 검색")
@@ -77,6 +75,7 @@ extension SearchView {
                         TicketRowView(width: proxy.size.width, item: value, isBottomSheet: false)
                     }
                 }
+                .padding(.horizontal)
             }
         }
     }
