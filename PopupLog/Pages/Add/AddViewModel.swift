@@ -15,6 +15,13 @@ final class AddViewModel: BaseViewModel {
     var input = Input()
     @Published var output = Output()
     
+    init() {
+       transform()
+    }
+}
+
+// MARK: Input / Output
+extension AddViewModel {
     struct Input {
         var visitedDate = Date() // 방문일
         var selectedImage = CurrentValueSubject<UIImage, Never>(Resources.Images.plusUK) // 선택한 이미지
@@ -25,9 +32,30 @@ final class AddViewModel: BaseViewModel {
         var selectedPlace = CurrentValueSubject<Place?, Never>(nil) // 선택된 장소
         var removePlace = PassthroughSubject<Void, Never>() // 장소 지우기 탭
         var selectedTag = PassthroughSubject<Tag?, Never>() // 선택된 태그
-        var logToEdit = CurrentValueSubject<Log?, Never>(nil)
+        var logToEdit = CurrentValueSubject<Log?, Never>(nil) // 편집할 로그
     }
     
+    struct Output {
+        var contentField = "" // 본문
+        var placeField = "" // 검색할 장소명
+        var presentPlaceSearchView = false // 장소검색뷰 보여줄지 말지
+        var searchedPlaces: [Place] = [] // 검색장소 리스트
+        var place = "" // 사용자에게 보여줄 현재 장소명
+        var selectedPlace: Place? = nil // 현재 선택된 장소
+        var presentTagListView = false // 태그뷰 보여줄지 말지
+        var selectedTag: Tag? = nil // 선택 태그
+        var isSelectedImage = false // 사진이 선택된 상태인지
+        var selectedImage: UIImage = Resources.Images.plusUK // 현재 사진
+        var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
+        var titleField = "" // 제목칸
+        var isEditMode = false // 편집모드인지 여부
+        var logToSave = Log() // 저장할 로그
+        var isPresentingCropView = false // 이미지 크롭뷰 보여주고 있는지
+    }
+}
+
+// MARK: Actions
+extension AddViewModel {
     enum Inputs {
         case save
         case image(selected: UIImage)
@@ -62,26 +90,11 @@ final class AddViewModel: BaseViewModel {
             return input.logToEdit.send(log)
         }
     }
-    
-    struct Output {
-        var contentField = "" // 본문
-        var placeField = "" // 검색할 장소명
-        var presentPlaceSearchView = false // 장소검색뷰 보여줄지 말지
-        var searchedPlaces: [Place] = [] // 검색장소 리스트
-        var place = "" // 사용자에게 보여줄 현재 장소명
-        var selectedPlace: Place? = nil // 현재 선택된 장소
-        var presentTagListView = false // 태그뷰 보여줄지 말지
-        var selectedTag: Tag? = nil // 선택 태그
-        var isSelectedImage = false // 사진이 선택된 상태인지
-        var selectedImage: UIImage = Resources.Images.plusUK // 현재 사진
-        var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
-        var titleField = ""
-        var isEditMode = false
-        var logToSave = Log()
-        var isPresentingCropView = false
-    }
-    
-    init() {
+}
+
+// MARK: Transform
+extension AddViewModel {
+    private func transform() {
         input.saveBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
@@ -95,6 +108,7 @@ final class AddViewModel: BaseViewModel {
                 let isValidImage = self.output.isSelectedImage
                 
                 if let log = input.logToEdit.value {
+                    print(place)
                     // 수정 모드
                     managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
                     LogRepository.shared.updateLog(log, title: title, content: content, place: place, tag: tag, visitDate: date)
@@ -176,6 +190,7 @@ final class AddViewModel: BaseViewModel {
                 self.output.selectedTag = value.tag
                 self.input.visitedDate = value.visitDate
                 
+                
                 // 이미지가 존재한다면 이미지 넣어주기
                 if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
                     self.action(.image(selected: image))
@@ -185,7 +200,10 @@ final class AddViewModel: BaseViewModel {
                 self.output.place = title
             }.store(in: &subscriptions)
     }
-    
+}
+
+// MARK: etc
+extension AddViewModel {
     private func managingImage(isValid: Bool, id: String, image: UIImage?) {
         guard let image, isValid else {
             DocumentManager.shared.removeImage(id: id)
