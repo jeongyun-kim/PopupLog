@@ -21,13 +21,15 @@ struct TicketRowView: View {
     var body: some View {
         rowView(width, item: item, isBottomSheet: isBottomSheet)
     }
-    
+}
+
+extension TicketRowView {
     // MARK: 행의 큰틀
     private func rowView(_ width: CGFloat, item: Log, isBottomSheet: Bool) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: Resources.Radius.ticket)
                 .fill(Resources.Colors.white)
-            contentsView(width, item: item)
+            rowContentsView(width, item: item)
         }
         .frame(height: 140)
         .overlay {
@@ -44,43 +46,60 @@ struct TicketRowView: View {
     }
     
     // MARK: 행 내 콘텐츠
-    private func contentsView(_ width: CGFloat, item: Log) -> some View {
+    private func rowContentsView(_ width: CGFloat, item: Log) -> some View {
         ZStack(alignment: .bottomTrailing) {
-            HStack(alignment: .top, spacing: 8) {
-                imageView(id: "\(item.id)")
-                    .resizable()
-                    .frame(maxWidth: width*0.35, maxHeight: .infinity)
-                    .background(.gray)
-                    .clipShape(
-                        .rect(topLeadingRadius: Resources.Radius.ticket, bottomLeadingRadius: Resources.Radius.ticket, bottomTrailingRadius: 0, topTrailingRadius: 0))
-                LazyVStack(alignment: .leading, spacing: 4) {
-                    Text(item.title)
-                        .lineLimit(1)
-                        .font(.headline)
-                        .bold()
-                    Text(item.content)
-                        .lineLimit(3)
-                        .font(Resources.Fonts.font14)
-                }
-                .foregroundStyle(Resources.Colors.black)
-                .padding(.top)
-                .padding(.trailing, 12)
-            }
-            HStack {
-                Text(item.place?.title ?? "")
-                    .font(.caption)
-                    .foregroundStyle(Resources.Colors.lightGray)
-                if let tag = item.tag {
-                    TagButton(tag: tag, action: {
-                        
-                    })
-                }
-            }
-            .padding(.vertical, 8)
-            .padding(.trailing, 8)
+            imageAndTextView()
+            bottomContentsView(width: width)
         }
     }
     
+    // MARK: 이미지 / 제목 / 내용
+    private func imageAndTextView() -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            imageView(id: "\(item.id)")
+                .resizable()
+                .frame(maxWidth: width*0.35, maxHeight: .infinity)
+                .background(.gray)
+                .clipShape(
+                    .rect(topLeadingRadius: Resources.Radius.ticket, bottomLeadingRadius: Resources.Radius.ticket, bottomTrailingRadius: 0, topTrailingRadius: 0))
+            LazyVStack(alignment: .leading, spacing: 4) {
+                Text(item.title)
+                    .lineLimit(1)
+                    .font(.headline)
+                    .bold()
+                Text(item.content)
+                    .lineLimit(3)
+                    .font(Resources.Fonts.font14)
+            }
+            .foregroundStyle(Resources.Colors.black)
+            .padding(.top)
+            .padding(.trailing, 12)
+        }
+    }
+    
+    // MARK: 장소 / 태그
+    private func bottomContentsView(width: CGFloat) -> some View {
+        HStack {
+            Spacer()
+            if let place = item.place, let title = place.title {
+                Text(title)
+                    .font(.caption)
+                    .foregroundStyle(Resources.Colors.lightGray)
+                    .lineLimit(1)
+            }
+            Spacer()
+            if let tag = item.tag {
+                TagButton(tag: tag, action: {
+                    
+                })
+            }
+        }
+        .frame(width: width*0.55)
+        .padding(.vertical, 8)
+        .padding(.trailing, 8)
+    }
+    
+    // MARK: ImageView
     private func imageView(id: String) -> Image {
         let image = DocumentManager.shared.loadImage(id: "\(id)") ?? Resources.Images.ticket
         return Image(uiImage: image)
