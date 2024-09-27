@@ -64,7 +64,7 @@ struct TicketRowView: View {
                         .font(Resources.Fonts.font14)
                 }
                 .padding(.top)
-                .padding(.leading)
+//                .padding(.leading)
                 .padding(.trailing, 12)
             }
             HStack {
