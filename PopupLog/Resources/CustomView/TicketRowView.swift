@@ -63,6 +63,7 @@ struct TicketRowView: View {
                         .lineLimit(3)
                         .font(Resources.Fonts.font14)
                 }
+                .foregroundStyle(Resources.Colors.black)
                 .padding(.top)
                 .padding(.trailing, 12)
             }
