@@ -33,11 +33,4 @@ final class LogRepository {
         guard let firstData = result.first else { return nil }
         return firstData
     }
-    
-    // 제목 기반 로그 검색 결과
-    func getSearchedLogs(_ keyword: String) -> [Log] {
-        return Array(realm.objects(Log.self).where { log in
-            log.title.contains(keyword, options: .caseInsensitive)
-        })
-    }
 }

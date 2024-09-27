@@ -9,15 +9,10 @@ import SwiftUI
 import RealmSwift
 
 struct SearchView: View {
-    private enum EmptyViewKeyword: String {
-        case emptyKeyword = "🔍 제목을 통해 지금까지 \n저장한 기록들을 찾아보세요"
-        case noResults = "🥲 검색결과가 없어요"
-    }
-    
-    @EnvironmentObject var viewStatus: CalendarViewStatus
-    @State private var searchList: [Log] = []
-    @State private var keyword = ""
-    @State private var emptyText = EmptyViewKeyword.emptyKeyword.rawValue
+    @ObservedResults (Log.self) private var logList
+    @EnvironmentObject private var viewStatus: CalendarViewStatus
+    @EnvironmentObject private var stack: ViewPath
+    @StateObject private var vm = SearchViewModel()
     
     var body: some View {
         VStack {
@@ -25,7 +20,11 @@ struct SearchView: View {
                 .padding()
             ZStack {
                 searchListView()
-                if searchList.isEmpty {
+                // 검색결과 없을 때
+                if logList.where({ log in
+                    log.title.contains(vm.output.keyword, options: .caseInsensitive)
+                }).isEmpty {
+                    // - 키워드 X / 키워드 O 상황으로 나뉨
                     emptySearchView()
                 }
             }
@@ -34,6 +33,9 @@ struct SearchView: View {
         .background(Resources.Colors.moreLightOrange)
         .navigationTitle("기록 검색")
         .toolbarRole(.editor)
+        .fullScreenCover(isPresented: $vm.output.isPresentingDetailView) {
+            LazyNavigationView(DetailView(selectedLog: vm.output.selectedLog))
+        }
         .onAppear {
             viewStatus.isPresentingSideMenu = false
             viewStatus.isMainView = false
@@ -56,12 +58,10 @@ extension SearchView {
                 .fill(Resources.Colors.white)
                 .frame(height: 56)
                 .frame(maxWidth: .infinity)
-            TextField("기록을 검색해보세요", text: $keyword)
+            TextField("기록을 검색해보세요", text: $vm.output.keyword)
                 .padding(.horizontal)
-                .changedString($keyword) {
-                    searchList = LogRepository.shared.getSearchedLogs(keyword)
-                    emptyText = keyword.isEmpty ?
-                    EmptyViewKeyword.emptyKeyword.rawValue : EmptyViewKeyword.noResults.rawValue
+                .changedString($vm.output.keyword) {
+                    vm.action(.changedKeyword)
                 }
         }
     }
@@ -71,8 +71,14 @@ extension SearchView {
         GeometryReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(searchList, id: \.id) { value in
+                    ForEach(logList.where({ log in
+                        log.title.contains(vm.output.keyword, options: .caseInsensitive)
+                    }), id: \.id) { value in
                         TicketRowView(width: proxy.size.width, item: value, isBottomSheet: false)
+                            .onTapGesture {
+                                vm.action(.selectedLog(log: value))
+                                vm.action(.toggleDetailView)
+                            }
                     }
                 }
                 .padding(.horizontal)
@@ -84,7 +90,7 @@ extension SearchView {
     private func emptySearchView() -> some View {
         VStack {
             Spacer()
-            Text(emptyText)
+            Text(vm.output.emptyText)
                 .lineLimit(2)
                 .foregroundStyle(Resources.Colors.lightGray)
             Spacer()
