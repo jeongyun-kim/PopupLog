@@ -9,10 +9,10 @@ import SwiftUI
 import RealmSwift
 
 struct DetailView: View {
-    @ObservedObject private var vm = DetailViewModel()
     @Environment(\.dismiss) private var dismiss
     @ObservedRealmObject var selectedLog: Log
     @ObservedResults (Log.self) private var logList
+    @State private var isFlipped = true
     
     var body: some View {
         NavigationStack {
@@ -26,10 +26,6 @@ struct DetailView: View {
                 dismissButton()
             } trailing: {
                 menuView()
-            }
-            .onAppear {
-                // 수정할 데이터 보내기
-                vm.action(.logData(log: selectedLog))
             }
         }
     }
@@ -52,23 +48,23 @@ extension DetailView {
     private func flipView() -> some View {
         GeometryReader { proxy in
             RoundedRectangle(cornerRadius: Resources.Radius.ticket)
-                .fill(.white)
+                .fill(Resources.Colors.white)
                 .frame(height: proxy.size.height*0.8)
                 .overlay {
-                    if !vm.output.isFlipped {
+                    if isFlipped {
                         frontView(proxy.size.width)
                     } else {
                         backView()
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .scaleEffect(x: vm.output.isFlipped ? -1 : 1)
+                .scaleEffect(x: isFlipped ? -1 : 1)
                 .padding(.horizontal)
                 .shadow(color: Resources.Colors.lightGray, radius: 12)
-                .rotation3DEffect(.degrees(vm.output.isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
-                .animation(.easeInOut(duration: 0.5), value: vm.output.isFlipped)
+                .rotation3DEffect(.degrees(isFlipped ? 180 : 0), axis: (x: 0, y: 1, z: 0))
+                .animation(.easeInOut(duration: 0.5), value: isFlipped)
                 .onTapGesture {
-                    vm.action(.flip)
+                    isFlipped.toggle()
                 }
         }
     }
@@ -76,10 +72,17 @@ extension DetailView {
     // MARK: 앞면 (이미지, 제목, 태그)
     func frontView(_ width: CGFloat) -> some View {
         VStack {
-            Image("logo", bundle: nil)
-                .resizable()
-                .frame(width: width, height: width*0.9)
-                .background(.blue)
+            if let img = DocumentManager.shared.loadImage(id: "\(selectedLog.id)") {
+                Image(uiImage: img)
+                    .resizable()
+                    .frame(width: width, height: width*0.9)
+                    .background(.blue)
+            } else {
+                Image("logo", bundle: nil)
+                    .resizable()
+                    .frame(width: width, height: width*0.9)
+                    .background(.blue)
+            }
             Spacer()
             VStack(spacing: 8) {
                 Text(selectedLog.title)
@@ -115,7 +118,7 @@ extension DetailView {
                 Rectangle()
                     .fill(Resources.Colors.lightGray.opacity(0.5))
                     .frame(height: 1)
-                Text(vm.output.log.content)
+                Text(selectedLog.content)
             }
         }
         .scrollIndicators(.hidden)
@@ -128,7 +131,7 @@ extension DetailView {
         Menu {
             // 편집뷰로 이동
             NavigationLink {
-                LazyNavigationView(AddOrEditView(logToEdit: vm.output.log))
+                LazyNavigationView(AddOrEditView(logToEdit: selectedLog))
             } label: {
                 Text("편집")
             }

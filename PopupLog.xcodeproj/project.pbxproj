@@ -22,7 +22,6 @@
 		E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96F2C9C8E9F00D07972 /* LogRepository.swift */; };
 		E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */; };
 		E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9772C9EAA5F00D07972 /* DBPlace.swift */; };
-		E035D0B82C9F07FE0018AD8C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
@@ -88,7 +87,6 @@
 		E009D96F2C9C8E9F00D07972 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
 		E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E009D9772C9EAA5F00D07972 /* DBPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPlace.swift; sourceTree = "<group>"; };
-		E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		E035D0B92CA04B100018AD8C /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
 		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
@@ -347,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				E08002BE2C9ED37E005EC98B /* DetailView.swift */,
-				E035D0B72C9F07FE0018AD8C /* DetailViewModel.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -477,7 +474,6 @@
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
 				E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */,
 				E009D9442C99E92000D07972 /* TagButton.swift in Sources */,
-				E035D0B82C9F07FE0018AD8C /* DetailViewModel.swift in Sources */,
 				E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */,
 				E009D9512C9B342500D07972 /* APIKey.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
