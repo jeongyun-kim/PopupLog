@@ -175,12 +175,9 @@ final class AddViewModel: BaseViewModel {
                 self.output.selectedTag = value.tag
                 self.input.visitedDate = value.visitDate
                 
-                // 이미지 찾아왔는데, 그 이미지가 기본 이미지인지 여부 확인
-                let image = DocumentManager.shared.loadImage(id: "\(value.id)")
-                self.output.isSelectedImage = image != Resources.Images.ticket
-                // 사용자 선택 이미지가 있다면 받아온 이미지 넣어주기
-                if self.output.isSelectedImage {
-                    self.output.selectedImage = image
+                // 이미지가 존재한다면 이미지 넣어주기
+                if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
+                    self.action(.image(selected: image))
                 }
                 
                 guard let place = value.place, let title = place.title else { return }
