@@ -8,8 +8,6 @@
 import SwiftUI
 import RealmSwift
 
-
-
 struct CalendarView: View {
     @EnvironmentObject private var stack: ViewPath
     @StateObject var vm = CalendarViewModel()
