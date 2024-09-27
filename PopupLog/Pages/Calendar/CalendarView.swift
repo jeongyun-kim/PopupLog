@@ -93,13 +93,13 @@ extension CalendarView {
     // MARK: NavigationTrailing
     private func trailingBarButtons() -> some View {
         HStack(spacing: 0) {
-            NavigationLink {
-                LazyNavigationView(ChartView())
-            } label: {
-                Resources.Images.chart
-                    .padding(8)
-            }
-            .disabled(!viewStatus.isPresentingBottomSheet)
+//            NavigationLink {
+//                LazyNavigationView(ChartView())
+//            } label: {
+//                Resources.Images.chart
+//                    .padding(8)
+//            }
+//            .disabled(!viewStatus.isPresentingBottomSheet)
             NavigationLink {
                 LazyNavigationView(AddOrEditView())
             } label: {
