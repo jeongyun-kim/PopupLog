@@ -51,6 +51,7 @@ extension AddViewModel {
         var isEditMode = false // 편집모드인지 여부
         var logToSave = Log() // 저장할 로그
         var isPresentingCropView = false // 이미지 크롭뷰 보여주고 있는지
+        var selectedDBPlace: DBPlace? = nil
     }
 }
 
@@ -95,20 +96,25 @@ extension AddViewModel {
 // MARK: Transform
 extension AddViewModel {
     private func transform() {
+        aboutCU()
+        aboutPlace()
+        aboutInfos()
+    }
+    
+    // MARK: 로그 저장 / 수정
+    private func aboutCU() {
         input.saveBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
                 let title = self.output.titleField
                 let content = self.output.contentField
-                let data = self.output.selectedPlace
-                let place = DBPlace(title: data?.replacedTitle, roadAddress: data?.roadAddress, mapX: data?.mapx, mapY: data?.mapy)
                 let tag = self.output.selectedTag
                 let date = self.input.visitedDate
                 let image = self.input.selectedImage.value
                 let isValidImage = self.output.isSelectedImage
-                
+                let place = self.output.selectedDBPlace
+    
                 if let log = input.logToEdit.value {
-                    print(place)
                     // 수정 모드
                     managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
                     LogRepository.shared.updateLog(log, title: title, content: content, place: place, tag: tag, visitDate: date)
@@ -117,9 +123,31 @@ extension AddViewModel {
                     self.output.logToSave = log
                     managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
                 }
-           
             }.store(in: &subscriptions)
         
+        input.logToEdit
+            .sink { [weak self] value in
+                guard let self else { return }
+                guard let value else { return }
+                self.output.isEditMode = true
+                self.output.titleField = value.title
+                self.output.contentField = value.content
+                self.output.selectedTag = value.tag
+                self.input.visitedDate = value.visitDate
+        
+                // 이미지가 존재한다면 이미지 넣어주기
+                if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
+                    self.action(.image(selected: image))
+                }
+                
+                guard let place = value.place, let title = place.title else { return }
+                self.output.selectedDBPlace = place
+                self.output.place = title
+            }.store(in: &subscriptions)
+    }
+    
+    // MARK: 장소
+    private func aboutPlace() {
         input.placeSearchBtnTapped
             .sink { [weak self] _ in
                 guard let self else { return }
@@ -155,6 +183,7 @@ extension AddViewModel {
                 self.output.presentPlaceSearchView.toggle() // sheet 내리기
                 self.output.searchedPlaces = [] // 검색결과 비워주고
                 self.output.placeField = "" // 검색 키워드 비워주기
+                self.output.selectedDBPlace = DBPlace(title: value.replacedTitle, roadAddress: value.roadAddress, mapX: value.mapx, mapY: value.mapy, link: value.link)
             }.store(in: &subscriptions)
         
         input.removePlace
@@ -162,8 +191,12 @@ extension AddViewModel {
                 guard let self else { return }
                 self.output.place = ""
                 self.output.selectedPlace = nil
+                self.output.selectedDBPlace = nil
             }.store(in: &subscriptions)
-        
+    }
+    
+    // MARK: 태그 / 이미지
+    private func aboutInfos() {
         input.selectedTag
             .sink { [weak self] value in
                 guard let self else { return }
@@ -178,26 +211,6 @@ extension AddViewModel {
                 // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
                 guard !self.output.isSelectedImage else { return }
                 self.output.selectedPhotoItem = nil
-            }.store(in: &subscriptions)
-        
-        input.logToEdit
-            .sink { [weak self] value in
-                guard let self else { return }
-                guard let value else { return }
-                self.output.isEditMode = true
-                self.output.titleField = value.title
-                self.output.contentField = value.content
-                self.output.selectedTag = value.tag
-                self.input.visitedDate = value.visitDate
-                
-                
-                // 이미지가 존재한다면 이미지 넣어주기
-                if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
-                    self.action(.image(selected: image))
-                }
-                
-                guard let place = value.place, let title = place.title else { return }
-                self.output.place = title
             }.store(in: &subscriptions)
     }
 }
