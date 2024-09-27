@@ -78,6 +78,7 @@ final class AddViewModel: BaseViewModel {
         var titleField = ""
         var isEditMode = false
         var logToSave = Log()
+        var isPresentingCropView = false
     }
     
     init() {

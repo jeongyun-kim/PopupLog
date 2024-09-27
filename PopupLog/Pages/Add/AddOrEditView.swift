@@ -8,6 +8,7 @@
 import SwiftUI
 import PhotosUI
 import RealmSwift
+import SwiftyCrop
 
 struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
@@ -316,10 +317,32 @@ extension AddOrEditView {
                     }
             }
             .changedImage($vm.output.selectedPhotoItem) { value in
+                vm.output.isPresentingCropView.toggle()
                 vm.action(.image(selected: value))
             }
         }
         .padding(.top)
+        .fullScreenCover(isPresented: $vm.output.isPresentingCropView) {
+            imageCropView(width)
+        }
+    }
+    
+    // MARK: ImageCropView
+    private func imageCropView(_ size: CGFloat) -> some View {
+        let configuration = SwiftyCropConfiguration(
+            maskRadius: size,
+            rectAspectRatio: 1/1
+        )
+    
+        return SwiftyCropView(
+            imageToCrop: vm.output.selectedImage,
+              maskShape: .square,
+              configuration: configuration
+          ) { croppedImage in
+              if let croppedImage {
+                  vm.action(.image(selected: croppedImage))
+              }
+          }
     }
     
     // MARK: PhotoPickerLabel

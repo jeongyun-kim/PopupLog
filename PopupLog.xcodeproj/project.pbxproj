@@ -58,6 +58,7 @@
 		E0A7E1782CA5C7C800390718 /* TicketRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1772CA5C7C800390718 /* TicketRowView.swift */; };
 		E0A7E17A2CA639C300390718 /* StringOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */; };
 		E0A7E1862CA6511A00390718 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1852CA6511A00390718 /* SearchViewModel.swift */; };
+		E0A7E1892CA6B12800390718 /* SwiftyCrop in Frameworks */ = {isa = PBXBuildFile; productRef = E0A7E1882CA6B12800390718 /* SwiftyCrop */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +131,7 @@
 			files = (
 				E009D96A2C9C02CB00D07972 /* RealmSwift in Frameworks */,
 				E009D9562C9B34DE00D07972 /* Alamofire in Frameworks */,
+				E0A7E1892CA6B12800390718 /* SwiftyCrop in Frameworks */,
 				E07A207F2C9804BE00557A22 /* SnapKit in Frameworks */,
 				E07A20822C9804C600557A22 /* FSCalendar in Frameworks */,
 				E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */,
@@ -385,6 +387,7 @@
 				E009D9552C9B34DE00D07972 /* Alamofire */,
 				E009D9692C9C02CB00D07972 /* RealmSwift */,
 				E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */,
+				E0A7E1882CA6B12800390718 /* SwiftyCrop */,
 			);
 			productName = PopupLog;
 			productReference = E07A205E2C98041600557A22 /* PopupLog.app */;
@@ -407,11 +410,12 @@
 			};
 			buildConfigurationList = E07A20592C98041600557A22 /* Build configuration list for PBXProject "PopupLog" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = E07A20552C98041600557A22;
 			packageReferences = (
@@ -420,6 +424,7 @@
 				E009D9542C9B34DE00D07972 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E009D9682C9C02CB00D07972 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				E064A99F2CA3ABDD00A4AE8C /* XCRemoteSwiftPackageReference "MCEmojiPicker" */,
+				E0A7E1872CA6B12800390718 /* XCRemoteSwiftPackageReference "SwiftyCrop" */,
 			);
 			productRefGroup = E07A205F2C98041600557A22 /* Products */;
 			projectDirPath = "";
@@ -749,6 +754,14 @@
 				minimumVersion = 2.8.4;
 			};
 		};
+		E0A7E1872CA6B12800390718 /* XCRemoteSwiftPackageReference "SwiftyCrop" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/benedom/SwiftyCrop.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -776,6 +789,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E07A20802C9804C600557A22 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		E0A7E1882CA6B12800390718 /* SwiftyCrop */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0A7E1872CA6B12800390718 /* XCRemoteSwiftPackageReference "SwiftyCrop" */;
+			productName = SwiftyCrop;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
