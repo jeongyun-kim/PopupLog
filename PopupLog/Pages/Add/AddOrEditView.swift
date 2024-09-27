@@ -152,19 +152,18 @@ extension AddOrEditView {
         }
         .padding(.horizontal)
         .sheet(isPresented: $vm.output.presentTagListView, content: {
-            NavigationStack {
-                VStack {
-                    sheetPushTagSettingView()
-                    sheetTagListView()
-                }
-                .background(Resources.Colors.moreLightOrange)
-                .navigationTitle("태그 목록")
-                .navigationBarTitleDisplayMode(.inline)
+            VStack {
+                Text("태그 목록")
+                    .bold()
+                sheetTagListView()
             }
+            .padding(20)
+            .background(Resources.Colors.moreLightOrange)
         })
     }
     
-    // MARK: 태그 리스트 -> 태그 관리
+    // 🚨 에러 추후에 고쳐서 재구현할 것
+    // 태그 리스트 -> 태그 관리
     private func sheetPushTagSettingView() -> some View {
         HStack {
             Spacer()
@@ -333,16 +332,16 @@ extension AddOrEditView {
             maskRadius: size,
             rectAspectRatio: 1/1
         )
-    
+        
         return SwiftyCropView(
             imageToCrop: vm.output.selectedImage,
-              maskShape: .square,
-              configuration: configuration
-          ) { croppedImage in
-              if let croppedImage {
-                  vm.action(.image(selected: croppedImage))
-              }
-          }
+            maskShape: .square,
+            configuration: configuration
+        ) { croppedImage in
+            if let croppedImage {
+                vm.action(.image(selected: croppedImage))
+            }
+        }
     }
     
     // MARK: PhotoPickerLabel
