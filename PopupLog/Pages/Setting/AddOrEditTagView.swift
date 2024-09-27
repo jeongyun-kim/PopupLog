@@ -31,27 +31,31 @@ struct AddOrEditTagView: View {
     }
     
     var body: some View {
-        ZStack {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    emojiView()
-                    tagNameTextField()
+        NavigationStack {
+            ZStack {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        emojiView()
+                        tagNameTextField()
+                    }
+                    HStack {
+                        colorPickerView()
+                        Spacer()
+                    }
+                    spacerView()
                 }
-                HStack {
-                    colorPickerView()
-                    Spacer()
-                }
-                spacerView()
+                .padding()
             }
-            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Resources.Colors.moreLightOrange)
+            .navigationTitle(isEditMode == false ? "태그 생성" : "태그 편집")
+            .navigationBar(leading: {
+                leadingButton()
+            }, trailing: {
+                trailingButtons()
+            })
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Resources.Colors.moreLightOrange)
-        .navigationTitle(isEditMode == false ? "태그 생성" : "태그 편집")
-        .navigationBar(leading: {}, trailing: {
-            trailingButtons()
-        })
-        .toolbarRole(.editor)
     }
     
     // Tag 편집
@@ -149,5 +153,14 @@ extension AddOrEditTagView {
             }
             .disabled(tagName.isEmpty)
         }
+    }
+    
+    // MARK: NavigationLeading
+    private func leadingButton() -> some View {
+        Button(action: {
+            dismiss()
+        }, label: {
+            Text("취소")
+        })
     }
 }
