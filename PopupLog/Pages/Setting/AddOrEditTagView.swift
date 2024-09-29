@@ -151,7 +151,7 @@ extension AddOrEditTagView {
             }) {
                 Text("저장")
             }
-            .disabled(tagName.isEmpty)
+            .disabled(tagName.isEmptyRemovedSpace)
         }
     }
     

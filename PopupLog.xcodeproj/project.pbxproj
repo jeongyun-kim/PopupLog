@@ -61,6 +61,7 @@
 		E0A7E1892CA6B12800390718 /* SwiftyCrop in Frameworks */ = {isa = PBXBuildFile; productRef = E0A7E1882CA6B12800390718 /* SwiftyCrop */; };
 		E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1902CA7160D00390718 /* SupportEmail.swift */; };
 		E0A7E1952CA7175400390718 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1942CA7175400390718 /* Email.swift */; };
+		E0A7E19A2CA98AF400390718 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1992CA98AF400390718 /* String + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -127,6 +128,7 @@
 		E0A7E1902CA7160D00390718 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		E0A7E1942CA7175400390718 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		E0A7E1962CA9745100390718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E0A7E1992CA98AF400390718 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +250,7 @@
 				E07A20772C98046500557A22 /* Color + Extension.swift */,
 				E035D0C92CA312400018AD8C /* View + Extension.swift */,
 				E0A7E1732CA466F500390718 /* Date + Extension.swift */,
+				E0A7E1992CA98AF400390718 /* String + Extension.swift */,
 			);
 			name = Extension;
 			path = Resources/Extension;
@@ -493,6 +496,7 @@
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
 				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
 				E0A7E1862CA6511A00390718 /* SearchViewModel.swift in Sources */,
+				E0A7E19A2CA98AF400390718 /* String + Extension.swift in Sources */,
 				E07A20A02C981C8E00557A22 /* MenuContentsView.swift in Sources */,
 				E0A7E1762CA5C0B100390718 /* StackViewType.swift in Sources */,
 				E009D95B2C9B36CC00D07972 /* SearchPlaceResults.swift in Sources */,

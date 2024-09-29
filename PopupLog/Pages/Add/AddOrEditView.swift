@@ -72,7 +72,8 @@ extension AddOrEditView {
             Text("저장")
         })
         // 제목 / 본문 비어있으면 저장 X
-        .disabled(vm.output.contentField.isEmpty || vm.output.titleField.isEmpty)
+        .disabled(vm.output.contentField.isEmptyRemovedSpace
+                  || vm.output.titleField.isEmptyRemovedSpace)
     }
     
     // MARK: 제목
