@@ -209,14 +209,15 @@ extension AddOrEditView {
     private func popupInfoView() -> some View {
         VStack(alignment: .leading) {
             // 방문일뷰
-            HStack(spacing: 30) {
-                HStack(spacing: 0) {
+            HStack {
+                HStack(spacing: 8) {
                     Text("방문일*")
                         .font(.callout)
                         .bold()
                     DatePicker("", selection: $vm.input.visitedDate, in: ...Date(), displayedComponents: .date)
                         .tint(Resources.Colors.primaryColor)
                         .environment(\.locale, Locale(identifier: "ko_KR"))
+                        .frame(width: 100)
                 }
                 Spacer()
                 searchPlaceButton()
