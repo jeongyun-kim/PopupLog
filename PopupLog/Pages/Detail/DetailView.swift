@@ -96,8 +96,7 @@ extension DetailView {
                             .lineLimit(2)
                     }
                     if let tag = selectedLog.tag {
-                       TagButton(tag: tag, action: {})
-                            .disabled(true)
+                       TagView(tag: tag)
                     }
                 }
             }

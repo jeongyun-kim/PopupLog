@@ -125,10 +125,12 @@ extension AddOrEditView {
                     .font(.headline)
                 // 선택된 태그있으면 보여주기
                 if let tag = vm.output.selectedTag {
-                    TagButton(tag: tag) {
-                        vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
+                    TagView(tag: tag)
+                        .onTapGesture {
+                            vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
+                        }
                     }
-                }
+                
                 Spacer()
                 Button(action: {
                     // sheet 이용해 모든 태그리스트 띄우기
@@ -143,9 +145,10 @@ extension AddOrEditView {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
-                        TagButton(tag: tag) {
-                            vm.action(.selectedTag(tag: tag))
-                        }
+                        TagView(tag: tag)
+                            .onTapGesture {
+                                vm.action(.selectedTag(tag: tag))
+                            }
                     }
                 }
             }
@@ -189,14 +192,16 @@ extension AddOrEditView {
                 LazyVStack(alignment: .leading) {
                     ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
                         HStack {
-                            TagButton(tag: tag) {
-                                vm.action(.selectedTag(tag: tag))
-                                vm.action(.presentTags)
-                            }
+                            TagView(tag: tag)
                             Spacer()
                         }
                         .frame(maxWidth: .infinity)
                         .padding(4)
+                        .background(.pink)
+                        .onTapGesture {
+                            vm.action(.selectedTag(tag: tag))
+                            vm.action(.presentTags)
+                        }
                     }
                 }
                 .padding()

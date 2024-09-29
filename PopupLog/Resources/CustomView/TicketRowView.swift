@@ -89,9 +89,7 @@ extension TicketRowView {
             }
             Spacer()
             if let tag = item.tag {
-                TagButton(tag: tag, action: {
-                    
-                })
+                TagView(tag: tag)
             }
         }
         .frame(width: width*0.55)

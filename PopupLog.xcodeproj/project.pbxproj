@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D93C2C98897C00D07972 /* RoundedTextField.swift */; };
 		E009D9422C99D28400D07972 /* ImageOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */; };
-		E009D9442C99E92000D07972 /* TagButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9432C99E92000D07972 /* TagButton.swift */; };
+		E009D9442C99E92000D07972 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9432C99E92000D07972 /* TagView.swift */; };
 		E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9452C9B1E1300D07972 /* AddViewModel.swift */; };
 		E009D9512C9B342500D07972 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9502C9B342500D07972 /* APIKey.swift */; };
 		E009D9532C9B34CB00D07972 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9522C9B34CB00D07972 /* NetworkService.swift */; };
@@ -80,7 +80,7 @@
 /* Begin PBXFileReference section */
 		E009D93C2C98897C00D07972 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOnChangeWrapper.swift; sourceTree = "<group>"; };
-		E009D9432C99E92000D07972 /* TagButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagButton.swift; sourceTree = "<group>"; };
+		E009D9432C99E92000D07972 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		E009D9452C9B1E1300D07972 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
 		E009D9502C9B342500D07972 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		E009D9522C9B34CB00D07972 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
 				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
-				E009D9432C99E92000D07972 /* TagButton.swift */,
+				E009D9432C99E92000D07972 /* TagView.swift */,
 				E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */,
 				E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */,
 			);
@@ -485,7 +485,7 @@
 				E08002BF2C9ED37E005EC98B /* DetailView.swift in Sources */,
 				E07A207C2C9804B300557A22 /* FSCalendarViewControllerWrapper.swift in Sources */,
 				E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */,
-				E009D9442C99E92000D07972 /* TagButton.swift in Sources */,
+				E009D9442C99E92000D07972 /* TagView.swift in Sources */,
 				E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */,
 				E009D9512C9B342500D07972 /* APIKey.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,

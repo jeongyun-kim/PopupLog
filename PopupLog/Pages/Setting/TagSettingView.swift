@@ -90,8 +90,7 @@ extension TagSettingView {
             LazyVStack(alignment: .leading) {
                 ForEach(tagList.filter { $0.isDefault }, id: \.id) { tag in
                     HStack {
-                        TagButton(tag: tag, action: {})
-                            .disabled(true)
+                        TagView(tag: tag)
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
@@ -121,8 +120,7 @@ extension TagSettingView {
                         isPresenting.toggle()
                     } label: {
                         HStack {
-                            TagButton(tag: tag, action: {})
-                                .disabled(true)
+                            TagView(tag: tag)
                             Spacer()
                             Resources.Images.next
                                 .foregroundStyle(Resources.Colors.lightGray)
