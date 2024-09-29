@@ -17,7 +17,7 @@ struct TagView: View {
                 Text(tag.emoji)
                 Text(tag.tagName)
                     .font(Resources.Fonts.font14)
-                    .foregroundStyle(Resources.Colors.black)
+                    .foregroundStyle(.black)
             }
             .padding(6)
             .background(Color.init(hex: tagColor))

@@ -30,7 +30,7 @@ struct MenuContentsView: View {
             .padding(.leading, 20)
             .padding(.trailing, 32)
             .frame(maxHeight: .infinity)
-            .background(.white)
+            .background(Resources.Colors.white)
             Spacer()
         }
         .background(.clear)
@@ -108,7 +108,7 @@ extension MenuContentsView {
         }
         .frame(width: 130)
         .padding(.vertical, 12)
-        .foregroundStyle(.black)
+        .foregroundStyle(Resources.Colors.black)
     }
     
     // MARK: 건의하기 + 버전 정보

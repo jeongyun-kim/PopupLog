@@ -59,9 +59,11 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             calendar.appearance.weekdayFont = Resources.Fonts.regular14
             
             calendar.appearance.titleSelectionColor = UIColor(Resources.Colors.white)
-            calendar.appearance.todayColor = Resources.Colors.primaryColorUK
-            calendar.appearance.selectionColor = Resources.Colors.primaryColorUK
+            calendar.appearance.todayColor = UIColor(Resources.Colors.primaryColor)
+            calendar.appearance.selectionColor = UIColor(Resources.Colors.primaryColor)
             calendar.appearance.weekdayTextColor = UIColor(Resources.Colors.black)
+            calendar.appearance.titleDefaultColor = UIColor(Resources.Colors.black)
+            
             return calendar
         }()
         
