@@ -197,7 +197,6 @@ extension AddOrEditView {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(4)
-                        .background(.pink)
                         .onTapGesture {
                             vm.action(.selectedTag(tag: tag))
                             vm.action(.presentTags)
@@ -306,6 +305,10 @@ extension AddOrEditView {
             }
         }
         .listStyle(.plain)
+        .overlay {
+            Text(vm.output.emptyPlaceText)
+                .foregroundStyle(Resources.Colors.lightGray)
+        }
     }
     
     // MARK: 사진

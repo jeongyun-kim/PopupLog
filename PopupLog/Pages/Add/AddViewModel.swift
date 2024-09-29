@@ -52,6 +52,7 @@ extension AddViewModel {
         var logToSave = Log() // 저장할 로그
         var isPresentingCropView = false // 이미지 크롭뷰 보여주고 있는지
         var selectedDBPlace: DBPlace? = nil
+        var emptyPlaceText = ""
     }
 }
 
@@ -164,11 +165,14 @@ extension AddViewModel {
             .sink { [weak self] _ in
                 guard let self else { return }
                 let keyword = self.output.placeField
-                guard !keyword.isEmpty else { return }
+                guard !keyword.isEmpty else { 
+                    self.output.searchedPlaces = []
+                    return }
                 NetworkService.shared.searchPlace(keyword) { result in
                     switch result {
                     case .success(let value):
                         self.output.searchedPlaces = value.items
+                        self.output.emptyPlaceText = value.items.isEmpty ? "검색결과가 없어요" : ""
                     case .failure(let error):
                         print(error)
                     }
