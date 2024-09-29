@@ -14,7 +14,7 @@ import SnapKit
 struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     @ObservedObject var vm: CalendarViewModel
     @Binding var detent: PresentationDetent
-    @Binding var disappearedDetailView: Bool
+    @Binding var reloadCalendar: Bool
 
     func makeUIViewController(context: Context) -> some UIViewController {
         FSCalendarViewController(vm: vm)
@@ -24,7 +24,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     // - 상세뷰에서 편집 후 이미지 변경 시, 바로 썸네일 반영되도록 calendar.reloadData()
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         guard let vc = uiViewController as? FSCalendarViewController else { return }
-        vc.reloadCalendar(disappearedDetailView)
+        vc.reloadCalendar(reloadCalendar)
         guard let detentType = Resources.Detents.allCases.filter({ $0.detents == detent }).first else { return }
         vc.changeScopeByDetent(detentType)
     }
@@ -125,11 +125,11 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
             vm.action(.changeCurrentPage(date: calendar.currentPage))
         }
         
-        func reloadCalendar(_ disappeared: Bool) {
+        func reloadCalendar(_ reload: Bool) {
             DispatchQueue.main.async {
-                if disappeared {
+                if reload {
                     self.calendar.reloadData()
-                    self.vm.action(.disappearedDetailView(disappeared: false))
+                    self.vm.action(.reloadCalendarTrigger(reload: false))
                 }
             }
         }

@@ -76,7 +76,7 @@ extension CalendarView {
     // MARK: 캘린더
     private func calendarView() -> some View {
         GeometryReader { proxy in
-            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, disappearedDetailView: $vm.output.disappearedDetailView)
+            FSCalendarViewControllerWrapper(vm: vm, detent: $detentType, reloadCalendar: $vm.output.reloadCalendarTrigger)
                 .frame(height: proxy.size.width*0.9)
                 .padding(.horizontal)
                 .sheet(isPresented: $viewStatus.isPresentingBottomSheet, content: {

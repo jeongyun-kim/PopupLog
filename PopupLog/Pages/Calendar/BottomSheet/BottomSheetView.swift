@@ -30,6 +30,7 @@ struct BottomSheetView: View {
                             Button(role: .destructive) {
                                 vm.action(.deleteLogImage(id: "\(item.id)"))
                                 $logList.remove(item)
+                                vm.action(.reloadCalendarTrigger(reload: true))
                             } label: {
                                 Text("삭제")
                             }
@@ -50,7 +51,7 @@ struct BottomSheetView: View {
         .fullScreenCover(isPresented: $vm.output.isPresentingFullCover, content: {
             LazyNavigationView(DetailView(selectedLog: vm.output.selectedLog))
                 .onDisappear {
-                    vm.action(.disappearedDetailView(disappeared: true))
+                    vm.action(.reloadCalendarTrigger(reload: true))
                 }
         })
         

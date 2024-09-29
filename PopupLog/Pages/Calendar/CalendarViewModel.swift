@@ -29,7 +29,7 @@ extension CalendarViewModel {
         var deleteLogImage = PassthroughSubject<String, Never>() // 이미지 삭제 버튼 탭
         var selectedLog = PassthroughSubject<Log, Never>() // 선택한 로그 -> 디테일뷰
         var toggleFullCover = PassthroughSubject<Void, Never>() // DetailView 띄우기
-        var disappearedDetailView = PassthroughSubject<Bool, Never>() // DetailView 사라질 때 캘린더 reload 위한 신호
+        var reloadCalendarTrigger = PassthroughSubject<Bool, Never>() // DetailView 사라질 때, 삭제했을 때 캘린더 reload 위한 신호
     }
     
     struct Output {
@@ -38,7 +38,7 @@ extension CalendarViewModel {
         var selectedDate = "" // 선택 날짜
         var selectedLog = Log(title: "", content: "", place: nil, visitDate: Date()) // DetailView로 넘겨줄 데이터
         var isPresentingFullCover = false // detailView presenting 상태
-        var disappearedDetailView = false // detailView 닫힐 때
+        var reloadCalendarTrigger = false // detailView 닫힐 때
     }
 }
 
@@ -51,7 +51,7 @@ extension CalendarViewModel {
         case deleteLogImage(id: String)
         case selectLog(log: Log)
         case toggleFullCover
-        case disappearedDetailView(disappeared: Bool)
+        case reloadCalendarTrigger(reload: Bool)
     }
     
     func action(_ inputs: Inputs) {
@@ -68,8 +68,8 @@ extension CalendarViewModel {
             input.selectedLog.send(log)
         case .toggleFullCover:
             input.toggleFullCover.send(())
-        case .disappearedDetailView(let value):
-            input.disappearedDetailView.send(value)
+        case .reloadCalendarTrigger(let value):
+            input.reloadCalendarTrigger.send(value)
         }
     }
 }
@@ -137,10 +137,10 @@ extension CalendarViewModel {
             }.store(in: &subscriptions)
         
         // DetailView 사라졌을 때
-        input.disappearedDetailView
+        input.reloadCalendarTrigger
             .sink { [weak self] value in
                 guard let self else { return }
-                self.output.disappearedDetailView = value
+                self.output.reloadCalendarTrigger = value
             }.store(in: &subscriptions)
     }
 }
