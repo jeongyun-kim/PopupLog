@@ -46,6 +46,7 @@ struct CalendarView: View {
             }, trailing: {
                 trailingBarButtons()
             })
+            .navigationBarTitleDisplayMode(.inline)
         }
         .tint(Resources.Colors.primaryColor)
     }
