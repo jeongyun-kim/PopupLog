@@ -55,6 +55,7 @@ struct AddOrEditView: View {
             saveButton()
         }
         .navigationTitle("기록하기")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbarRole(.editor)
     }
 }
@@ -198,6 +199,7 @@ extension AddOrEditView {
                         }
                         .frame(maxWidth: .infinity)
                         .padding(4)
+                        .background(Resources.Colors.white)
                         .onTapGesture {
                             vm.action(.selectedTag(tag: tag))
                             vm.action(.presentTags)
