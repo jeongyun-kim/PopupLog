@@ -13,12 +13,29 @@ final class SearchViewModel: BaseViewModel {
     var input = Input()
     @Published var output = Output()
     
+    init() {
+        transform()
+    }
+}
+
+// MARK: Input / Output
+extension SearchViewModel {
     struct Input {
         let changedKeyword = PassthroughSubject<Void, Never>()
         let selectedLog = PassthroughSubject<Log, Never>()
         let toggleDetailView = PassthroughSubject<Void, Never>()
     }
     
+    struct Output {
+        var keyword = ""
+        var selectedLog = Log()
+        var emptyText = EmptyViewKeyword.emptyKeyword.rawValue
+        var isPresentingDetailView = false
+    }
+}
+
+// MARK: Actions
+extension SearchViewModel {
     enum Inputs {
         case selectedLog(log: Log)
         case changedKeyword
@@ -35,20 +52,11 @@ final class SearchViewModel: BaseViewModel {
             input.toggleDetailView.send(())
         }
     }
-    
-    struct Output {
-        var keyword = ""
-        var selectedLog = Log()
-        var emptyText = EmptyViewKeyword.emptyKeyword.rawValue
-        var isPresentingDetailView = false
-    }
-    
-    enum EmptyViewKeyword: String {
-        case emptyKeyword = "🔍 제목을 통해 지금까지 \n저장한 기록들을 찾아보세요"
-        case noResults = "🥲 검색결과가 없어요"
-    }
-    
-    init() {
+}
+
+// MARK: Transform
+extension SearchViewModel {
+    private func transform() {
         input.selectedLog
             .sink { [weak self] value in
                 guard let self else { return }
@@ -68,5 +76,13 @@ final class SearchViewModel: BaseViewModel {
                 self.output.isPresentingDetailView.toggle()
             }.store(in: &subscriptions)
 
+    }
+}
+
+// MARK: etc
+extension SearchViewModel {
+    enum EmptyViewKeyword: String {
+        case emptyKeyword = "🔍 제목을 통해 지금까지 \n저장한 기록들을 찾아보세요"
+        case noResults = "🥲 검색결과가 없어요"
     }
 }
