@@ -71,36 +71,27 @@ extension DetailView {
     
     // MARK: 앞면 (이미지, 제목, 태그)
     func frontView(_ width: CGFloat) -> some View {
-        VStack {
-            if let img = DocumentManager.shared.loadImage(id: "\(selectedLog.id)") {
-                Image(uiImage: img)
-                    .resizable()
-                    .frame(width: width, height: width*0.9)
-                    .background(.blue)
-            } else {
-                Image("logo", bundle: nil)
-                    .resizable()
-                    .frame(width: width, height: width*0.9)
-                    .background(.blue)
+        VStack(spacing: 8) {
+            Image(uiImage: DocumentManager.shared.loadImage(id: "\(selectedLog.id)") ?? Resources.Images.logo)
+                .resizable()
+                .frame(width: width, height: width*0.9)
+                .padding(.bottom, 12)
+            if let tag = selectedLog.tag {
+               TagView(tag: tag)
             }
-            Spacer()
             VStack(spacing: 8) {
                 Text(selectedLog.title)
                     .font(.headline)
                     .lineLimit(2)
-                HStack(spacing: 8) {
-                    if let place = selectedLog.place, let title = place.title {
-                        Text(title)
-                            .font(.callout)
-                            .foregroundStyle(Resources.Colors.lightGray)
-                            .lineLimit(2)
-                    }
-                    if let tag = selectedLog.tag {
-                       TagView(tag: tag)
-                    }
+                if let place = selectedLog.place, let title = place.title {
+                    Text(title)
+                        .font(.callout)
+                        .foregroundStyle(Resources.Colors.lightGray)
+                        .lineLimit(2)
                 }
             }
             .padding(.horizontal, 32)
+            .padding(.bottom)
             Spacer()
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
