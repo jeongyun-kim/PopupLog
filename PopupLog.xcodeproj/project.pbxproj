@@ -283,7 +283,6 @@
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
 				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
-				E009D9432C99E92000D07972 /* TagView.swift */,
 				E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */,
 				E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */,
 			);
@@ -347,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				E07A20B12C98693C00557A22 /* LazyNavigationView.swift */,
+				E009D9432C99E92000D07972 /* TagView.swift */,
 				E0A7E1772CA5C7C800390718 /* TicketRowView.swift */,
 				E0A7E1902CA7160D00390718 /* SupportEmail.swift */,
 			);
