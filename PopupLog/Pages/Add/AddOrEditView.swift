@@ -14,7 +14,7 @@ struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
     @EnvironmentObject private var viewStatus: CalendarViewStatus
     @ObservedObject private var vm = AddViewModel()
-    @ObservedResults (Log.self) private var logList
+    @ObservedResults(Log.self) private var logList
     
     init(logToEdit: Log? = nil) {
         if let logToEdit {
@@ -132,7 +132,6 @@ extension AddOrEditView {
                             vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
                         }
                     }
-                
                 Spacer()
                 Button(action: {
                     // sheet 이용해 모든 태그리스트 띄우기
@@ -143,7 +142,6 @@ extension AddOrEditView {
                         .foregroundStyle(Resources.Colors.lightGray)
                 })
             }
-            
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack {
                     ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
@@ -157,18 +155,11 @@ extension AddOrEditView {
         }
         .padding(.horizontal)
         .sheet(isPresented: $vm.output.presentTagListView, content: {
-            VStack {
-                Text("태그 목록")
-                    .bold()
-                sheetTagListView()
-            }
-            .padding(20)
-            .background(Resources.Colors.moreLightOrange)
+            tagSheetView()
         })
     }
     
-    // 🚨 에러 추후에 고쳐서 재구현할 것
-    // 태그 리스트 -> 태그 관리
+    // MARK: 태그 리스트 -> 태그 관리
     private func sheetPushTagSettingView() -> some View {
         HStack {
             Spacer()
@@ -176,13 +167,11 @@ extension AddOrEditView {
                 LazyNavigationView(TagSettingView())
             } label: {
                 HStack(spacing: 4) {
-                    Resources.Images.tagSetting
                     Text("태그 관리")
                         .font(.callout)
                 }
             }
         }
-        .padding(.horizontal)
     }
     
     // MARK: 모든 태그 리스트
@@ -209,6 +198,26 @@ extension AddOrEditView {
                 .padding()
             }
             .padding()
+        }
+    }
+    
+    // MARK: TagSheetView
+    private func tagSheetView() -> some View {
+        NavigationStack {
+            sheetTagListView()
+            .padding(.horizontal)
+            .background(Resources.Colors.moreLightOrange)
+            .navigationTitle("태그 목록")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBar {
+                Button {
+                    vm.action(.presentTags)
+                } label: {
+                    Text("취소")
+                }
+            } trailing: {
+                sheetPushTagSettingView()
+            }
         }
     }
     
