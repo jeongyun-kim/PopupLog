@@ -11,7 +11,7 @@ import RealmSwift
 struct DetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedRealmObject var selectedLog: Log
-    @ObservedResults (Log.self) private var logList
+    @ObservedResults(Log.self) private var logList
     @State private var isFlipped = true
     
     var body: some View {

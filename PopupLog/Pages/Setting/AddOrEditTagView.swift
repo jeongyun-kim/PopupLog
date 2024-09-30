@@ -10,7 +10,7 @@ import RealmSwift
 import MCEmojiPicker
 
 struct AddOrEditTagView: View {
-    @ObservedResults (Tag.self) private var tagList // 태그 DB
+    @ObservedResults(Tag.self) private var tagList // 태그 DB
     @ObservedRealmObject var tagForEdit: Tag = Tag() // 편집할 태그
     @Environment(\.dismiss) private var dismiss
     @State private var selectedEmoji: String = "😊" // 사용자 선택 이모지

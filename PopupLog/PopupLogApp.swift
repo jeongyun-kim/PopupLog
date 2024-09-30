@@ -12,7 +12,6 @@ import RealmSwift
 struct PopupLogApp: App {
     var body: some Scene {
         WindowGroup {
-    //        TagSettingView()
             CalendarView()
                 .environmentObject(CalendarViewStatus())
                 .environmentObject(ViewPath())

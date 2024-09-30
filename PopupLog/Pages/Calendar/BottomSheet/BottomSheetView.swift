@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct BottomSheetView: View {
-    @ObservedResults (Log.self) private var logList
+    @ObservedResults(Log.self) private var logList
     @ObservedObject var vm: CalendarViewModel
  
     var body: some View {

@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct SearchView: View {
-    @ObservedResults (Log.self) private var logList
+    @ObservedResults(Log.self) private var logList
     @EnvironmentObject private var viewStatus: CalendarViewStatus
     @EnvironmentObject private var stack: ViewPath
     @StateObject private var vm = SearchViewModel()
