@@ -277,11 +277,9 @@
 		E07A20932C9809FD00557A22 /* Wrapper */ = {
 			isa = PBXGroup;
 			children = (
+				E0C29EA12CAAFE3C00BF31B1 /* OnChange */,
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
-				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
-				E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */,
-				E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */,
 			);
 			name = Wrapper;
 			path = Resources/Wrapper;
@@ -370,6 +368,16 @@
 				E07A20792C98049D00557A22 /* Calendar */,
 			);
 			path = Pages;
+			sourceTree = "<group>";
+		};
+		E0C29EA12CAAFE3C00BF31B1 /* OnChange */ = {
+			isa = PBXGroup;
+			children = (
+				E0A7E1792CA639C300390718 /* StringOnChangeWrapper.swift */,
+				E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */,
+				E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */,
+			);
+			path = OnChange;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
