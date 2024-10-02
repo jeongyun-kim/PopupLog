@@ -23,7 +23,7 @@ final class AddViewModel: BaseViewModel {
 // MARK: Input / Output
 extension AddViewModel {
     struct Input {
-        var visitedDate = Date() // 방문일
+        var visitedDate = PassthroughSubject<Date, Never>() // 방문일
         var selectedImage = CurrentValueSubject<UIImage, Never>(Resources.Images.plusUK) // 선택한 이미지
         var saveBtnTapped = PassthroughSubject<Void, Never>() // 저장버튼 탭
         var placeSearchBtnTapped = PassthroughSubject<Void, Never>() // 장소검색 버튼 탭
@@ -36,29 +36,31 @@ extension AddViewModel {
     }
     
     struct Output {
-        var contentField = "" // 본문
+        var selectedImage: UIImage = Resources.Images.plusUK // 현재 사진
+        var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
+        var isPresentingCropView = false // 이미지 크롭뷰 보여주고 있는지
+        var titleField = "" // 제목칸
+        var contentField = "" // 후기
+        var visitedDate = Date() // 방문일
         var placeField = "" // 검색할 장소명
         var presentPlaceSearchView = false // 장소검색뷰 보여줄지 말지
         var searchedPlaces: [Place] = [] // 검색장소 리스트
+        var selectedDBPlace: DBPlace? = nil
+        var emptyPlaceText = "" // 장소 검색 결과 없을 때
         var place = "" // 사용자에게 보여줄 현재 장소명
         var selectedPlace: Place? = nil // 현재 선택된 장소
         var presentTagListView = false // 태그뷰 보여줄지 말지
         var selectedTag: Tag? = nil // 선택 태그
         var isSelectedImage = false // 사진이 선택된 상태인지
-        var selectedImage: UIImage = Resources.Images.plusUK // 현재 사진
-        var selectedPhotoItem: PhotosPickerItem? = nil // 선택된 사진
-        var titleField = "" // 제목칸
         var isEditMode = false // 편집모드인지 여부
         var logToSave = Log() // 저장할 로그
-        var isPresentingCropView = false // 이미지 크롭뷰 보여주고 있는지
-        var selectedDBPlace: DBPlace? = nil
-        var emptyPlaceText = ""
     }
 }
 
 // MARK: Actions
 extension AddViewModel {
     enum Inputs {
+        case visitedDate(date: Date)
         case save
         case image(selected: UIImage)
         case placeSearch
@@ -72,6 +74,8 @@ extension AddViewModel {
     
     func action(_ inputs: Inputs) {
         switch inputs {
+        case .visitedDate(let date):
+            return input.visitedDate.send(date)
         case .save:
             return input.saveBtnTapped.send(())
         case .image(let selectedImage):
@@ -100,6 +104,7 @@ extension AddViewModel {
         aboutCU()
         aboutPlace()
         aboutInfos()
+        aboutDate()
     }
     
     // MARK: 로그 저장 / 수정
@@ -110,7 +115,8 @@ extension AddViewModel {
                 let title = self.output.titleField
                 let content = self.output.contentField
                 let tag = self.output.selectedTag
-                let date = self.input.visitedDate
+                let date = self.output.visitedDate
+                //let date = self.input.visitedDate
                 let image = self.input.selectedImage.value
                 let isValidImage = self.output.isSelectedImage
                 let place = self.output.selectedDBPlace
@@ -134,7 +140,7 @@ extension AddViewModel {
                 self.output.titleField = value.title
                 self.output.contentField = value.content
                 self.output.selectedTag = value.tag
-                self.input.visitedDate = value.visitDate
+                self.output.visitedDate = value.visitDate
         
                 // 이미지가 존재한다면 이미지 넣어주기
                 if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
@@ -215,6 +221,15 @@ extension AddViewModel {
                 // 만약 현재 사진이 선택되어있는 상태가 아니라면 photoItem 지우기
                 guard !self.output.isSelectedImage else { return }
                 self.output.selectedPhotoItem = nil
+            }.store(in: &subscriptions)
+    }
+    
+    // MARK: 방문일
+    private func aboutDate() {
+        input.visitedDate
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.visitedDate = value
             }.store(in: &subscriptions)
     }
 }

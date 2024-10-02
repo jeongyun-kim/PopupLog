@@ -16,7 +16,10 @@ struct AddOrEditView: View {
     @ObservedObject private var vm = AddViewModel()
     @ObservedResults(Log.self) private var logList
     
-    init(logToEdit: Log? = nil) {
+    init(logToEdit: Log? = nil, selectedDate: Date? = nil) {
+        if let selectedDate {
+            vm.action(.visitedDate(date: selectedDate))
+        }
         if let logToEdit {
             vm.action(.logToEdit(log: logToEdit))
         }
@@ -92,7 +95,7 @@ extension AddOrEditView {
     // MARK: 본문
     private func contentsView() -> some View {
         VStack(alignment: .leading) {
-            Text("본문*")
+            Text("후기*")
                 .font(.headline)
             ZStack(alignment: .leading) {
                 // TextEditor Placeholder
@@ -226,30 +229,24 @@ extension AddOrEditView {
         VStack(alignment: .leading) {
             // 방문일뷰
             HStack {
-                HStack(spacing: 8) {
+                HStack(spacing: 12) {
                     Text("방문일*")
                         .font(.callout)
                         .bold()
-                    DatePicker("", selection: $vm.input.visitedDate, in: ...Date(), displayedComponents: .date)
+                    DatePicker("", selection: $vm.output.visitedDate, displayedComponents: .date)
                         .tint(Resources.Colors.primaryColor)
                         .environment(\.locale, Locale(identifier: "ko_KR"))
                         .frame(width: 100)
                 }
                 Spacer()
-                searchPlaceButton()
             }
             .offset(y: -16)
             // 장소뷰
             HStack {
                 Text("장소")
                     .font(.headline)
-                ZStack(alignment: .leading) {
-                    Text("장소를 검색해주세요") // 검색 장소
-                        .foregroundStyle(Resources.Colors.lightGray)
-                        .opacity(vm.output.place.isEmpty ? 1 : 0) // 선택한 장소가 없다면 '장소를 검색해주세요' 숨기기
-                    Text(vm.output.place) // 검색 장소 결과 주소
-                        .font(.callout)
-                }
+                searchPlaceButton()
+                Spacer()
                 Spacer()
                 // 선택한 장소가 있다면 장소가 있다면 장소 지울 수 있게
                 if !vm.output.place.isEmpty {
@@ -268,20 +265,22 @@ extension AddOrEditView {
     
     // MARK: 검색 버튼
     private func searchPlaceButton() -> some View {
-        Button(action: {
+        Button {
             vm.action(.placeSearch)
-        }, label: {
-            HStack(spacing: 4) {
-                Resources.Images.search
-                Text("장소 검색")
+        } label: {
+            ZStack(alignment: .leading) {
+                Text("장소를 검색해보세요 👀") // 검색 장소
+                    .foregroundStyle(Resources.Colors.black)
+                    .opacity(vm.output.place.isEmpty ? 1 : 0) // 선택한 장소가 없다면 '장소를 검색해주세요' 숨기기
+                Text(vm.output.place) // 검색 장소 결과 주소
                     .font(.callout)
+                    .foregroundStyle(Resources.Colors.black)
+                    .lineLimit(1)
             }
-            .padding(.vertical, 8)
-            .padding(.horizontal, 6)
-            .foregroundStyle(Resources.Colors.black)
-            .background(Resources.Colors.systemGray6)
-            .clipShape(.rect(cornerRadius: Resources.Radius.button))
-        })
+        }
+        .padding(8)
+        .background(vm.output.place.isEmpty ? Color(.systemGray5).opacity(0.7) : .clear)
+        .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.button))
         .sheet(isPresented: $vm.output.presentPlaceSearchView, content: {
             VStack {
                 TextField("장소를 검색해보세요", text: $vm.output.placeField)

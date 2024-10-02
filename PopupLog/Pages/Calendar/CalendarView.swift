@@ -102,7 +102,7 @@ extension CalendarView {
 //            }
 //            .disabled(!viewStatus.isPresentingBottomSheet)
             NavigationLink {
-                LazyNavigationView(AddOrEditView())
+                LazyNavigationView(AddOrEditView(selectedDate: vm.input.todayDate.value))
             } label: {
                 Resources.Images.plus
                     .padding(8)
