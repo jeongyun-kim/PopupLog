@@ -42,9 +42,7 @@ struct BottomSheetView: View {
             .overlay { // 리스트에 부합하는 데이터 없을 때
                 let data = logList.filter { $0.visitDate.formattedDate == vm.output.selectedDate }
                 if data.isEmpty {
-                    Rectangle()
-                        .fill(Resources.Colors.lightOrange)
-                        .ignoresSafeArea()
+                    emptyListView()
                 }
             }
         }
@@ -54,8 +52,23 @@ struct BottomSheetView: View {
                     vm.action(.reloadCalendarTrigger(reload: true))
                 }
         })
-        
         .padding(.top, 32)
         .background(Resources.Colors.lightOrange)
+    }
+}
+
+extension BottomSheetView {
+    private func emptyListView() -> some View {
+        ZStack {
+            Rectangle()
+                .fill(Resources.Colors.lightOrange)
+                .ignoresSafeArea()
+            VStack(spacing: 8) {
+                Text("선택한 날짜에 기록이 없어요")
+                Text("상단의 +를 통해 기록을 추가해보세요")
+            }
+            .font(.callout)
+            .foregroundStyle(Resources.Colors.primaryColor.opacity(0.9))
+        }
     }
 }
