@@ -82,7 +82,7 @@ extension SearchViewModel {
 // MARK: etc
 extension SearchViewModel {
     enum EmptyViewKeyword: String {
-        case emptyKeyword = "🔍 제목을 통해 지금까지 \n저장한 기록들을 찾아보세요"
+        case emptyKeyword = "😊 아직 저장한 기록이 없어요"
         case noResults = "🥲 검색결과가 없어요"
     }
 }

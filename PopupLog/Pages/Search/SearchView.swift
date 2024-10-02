@@ -13,6 +13,15 @@ struct SearchView: View {
     @EnvironmentObject private var viewStatus: CalendarViewStatus
     @EnvironmentObject private var stack: ViewPath
     @StateObject private var vm = SearchViewModel()
+    private var searchResults: Results<Log> {
+        if vm.output.keyword.isEmpty {
+            return logList
+        } else{
+            return logList.where { log in
+                log.title.contains(vm.output.keyword)
+            }
+        }
+    }
     
     var body: some View {
         VStack {
@@ -21,9 +30,7 @@ struct SearchView: View {
             ZStack {
                 searchListView()
                 // 검색결과 없을 때
-                if logList.where({ log in
-                    log.title.contains(vm.output.keyword, options: .caseInsensitive)
-                }).isEmpty {
+                if searchResults.isEmpty {
                     // - 키워드 X / 키워드 O 상황으로 나뉨
                     emptySearchView()
                 }
@@ -71,9 +78,7 @@ extension SearchView {
         GeometryReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(logList.where({ log in
-                        log.title.contains(vm.output.keyword, options: .caseInsensitive)
-                    }), id: \.id) { value in
+                    ForEach(searchResults, id: \.id) { value in
                         TicketRowView(width: proxy.size.width, item: value, isBottomSheet: false)
                             .onTapGesture {
                                 vm.action(.selectedLog(log: value))
