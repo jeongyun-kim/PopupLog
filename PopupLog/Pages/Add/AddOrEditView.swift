@@ -131,7 +131,7 @@ extension AddOrEditView {
                         .onTapGesture {
                             vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
                         }
-                    }
+                }
                 Spacer()
                 Button(action: {
                     // sheet 이용해 모든 태그리스트 띄우기
@@ -205,19 +205,19 @@ extension AddOrEditView {
     private func tagSheetView() -> some View {
         NavigationStack {
             sheetTagListView()
-            .padding(.horizontal)
-            .background(Resources.Colors.moreLightOrange)
-            .navigationTitle("태그 목록")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBar {
-                Button {
-                    vm.action(.presentTags)
-                } label: {
-                    Text("취소")
+                .padding(.horizontal)
+                .background(Resources.Colors.moreLightOrange)
+                .navigationTitle("태그 목록")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBar {
+                    Button {
+                        vm.action(.presentTags)
+                    } label: {
+                        Text("취소")
+                    }
+                } trailing: {
+                    sheetPushTagSettingView()
                 }
-            } trailing: {
-                sheetPushTagSettingView()
-            }
         }
     }
     
@@ -321,6 +321,7 @@ extension AddOrEditView {
             Text(vm.output.emptyPlaceText)
                 .foregroundStyle(Resources.Colors.lightGray)
         }
+        
     }
     
     // MARK: 사진
