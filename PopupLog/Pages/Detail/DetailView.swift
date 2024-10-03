@@ -35,13 +35,22 @@ struct DetailView: View {
 extension DetailView {
     // MARK: 날짜뷰
     private func dateView() -> some View {
-        Text(selectedLog.visitDate.formattedDate)
-            .padding(.horizontal)
+        HStack {
+            Spacer()
+            Text(isFlipped ? "앞면" : "뒷면")
+                .font(.callout)
+                .bold()
+                .padding(6)
+                .background(Resources.Colors.white)
+                .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.textContents))
+            Text(selectedLog.visitDate.formattedDate)
+                .font(.title3)
+                .bold()
+        }
+            .padding(.horizontal, 24)
             .padding(.top, 24)
             .padding(.bottom, 8)
-            .font(.title3)
-            .bold()
-            .foregroundStyle(Resources.Colors.lightGray)
+            .foregroundStyle(Resources.Colors.primaryColor.opacity(0.8))
     }
     
     // MARK: 콘텐츠뷰 (+ 뒤집는 애니메이션)
@@ -66,6 +75,12 @@ extension DetailView {
                 .onTapGesture {
                     isFlipped.toggle()
                 }
+                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded({ value in
+                        if value.translation.width > 0 || value.translation.width < 0 {
+                            isFlipped.toggle()
+                        }
+                    }))
         }
     }
     
@@ -77,7 +92,7 @@ extension DetailView {
                 .frame(width: width, height: width*0.9)
                 .padding(.bottom, 12)
             if let tag = selectedLog.tag {
-               TagView(tag: tag)
+                TagView(tag: tag)
             }
             VStack(spacing: 8) {
                 Text(selectedLog.title)
