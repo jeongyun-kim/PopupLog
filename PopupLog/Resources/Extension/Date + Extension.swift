@@ -15,4 +15,11 @@ extension Date {
     var isToday: Bool {
         return formattedDate == Date().formatted(date: .numeric, time: .omitted)
     }
+    
+    var yearAndMonth: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M"
+        let result = dateFormatter.string(from: self)
+        return result
+    }
 }
