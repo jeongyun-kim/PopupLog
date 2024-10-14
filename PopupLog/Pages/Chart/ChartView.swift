@@ -21,7 +21,7 @@ struct ChartView: View {
             VStack(alignment: .leading) {
                 logTextView()
                 logChartHeaderView()
-                logChartView()
+                logChartView(logCounts)
             }
             .padding()
         }
@@ -55,7 +55,7 @@ extension ChartView {
             .padding(.top, 8)
     }
     
-    private func logChartView() -> some View {
+    private func logChartView(_ logCounts: [Int]) -> some View {
         ZStack {
             RoundedRectangle(cornerRadius: Resources.Radius.textContents)
                 .fill(Resources.Colors.white)
@@ -66,8 +66,14 @@ extension ChartView {
                 AxisMarks(stroke: StrokeStyle(lineWidth: 0))
             }
             .chartYAxis {
-                AxisMarks(stroke: StrokeStyle(lineWidth: 0))
+                AxisMarks {
+                    AxisValueLabel()
+                        .font(Resources.Fonts.font14)
+                        .foregroundStyle(Resources.Colors.lightGray)
+                }
             }
+            .chartYScale(range: .plotDimension(startPadding: 4, endPadding: 16))
+            .chartXScale(range: .plotDimension(startPadding: 0, endPadding: 4))
         }
         .frame(height: 250)
     }
