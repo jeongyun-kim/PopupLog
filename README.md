@@ -1,4 +1,7 @@
-# 팝업로그 - 나만의 팝업기록장
+# 팝업로그 - 나만의 팝업스토어 기록장
+<a href="https://apps.apple.com/kr/app/팝업로그/id6720723835">
+	<img src="https://github.com/user-attachments/assets/dd8e6470-7966-49e3-ad87-0de5726221f8" width="120"/>
+</a>
 
 ### ✏️ 개발 의도
 
