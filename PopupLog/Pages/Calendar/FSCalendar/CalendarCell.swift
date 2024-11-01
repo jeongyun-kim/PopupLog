@@ -48,6 +48,9 @@ final class CalendarCell: FSCalendarCell {
     func configureCell(_ log: Log?) {
         guard let log else { return }
         var image = DocumentManager.shared.loadImage(id: "\(log.id)") ?? Resources.Images.ticket
+        if image == Resources.Images.ticket, self.traitCollection.userInterfaceStyle == .dark {
+            image = Resources.Images.darkTicket
+        }
         thumbImageView.image = image
     }
 

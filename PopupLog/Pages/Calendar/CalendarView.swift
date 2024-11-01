@@ -29,6 +29,7 @@ struct CalendarView: View {
                     viewStatus.isPresentingBottomSheet = !viewStatus.isPresentingSideMenu
                 }
             }
+            .background(Resources.Colors.white)
             .navigationDestination(for: StackViewType.self, destination: { viewType in
                 switch viewType {
                 case .searchView:

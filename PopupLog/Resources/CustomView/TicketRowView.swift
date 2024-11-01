@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TicketRowView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let width: CGFloat
     let item: Log
     let isBottomSheet: Bool
@@ -99,7 +101,10 @@ extension TicketRowView {
     
     // MARK: ImageView
     private func imageView(id: String) -> Image {
-        let image = DocumentManager.shared.loadImage(id: "\(id)") ?? Resources.Images.ticket
+        var image = DocumentManager.shared.loadImage(id: "\(id)") ?? Resources.Images.ticket
+        if image == Resources.Images.ticket, colorScheme == .dark {
+            image = Resources.Images.darkTicket
+        }
         return Image(uiImage: image)
     }
 }

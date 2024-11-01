@@ -20,6 +20,7 @@ enum Resources {
         static let more = Image(systemName: "ellipsis.circle")
         static let next = Image(systemName: "chevron.right")
         static let ticket = UIImage(named: "ticketDefaultImage")!
+        static let darkTicket = UIImage(named: "ticketDefaultImage_dark")!
         static let logo = UIImage(named: "logo")!
     }
     

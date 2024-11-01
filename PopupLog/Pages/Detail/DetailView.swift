@@ -9,6 +9,7 @@ import SwiftUI
 import RealmSwift
 
 struct DetailView: View {
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.dismiss) private var dismiss
     @ObservedRealmObject var selectedLog: Log
     @ObservedResults(Log.self) private var logList
@@ -87,7 +88,7 @@ extension DetailView {
     // MARK: 앞면 (이미지, 제목, 태그)
     func frontView(_ width: CGFloat) -> some View {
         VStack(spacing: 8) {
-            Image(uiImage: DocumentManager.shared.loadImage(id: "\(selectedLog.id)") ?? Resources.Images.logo)
+            configureImage()
                 .resizable()
                 .frame(width: width, height: width*0.9)
                 .padding(.bottom, 12)
@@ -161,5 +162,14 @@ extension DetailView {
             Resources.Images.xmark
                 .frame(width: 40, height: 40)
         })
+    }
+    
+    private func configureImage() -> Image {
+        var image = DocumentManager.shared.loadImage(id: "\(selectedLog.id)") ?? Resources.Images.logo
+        if image == Resources.Images.logo, colorScheme == .dark {
+            image = Resources.Images.darkTicket
+        }
+        
+        return Image(uiImage: image)
     }
 }

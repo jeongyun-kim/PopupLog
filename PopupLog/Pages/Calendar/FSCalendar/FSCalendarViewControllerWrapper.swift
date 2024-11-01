@@ -27,6 +27,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
         vc.reloadCalendar(reloadCalendar)
         guard let detentType = Resources.Detents.allCases.filter({ $0.detents == detent }).first else { return }
         vc.changeScopeByDetent(detentType)
+        vc.bindColorScheme(vc.traitCollection.userInterfaceStyle)
     }
     
     class FSCalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
@@ -131,6 +132,14 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
                     self.calendar.reloadData()
                     self.vm.action(.reloadCalendarTrigger(reload: false))
                 }
+            }
+        }
+        
+        func bindColorScheme(_ mode: UIUserInterfaceStyle) {
+            if mode == .dark {
+                calendar.appearance.selectionColor = UIColor(red: 0.72, green: 0.49, blue: 0.28, alpha: 1.00)
+            } else {
+                calendar.appearance.selectionColor = UIColor(Resources.Colors.primaryColor)
             }
         }
     }

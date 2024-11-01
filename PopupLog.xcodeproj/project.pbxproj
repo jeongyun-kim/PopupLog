@@ -22,13 +22,13 @@
 		E009D9702C9C8E9F00D07972 /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96F2C9C8E9F00D07972 /* LogRepository.swift */; };
 		E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */; };
 		E009D9782C9EAA5F00D07972 /* DBPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9772C9EAA5F00D07972 /* DBPlace.swift */; };
+		E01CFC822CD525E500443BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E01CFC812CD525E500443BE8 /* Assets.xcassets */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
 		E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C92CA312400018AD8C /* View + Extension.swift */; };
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
-		E07A20662C98041700557A22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20652C98041700557A22 /* Assets.xcassets */; };
 		E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20682C98041700557A22 /* Preview Assets.xcassets */; };
 		E07A20702C98042900557A22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E07A206F2C98042900557A22 /* .gitignore */; };
 		E07A20782C98046500557A22 /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20772C98046500557A22 /* Color + Extension.swift */; };
@@ -90,13 +90,13 @@
 		E009D96F2C9C8E9F00D07972 /* LogRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRepository.swift; sourceTree = "<group>"; };
 		E009D9712C9D610200D07972 /* BoolOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E009D9772C9EAA5F00D07972 /* DBPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBPlace.swift; sourceTree = "<group>"; };
+		E01CFC812CD525E500443BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E035D0B92CA04B100018AD8C /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
 		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
 		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
-		E07A20652C98041700557A22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E07A20682C98041700557A22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E07A206F2C98042900557A22 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		E07A20772C98046500557A22 /* Color + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color + Extension.swift"; sourceTree = "<group>"; };
@@ -205,6 +205,7 @@
 		E07A20602C98041600557A22 /* PopupLog */ = {
 			isa = PBXGroup;
 			children = (
+				E01CFC812CD525E500443BE8 /* Assets.xcassets */,
 				E0A7E1962CA9745100390718 /* Info.plist */,
 				E009D95C2C9BFD8500D07972 /* Database */,
 				E009D94F2C9B341E00D07972 /* Network */,
@@ -214,7 +215,6 @@
 				E07A20752C98045600557A22 /* Resources */,
 				E0A7E1842CA6493F00390718 /* Pages */,
 				E07A20612C98041600557A22 /* PopupLogApp.swift */,
-				E07A20652C98041700557A22 /* Assets.xcassets */,
 				E07A20672C98041700557A22 /* Preview Content */,
 				E0A7E1942CA7175400390718 /* Email.swift */,
 			);
@@ -457,8 +457,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */,
+				E01CFC822CD525E500443BE8 /* Assets.xcassets in Resources */,
 				E07A20702C98042900557A22 /* .gitignore in Resources */,
-				E07A20662C98041700557A22 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,7 +657,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -695,7 +695,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
