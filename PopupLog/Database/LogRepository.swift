@@ -13,6 +13,18 @@ final class LogRepository {
     static let shared = LogRepository()
     private let realm = try! Realm()
     
+    // 모든 로그 리스트
+    func getAllLogs() -> [Log] {
+        return Array(realm.objects(Log.self))
+    }
+    
+    // 태그로 필터링 된 로그 리스트 
+    func getFilteredLogs(_ tag: Tag) -> [Log] {
+        return getAllLogs().filter { log in
+            log.tag == tag
+        }
+    }
+    
     // 로그 업데이트
     func updateLog(_ log: Log?, title: String, content: String, place: DBPlace?, tag: Tag?, visitDate: Date) {
         guard let log else { return }

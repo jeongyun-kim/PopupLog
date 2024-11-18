@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E002C8A42CEB73A800444E2E /* FilteredTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E002C8A32CEB73A800444E2E /* FilteredTagView.swift */; };
+		E002C8A62CEB893B00444E2E /* FileteredTagViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E002C8A52CEB893B00444E2E /* FileteredTagViewModel.swift */; };
 		E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D93C2C98897C00D07972 /* RoundedTextField.swift */; };
 		E009D9422C99D28400D07972 /* ImageOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */; };
 		E009D9442C99E92000D07972 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9432C99E92000D07972 /* TagView.swift */; };
@@ -80,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		E002C8A32CEB73A800444E2E /* FilteredTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTagView.swift; sourceTree = "<group>"; };
+		E002C8A52CEB893B00444E2E /* FileteredTagViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileteredTagViewModel.swift; sourceTree = "<group>"; };
 		E009D93C2C98897C00D07972 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E009D9432C99E92000D07972 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				E002C8A32CEB73A800444E2E /* FilteredTagView.swift */,
+				E002C8A52CEB893B00444E2E /* FileteredTagViewModel.swift */,
 			);
 			path = FilteredTag;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */,
 				E07A20952C980A0400557A22 /* NavigationBarWrapper.swift in Sources */,
 				E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */,
+				E002C8A62CEB893B00444E2E /* FileteredTagViewModel.swift in Sources */,
 				E07A20A42C981F1D00557A22 /* Texts.swift in Sources */,
 				E009D9722C9D610200D07972 /* BoolOnChangeWrapper.swift in Sources */,
 				E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */,
