@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E002C8A42CEB73A800444E2E /* FilteredTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E002C8A32CEB73A800444E2E /* FilteredTagView.swift */; };
 		E009D93D2C98897C00D07972 /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D93C2C98897C00D07972 /* RoundedTextField.swift */; };
 		E009D9422C99D28400D07972 /* ImageOnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */; };
 		E009D9442C99E92000D07972 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9432C99E92000D07972 /* TagView.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E002C8A32CEB73A800444E2E /* FilteredTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTagView.swift; sourceTree = "<group>"; };
 		E009D93C2C98897C00D07972 /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		E009D9412C99D28400D07972 /* ImageOnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageOnChangeWrapper.swift; sourceTree = "<group>"; };
 		E009D9432C99E92000D07972 /* TagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
@@ -146,6 +148,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E002C8A22CEB739D00444E2E /* FilteredTag */ = {
+			isa = PBXGroup;
+			children = (
+				E002C8A32CEB73A800444E2E /* FilteredTagView.swift */,
+			);
+			path = FilteredTag;
+			sourceTree = "<group>";
+		};
 		E009D94F2C9B341E00D07972 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +370,7 @@
 		E0A7E1842CA6493F00390718 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				E002C8A22CEB739D00444E2E /* FilteredTag */,
 				E07A20A52C98659F00557A22 /* Search */,
 				E07A20A82C98673100557A22 /* Setting */,
 				E07A20AB2C98690800557A22 /* Chart */,
@@ -417,7 +428,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					E07A205D2C98041600557A22 = {
 						CreatedOnToolsVersion = 15.3;
@@ -512,6 +523,7 @@
 				E0A7E1952CA7175400390718 /* Email.swift in Sources */,
 				E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */,
 				E0A7E17A2CA639C300390718 /* StringOnChangeWrapper.swift in Sources */,
+				E002C8A42CEB73A800444E2E /* FilteredTagView.swift in Sources */,
 				E009D96E2C9C8BB500D07972 /* Log.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,6 +536,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -587,6 +600,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

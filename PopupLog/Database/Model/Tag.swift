@@ -9,7 +9,7 @@ import SwiftUI
 import RealmSwift
 
 final class Tag: Object, ObjectKeyIdentifiable {
-    @Persisted (primaryKey: true) var id: ObjectId
+    @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var emoji: String
     @Persisted var tagName: String
     @Persisted var tagColor: String?
