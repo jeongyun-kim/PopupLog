@@ -121,7 +121,7 @@ extension MenuContentsView {
                     .font(.callout)
                     .foregroundStyle(Resources.Colors.lightGray)
             })
-            Text("버전 1.2.1")
+            Text("버전 1.3.1")
                 .font(.caption)
                 .foregroundStyle(Resources.Colors.lightGray)
         }
