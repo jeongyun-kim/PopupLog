@@ -10,4 +10,5 @@ import Foundation
 enum StackViewType: Hashable, CaseIterable {
     case searchView
     case tagSettingView
+    case filteredTagView
 }

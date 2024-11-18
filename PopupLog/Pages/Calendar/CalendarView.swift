@@ -36,6 +36,8 @@ struct CalendarView: View {
                     LazyNavigationView(SearchView())
                 case .tagSettingView:
                     LazyNavigationView(TagSettingView(isSetting: true))
+                case .filteredTagView:
+                    LazyNavigationView(FilteredTagView())
                 }
             })
             .onAppear {

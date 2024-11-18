@@ -42,6 +42,7 @@ extension MenuContentsView {
     private enum Menus: Int, CaseIterable {
         case search = 0
         case setting
+        case filter
         
         var title: String {
             switch self {
@@ -49,6 +50,8 @@ extension MenuContentsView {
                 return "검색"
             case .setting:
                 return "태그 관리"
+            case .filter:
+                return "태그별 모아보기"
             }
         }
         
@@ -58,6 +61,8 @@ extension MenuContentsView {
                 return Resources.Images.search
             case .setting:
                 return Resources.Images.tagSetting
+            case .filter:
+                return Resources.Images.hashTag
             }
         }
     }
@@ -70,12 +75,7 @@ extension MenuContentsView {
         ForEach(Array(Menus.allCases.enumerated()), id: \.element.rawValue) { value in
             Button(action: {
                 let viewType = StackViewType.allCases[value.offset]
-                switch viewType {
-                case .searchView:
-                    stack.path.append(.searchView)
-                case .tagSettingView:
-                    stack.path.append(.tagSettingView)
-                }
+                stack.path.append(viewType)
             }, label: {
                 rowView(value.element)
             })
@@ -106,7 +106,7 @@ extension MenuContentsView {
                 .font(.callout)
             Spacer()
         }
-        .frame(width: 130)
+        .frame(width: 160)
         .padding(.vertical, 12)
         .foregroundStyle(Resources.Colors.black)
     }
