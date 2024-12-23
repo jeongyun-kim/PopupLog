@@ -63,6 +63,7 @@
 		E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1902CA7160D00390718 /* SupportEmail.swift */; };
 		E0A7E1952CA7175400390718 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1942CA7175400390718 /* Email.swift */; };
 		E0A7E19A2CA98AF400390718 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1992CA98AF400390718 /* String + Extension.swift */; };
+		E0EB4A662D197B3E00B556DC /* ChartHeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -131,6 +132,7 @@
 		E0A7E1942CA7175400390718 /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
 		E0A7E1962CA9745100390718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E0A7E1992CA98AF400390718 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +295,7 @@
 				E0C29EA12CAAFE3C00BF31B1 /* OnChange */,
 				E07A20942C980A0400557A22 /* NavigationBarWrapper.swift */,
 				E009D93C2C98897C00D07972 /* RoundedTextField.swift */,
+				E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */,
 			);
 			name = Wrapper;
 			path = Resources/Wrapper;
@@ -527,6 +530,7 @@
 				E0A7E1952CA7175400390718 /* Email.swift in Sources */,
 				E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */,
 				E0A7E17A2CA639C300390718 /* StringOnChangeWrapper.swift in Sources */,
+				E0EB4A662D197B3E00B556DC /* ChartHeaderText.swift in Sources */,
 				E002C8A42CEB73A800444E2E /* FilteredTagView.swift in Sources */,
 				E009D96E2C9C8BB500D07972 /* Log.swift in Sources */,
 			);
