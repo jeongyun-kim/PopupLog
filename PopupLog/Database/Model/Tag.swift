@@ -24,6 +24,12 @@ final class Tag: Object, ObjectKeyIdentifiable {
     }
 }
 
+extension Tag {
+    var chartTagName: String {
+        return emoji + tagName
+    }
+}
+
 struct DefaultTags {
     static let defaultTagList = [
         Tag(emoji: "💖", tagName: "캐릭터", tagColor: "F3CCF3"),
