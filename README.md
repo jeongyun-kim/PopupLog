@@ -66,10 +66,6 @@
 
 ### 🧐 개발 포인트
 
-- 사용성 향상을 위한 필수값에 대한 검증 및 명확한 표기
-- 사용자 경험 개선을 위해 선택 날짜에 기록이 없거나 장소 검색결과가 없을 때, 시각적 피드백 제공
-- 사용자 경험 향상을 위해 건의하기(이메일 전송) 구현
-- 향상된 사용자 경험을 위한 실시간 데이터 반영
 - 이미지 추가 시, 비동기적으로 ```PhotosPickerItem```을 ```Data```로 변환하기 위한 ```Swift Concurrency``` 활용
 - 반응형 프로그래밍 및 비동기 처리를 위한 ```Combine``` 활용
 - ```Instruments - Leaks```를 활용한 메모리 누수 방지
@@ -83,6 +79,10 @@
 - 데이터의 흐름을 명확히 파악하고 추후의 유지보수성을 고려하여 ```ViewModel 내 Input-Output Pattern``` 적용
 - 전역적인 상태 공유로 상태의 일관성 유지를 위해 ```EnvironmentObject``` 활용
 - ```UIKit```으로 구성된 뷰를 ```SwiftUI```에서 활용하기 위한 ```UIViewControllerRepresentable``` 활용
+- 사용성 향상을 위한 필수값에 대한 검증 및 명확한 표기
+- 사용자 경험 개선을 위해 선택 날짜에 기록이 없거나 장소 검색결과가 없을 때, 시각적 피드백 제공
+- 사용자 경험 향상을 위해 건의하기(이메일 전송) 구현
+- 향상된 사용자 경험을 위한 실시간 데이터 반영
 
 ---
 
@@ -122,15 +122,15 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     class FSCalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         init(vm: CalendarViewModel) {
         ...
-		    // Calendar Reload 갱신해야한다면 Reload -> Trigger false 처리  
-		    func reloadCalendar(_ reload: Bool) {
-		            DispatchQueue.main.async {
-		                if reload {
-		                    self.calendar.reloadData()
-		                    self.vm.action(.reloadCalendarTrigger(reload: false))
-		                }
-		            }
-		      }
+	// Calendar Reload 갱신해야한다면 Reload -> Trigger false 처리  
+	func reloadCalendar(_ reload: Bool) {
+            DispatchQueue.main.async {
+		if reload {
+		   self.calendar.reloadData()
+                   self.vm.action(.reloadCalendarTrigger(reload: false))
+		}
+            }
+	}
 }
 ```
 <br>
@@ -198,6 +198,7 @@ extension Image {
 
         // 뷰의 레이어가 그려지게 
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
         // 화면 업데이트 후 그려주기
         controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         let uiImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -222,20 +223,22 @@ extension Image {
 private func getUIImage(_ pickerItem: PhotosPickerItem?, completionHandler: @escaping (UIImage) -> Void) {
 	guard let pickerItem else { return }
 	Task {
-	// 1차 변환: PhotosPickerItem => Data
-		if let imageData = try? await pickerItem.loadTransferable(type: Data.self) {
-		  // 2차 변환: Data => UIImage
+            // 1차 변환: PhotosPickerItem => Data
+            if let imageData = try? await pickerItem.loadTransferable(type: Data.self) {
+
+            // 2차 변환: Data => UIImage
 	    if let image = UIImage(data: imageData) {
-		    // Main으로 UIImage 보내기 
-         DispatchQueue.main.async {
-            completionHandler(image)
-		     }
-	     }
-   }
-	   else {
-       print("Failed Get UIImage")
-     }
+
+            // Main으로 UIImage 보내기 
+            DispatchQueue.main.async {
+            	completionHandler(image)
+             }
+           }
+   	}	
+	else {
+      	    print("Failed Get UIImage")
 	}
+    }
 }
 ```
 
