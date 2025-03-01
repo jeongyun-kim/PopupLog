@@ -139,7 +139,7 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
 
 **- 문제점**
 <br>
-특정 기록을 선택하였을 때, ```FullScreenCover```로 설정된 뷰가 ```present되```며 해당 기록의 상세정보를 확인할 수 있어야하는 상황에서 어떤 기록을 선택하든 보여지고 있는 기록들 중 첫번째 기록에 대한 상세정보만이 표출되는 문제가 발생하였습니다.
+특정 기록을 선택하였을 때, ```FullScreenCover```로 설정된 뷰가 ```present```되며 해당 기록의 상세정보를 확인할 수 있어야하는 상황에서 어떤 기록을 선택하든 보여지고 있는 기록들 중 첫번째 기록에 대한 상세정보만이 표출되는 문제가 발생하였습니다.
 <br>
 
 **- 해결**
