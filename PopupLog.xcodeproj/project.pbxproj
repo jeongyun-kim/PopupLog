@@ -31,6 +31,17 @@
 		E01A5DD92EC178B500B9D0AC /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */; };
 		E01A5DDA2EC178B500B9D0AC /* CalendarWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD42EC178B500B9D0AC /* CalendarWidgetBundle.swift */; };
 		E01CFC822CD525E500443BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E01CFC812CD525E500443BE8 /* Assets.xcassets */; };
+		E02E2DD72EC1844F0007F57E /* LogRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96F2C9C8E9F00D07972 /* LogRepository.swift */; };
+		E02E2DD92EC1845D0007F57E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E02E2DD82EC1845D0007F57E /* RealmSwift */; };
+		E02E2DDA2EC185C80007F57E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D96D2C9C8BB500D07972 /* Log.swift */; };
+		E02E2DDB2EC185CD0007F57E /* DBPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D9772C9EAA5F00D07972 /* DBPlace.swift */; };
+		E02E2DDC2EC185D70007F57E /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009D95E2C9BFD9400D07972 /* Tag.swift */; };
+		E02E2DDD2EC185E50007F57E /* Color + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20772C98046500557A22 /* Color + Extension.swift */; };
+		E02E2DDE2EC185EA0007F57E /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1732CA466F500390718 /* Date + Extension.swift */; };
+		E02E2DDF2EC185F10007F57E /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A208F2C98062200557A22 /* Resources.swift */; };
+		E02E2DE02EC1896B0007F57E /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
+		E02E2DE12EC18A500007F57E /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */; };
+		E02E2DE32EC1C14C0007F57E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02E2DE22EC1C14C0007F57E /* AppInfo.swift */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
@@ -132,6 +143,7 @@
 		E01A5DDB2EC1791B00B9D0AC /* PopupLogDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PopupLogDebug.entitlements; sourceTree = "<group>"; };
 		E01A5DDC2EC1792D00B9D0AC /* CalendarWidgetExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarWidgetExtensionDebug.entitlements; sourceTree = "<group>"; };
 		E01CFC812CD525E500443BE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E02E2DE22EC1C14C0007F57E /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		E035D0B92CA04B100018AD8C /* TagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagRepository.swift; sourceTree = "<group>"; };
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
 		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
@@ -176,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E02E2DD92EC1845D0007F57E /* RealmSwift in Frameworks */,
 				E01A5DC12EC1786600B9D0AC /* SwiftUI.framework in Frameworks */,
 				E01A5DBF2EC1786600B9D0AC /* WidgetKit.framework in Frameworks */,
 			);
@@ -302,6 +315,7 @@
 				E07A20612C98041600557A22 /* PopupLogApp.swift */,
 				E07A20672C98041700557A22 /* Preview Content */,
 				E0A7E1942CA7175400390718 /* Email.swift */,
+				E02E2DE22EC1C14C0007F57E /* AppInfo.swift */,
 			);
 			path = PopupLog;
 			sourceTree = "<group>";
@@ -484,6 +498,7 @@
 			);
 			name = CalendarWidgetExtension;
 			packageProductDependencies = (
+				E02E2DD82EC1845D0007F57E /* RealmSwift */,
 			);
 			productName = CalendarWidgetExtension;
 			productReference = E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */;
@@ -589,8 +604,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E02E2DDC2EC185D70007F57E /* Tag.swift in Sources */,
+				E02E2DDD2EC185E50007F57E /* Color + Extension.swift in Sources */,
+				E02E2DD72EC1844F0007F57E /* LogRepository.swift in Sources */,
+				E02E2DDB2EC185CD0007F57E /* DBPlace.swift in Sources */,
+				E02E2DE02EC1896B0007F57E /* DocumentManager.swift in Sources */,
 				E01A5DD92EC178B500B9D0AC /* CalendarWidget.swift in Sources */,
+				E02E2DDA2EC185C80007F57E /* Log.swift in Sources */,
+				E02E2DDF2EC185F10007F57E /* Resources.swift in Sources */,
 				E01A5DDA2EC178B500B9D0AC /* CalendarWidgetBundle.swift in Sources */,
+				E02E2DDE2EC185EA0007F57E /* Date + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +650,7 @@
 				E009D9442C99E92000D07972 /* TagView.swift in Sources */,
 				E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */,
 				E009D9512C9B342500D07972 /* APIKey.swift in Sources */,
+				E02E2DE12EC18A500007F57E /* CalendarWidget.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
 				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
 				E0A7E1862CA6511A00390718 /* SearchViewModel.swift in Sources */,
@@ -645,6 +669,7 @@
 				E0EB4A662D197B3E00B556DC /* ChartHeaderText.swift in Sources */,
 				E002C8A42CEB73A800444E2E /* FilteredTagView.swift in Sources */,
 				E009D96E2C9C8BB500D07972 /* Log.swift in Sources */,
+				E02E2DE32EC1C14C0007F57E /* AppInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,6 +1037,11 @@
 			productName = Alamofire;
 		};
 		E009D9692C9C02CB00D07972 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E009D9682C9C02CB00D07972 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		E02E2DD82EC1845D0007F57E /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E009D9682C9C02CB00D07972 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

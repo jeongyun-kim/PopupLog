@@ -5,6 +5,7 @@
 //  Created by 김정윤 on 9/21/24.
 //
 
+import WidgetKit
 import UIKit
 import SwiftUI
 
@@ -13,23 +14,24 @@ final class DocumentManager {
     static let shared = DocumentManager()
     private let fileManager = FileManager.default
     
+    // App Group 경로
     func getFolderPath() -> URL? {
-        // 폴더 경로 유효한지 확인
-        guard let documentDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-        let folderDirectory = documentDirectory.appendingPathComponent("popuplog")
-        return folderDirectory
+        guard let containerURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: AppInfo.appGroupID) else {
+            return nil
+        }
+        let folderURL = containerURL.appendingPathComponent("popuplog")
+        return folderURL
     }
     
     func createFolder() {
         guard let folderPath = getFolderPath() else { return }
-        if !fileManager.fileExists(atPath: folderPath.path()) {
+        if !fileManager.fileExists(atPath: folderPath.path) {
             do {
                 try fileManager.createDirectory(at: folderPath, withIntermediateDirectories: true)
+                print("폴더 생성 완료: \(folderPath.path)")
             } catch {
-                print("failed to create folder")
+                print("폴더 생성 실패:", error)
             }
-        } else {
-            return 
         }
     }
     
@@ -37,54 +39,44 @@ final class DocumentManager {
         guard let folderPath = getFolderPath() else { return }
         createFolder()
         
-        // 이미지 데이터 불러오기
         guard let data = image.jpegData(compressionQuality: 0.3) else { return }
-        let imageName = "\(id).jpg"
-        let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
+        let fileURL = folderPath.appendingPathComponent("\(id).jpg", conformingTo: .jpeg)
         
-        // 이미지 저장
         do {
             try data.write(to: fileURL)
+            print("이미지 저장 완료: \(fileURL.path)")
+            WidgetCenter.shared.reloadAllTimelines()
         } catch {
-            print("image save error")
+            print("이미지 저장 실패:", error)
         }
     }
     
     func loadImage(id: String) -> UIImage? {
-        guard let folderPath = getFolderPath() else {
-            return nil
-        }
+        guard let folderPath = getFolderPath() else { return nil }
         
-        let imageName = "\(id).jpg"
-        let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
+        let fileURL = folderPath.appendingPathComponent("\(id).jpg", conformingTo: .jpeg)
         
-        // 이미지 있을 경우 이미지 보내고 아니면 다 nil
-        if fileManager.fileExists(atPath: fileURL.path()) {
-            guard let result =  UIImage(contentsOfFile: fileURL.path()) else {
-                return nil
-            }
-            return result
+        if fileManager.fileExists(atPath: fileURL.path) {
+            return UIImage(contentsOfFile: fileURL.path)
         } else {
+            print("이미지 없음: \(fileURL.path)")
             return nil
         }
     }
     
     func removeImage(id: String) {
         guard let folderPath = getFolderPath() else { return }
+        let fileURL = folderPath.appendingPathComponent("\(id).jpg", conformingTo: .jpeg)
         
-        let imageName = "\(id).jpg"
-        let fileURL = folderPath.appendingPathComponent(imageName, conformingTo: .jpeg)
-        
-        if fileManager.fileExists(atPath: fileURL.path()) {
+        if fileManager.fileExists(atPath: fileURL.path) {
             do {
-                try fileManager.removeItem(atPath: fileURL.path())
+                try fileManager.removeItem(at: fileURL)
+                print("이미지 삭제 완료: \(fileURL.path)")
             } catch {
-                print("file remove error", error)
+                print("이미지 삭제 실패:", error)
             }
-            
         } else {
-            print("file no exist")
+            print("삭제할 이미지 없음: \(fileURL.path)")
         }
-        
     }
 }
