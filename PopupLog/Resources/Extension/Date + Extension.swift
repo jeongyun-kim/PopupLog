@@ -22,4 +22,11 @@ extension Date {
         let result = dateFormatter.string(from: self)
         return result
     }
+    
+    var formattedWidgetDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy년\nMM월 dd일"
+        let result = dateFormatter.string(from: self)
+        return result
+    }
 }
