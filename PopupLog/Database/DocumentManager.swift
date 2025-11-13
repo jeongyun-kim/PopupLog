@@ -93,15 +93,26 @@ final class DocumentManager {
     }
     
     func removeImage(id: String) {
-        guard let folderPath = getFolderPath() else { return }
+        guard let folderPath = getFolderPath() else {
+            print("폴더 경로를 가져올 수 없음")
+            return
+        }
         let fileURL = folderPath.appendingPathComponent("\(id).jpg", conformingTo: .jpeg)
+        
+        print("삭제 시도할 파일 경로: \(fileURL.path)")
+        print("파일 존재 여부: \(fileManager.fileExists(atPath: fileURL.path))")
         
         if fileManager.fileExists(atPath: fileURL.path) {
             do {
                 try fileManager.removeItem(at: fileURL)
                 print("이미지 삭제 완료: \(fileURL.path)")
+                
+                // 삭제 후 재확인
+                print("삭제 후 파일 존재 여부: \(fileManager.fileExists(atPath: fileURL.path))")
+                
             } catch {
                 print("이미지 삭제 실패:", error)
+                print("에러 상세: \(error.localizedDescription)")
             }
         } else {
             print("삭제할 이미지 없음: \(fileURL.path)")

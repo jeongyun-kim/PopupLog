@@ -25,6 +25,7 @@ struct DetailView: View {
             }
             .background(Resources.Colors.lightOrange)
             .onDisappear {
+                // 1초 후 한 번 더
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
@@ -149,8 +150,11 @@ extension DetailView {
             }
             // 현재 기록 삭제
             Button(action: {
-                $logList.remove(selectedLog)
+                let logId = selectedLog.id  // 1. id를 먼저 저장
+                DocumentManager.shared.removeImage(id: "\(logId)")  // 2. 이미지 삭제
+                $logList.remove(selectedLog)  // 3. 마지막에 Realm에서 삭제
                 dismiss()
+                
             }, label: {
                 Text("삭제")
             })
