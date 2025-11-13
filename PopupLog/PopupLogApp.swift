@@ -10,6 +10,10 @@ import RealmSwift
 
 @main
 struct PopupLogApp: App {
+    init() {
+        DocumentManager.shared.migrateToAppGroupIfNeeded()
+    }
+
     var body: some Scene {
         WindowGroup {
             CalendarView()
