@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import WidgetKit
 
 struct DetailView: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -23,6 +24,11 @@ struct DetailView: View {
                 Spacer()
             }
             .background(Resources.Colors.lightOrange)
+            .onDisappear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            }
             .navigationBar {
                 dismissButton()
             } trailing: {

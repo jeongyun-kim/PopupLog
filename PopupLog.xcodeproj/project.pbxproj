@@ -27,7 +27,6 @@
 		E01A5DBF2EC1786600B9D0AC /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01A5DBE2EC1786600B9D0AC /* WidgetKit.framework */; };
 		E01A5DC12EC1786600B9D0AC /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E01A5DC02EC1786600B9D0AC /* SwiftUI.framework */; };
 		E01A5DCC2EC1786700B9D0AC /* CalendarWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		E01A5DD72EC178B500B9D0AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E01A5DD22EC178B500B9D0AC /* Assets.xcassets */; };
 		E01A5DD92EC178B500B9D0AC /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */; };
 		E01A5DDA2EC178B500B9D0AC /* CalendarWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD42EC178B500B9D0AC /* CalendarWidgetBundle.swift */; };
 		E01CFC822CD525E500443BE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E01CFC812CD525E500443BE8 /* Assets.xcassets */; };
@@ -42,6 +41,8 @@
 		E02E2DE02EC1896B0007F57E /* DocumentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E08002BB2C9EB8CF005EC98B /* DocumentManager.swift */; };
 		E02E2DE12EC18A500007F57E /* CalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */; };
 		E02E2DE32EC1C14C0007F57E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02E2DE22EC1C14C0007F57E /* AppInfo.swift */; };
+		E02E2DE42EC1C2780007F57E /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E02E2DE22EC1C14C0007F57E /* AppInfo.swift */; };
+		E02E2DE52EC1C4290007F57E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E01CFC812CD525E500443BE8 /* Assets.xcassets */; };
 		E035D0BA2CA04B100018AD8C /* TagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0B92CA04B100018AD8C /* TagRepository.swift */; };
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
@@ -136,7 +137,6 @@
 		E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CalendarWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E01A5DBE2EC1786600B9D0AC /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		E01A5DC02EC1786600B9D0AC /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		E01A5DD22EC178B500B9D0AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidget.swift; sourceTree = "<group>"; };
 		E01A5DD42EC178B500B9D0AC /* CalendarWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarWidgetBundle.swift; sourceTree = "<group>"; };
 		E01A5DD52EC178B500B9D0AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -270,7 +270,6 @@
 		E01A5DD62EC178B500B9D0AC /* CalendarWidget */ = {
 			isa = PBXGroup;
 			children = (
-				E01A5DD22EC178B500B9D0AC /* Assets.xcassets */,
 				E01A5DD32EC178B500B9D0AC /* CalendarWidget.swift */,
 				E01A5DD42EC178B500B9D0AC /* CalendarWidgetBundle.swift */,
 				E01A5DD52EC178B500B9D0AC /* Info.plist */,
@@ -583,7 +582,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E01A5DD72EC178B500B9D0AC /* Assets.xcassets in Resources */,
+				E02E2DE52EC1C4290007F57E /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,6 +606,7 @@
 				E02E2DDC2EC185D70007F57E /* Tag.swift in Sources */,
 				E02E2DDD2EC185E50007F57E /* Color + Extension.swift in Sources */,
 				E02E2DD72EC1844F0007F57E /* LogRepository.swift in Sources */,
+				E02E2DE42EC1C2780007F57E /* AppInfo.swift in Sources */,
 				E02E2DDB2EC185CD0007F57E /* DBPlace.swift in Sources */,
 				E02E2DE02EC1896B0007F57E /* DocumentManager.swift in Sources */,
 				E01A5DD92EC178B500B9D0AC /* CalendarWidget.swift in Sources */,

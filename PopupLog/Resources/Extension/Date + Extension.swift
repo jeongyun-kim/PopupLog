@@ -23,9 +23,16 @@ extension Date {
         return result
     }
     
-    var formattedWidgetDate: String {
+    var formattedDay: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년\nMM월 dd일"
+        dateFormatter.dateFormat = "dd일"
+        let result = dateFormatter.string(from: self)
+        return result
+    }
+    
+    var formattedE: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
         let result = dateFormatter.string(from: self)
         return result
     }

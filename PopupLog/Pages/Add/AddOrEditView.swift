@@ -9,6 +9,7 @@ import SwiftUI
 import PhotosUI
 import RealmSwift
 import SwiftyCrop
+import WidgetKit
 
 struct AddOrEditView: View {
     @Environment(\.dismiss) private var dismiss // PopVC 위한 변수
@@ -52,6 +53,10 @@ struct AddOrEditView: View {
         .onDisappear {
             if !vm.output.isEditMode {
                 viewStatus.isPresentingBottomSheet.toggle()
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
         .navigationBar { } trailing: {
