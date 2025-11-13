@@ -35,7 +35,10 @@ struct Provider: TimelineProvider {
         completion(entry)
     }
 
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        print("🔵 getTimeline 호출")
+        
         let todayLog = getTodayLog()
         let day = todayLog?.visitDate.formattedDay ?? Date().formattedDay
         let E = todayLog?.visitDate.formattedE ?? Date().formattedE
@@ -43,21 +46,24 @@ struct Provider: TimelineProvider {
         let logImage = loadLogImage(from: todayLog)
         
         let currentDate = Date()
+        var entries: [SimpleEntry] = []
         
-        // 현재 시간의 엔트리 1개만 생성
-        let entry = SimpleEntry(
-            date: currentDate,
-            day: day,
-            E: E,
-            hasLog: hasLog,
-            logImage: logImage
-        )
+        // 1분 간격으로 5분치 Timeline 생성
+        for minuteOffset in 0..<5 {
+            let entryDate = Calendar.current.date(byAdding: .minute, value: minuteOffset, to: currentDate)!
+            let entry = SimpleEntry(
+                date: entryDate,
+                day: day,
+                E: E,
+                hasLog: hasLog,
+                logImage: logImage
+            )
+            entries.append(entry)
+        }
         
-        // 다음날 자정에 갱신
+        // 다음날 00:00에 갱신되도록 설정
         let nextMidnight = Calendar.current.startOfDay(for: Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!)
-        
-        // atEnd 사용 - 엔트리가 끝나면 자동으로 다시 타임라인 요청
-        let timeline = Timeline(entries: [entry], policy: .after(nextMidnight))
+        let timeline = Timeline(entries: entries, policy: .after(nextMidnight))
         
         completion(timeline)
     }
