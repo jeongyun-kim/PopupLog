@@ -74,7 +74,7 @@ final class LogRepository {
     
     private func configureRealm() {
         guard let groupURL = FileManager.default.containerURL(
-            forSecurityApplicationGroupIdentifier: AppInfo.appGroupID
+            forSecurityApplicationGroupIdentifier: AppGroupInfo.appGroupID
         ) else { return }
         
         let realmURL = groupURL.appendingPathComponent("default.realm")
