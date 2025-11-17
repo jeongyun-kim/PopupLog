@@ -28,7 +28,7 @@
   <td><img src="https://github.com/user-attachments/assets/6b27d1bb-bee2-4c3a-8ae9-af8754afcf75" width="120" height="250"></td>
   <td><img src="https://github.com/user-attachments/assets/2c2c961b-0fa9-40bb-9202-140cacbd9e67" width="120" height="250"></td>
   <td><img src="https://github.com/user-attachments/assets/4b217b5e-71a7-44f1-bf0f-d7be77e11340" width="120" height="250"></td>
-  <td><img src="https://github.com/user-attachments/assets/56f0f986-0849-4c6c-91e6-a6177d46c51c" width="120" height="250"></td>
+  <td><img src="https://github.com/user-attachments/assets/24414ddf-a29d-4a73-9071-c10209884f36" width="120" height="250"></td>
 </tr>
 </table>
 
@@ -43,12 +43,12 @@
 
 ### 👩🏼‍💻 주요 기술
 
-- UI : SwiftUI, UIKit, SnapKit, FSCalendar, MCEmojiPicker, SwiftyCrop
-- Database : Realm
-- Network : Alamofire
-- Reactive : Combine
-- Design Pattern: Singleton, Input-Output, MVVM, Repository
-- etc: Naver API, Swift Concurrency
+- UI :  ```SwiftUI```, ```UIKit```, ```SnapKit```, ```FSCalendar```, ```MCEmojiPicker```, ```SwiftyCrop```
+- Database : ```Realm```
+- Network : ```Alamofire```
+- Reactive : ```Combine```
+- Design Pattern: ```Singleton```, ```Input-Output```, ```MVVM```, ```Repository```
+- etc: ```Naver API```, ```Swift Concurrency```
 
 ---
 
@@ -66,23 +66,23 @@
 
 ### 🧐 개발 포인트
 
+- 이미지 추가 시, 비동기적으로 ```PhotosPickerItem```을 ```Data```로 변환하기 위한 ```Swift Concurrency``` 활용
+- 반응형 프로그래밍 및 비동기 처리를 위한 ```Combine``` 활용
+- ```Instruments - Leaks```를 활용한 메모리 누수 방지
+- 재사용성과 유지보수성을 위한 ```Repository Pattern```을 활용한 ```Realm``` 데이터 관리
+- ```Realm``` 비효율성 감소를 위한 ```Filemanager```를 활용한 이미지 저장
+- 유지보수성을 위해 네트워크 코드 ```Singleton Pattern```으로 구성
+- 불필요한 View Initialize를 방지하기 위한 ```LazyNavigationView``` 활용
+- iOS17 이상, 미만에 따라 각 버전에 따른 처리를 위한 ```ViewModifier``` 활용
+- 재사용성과 유지보수성을 고려한 리소스 정의
+- UI와 비즈니스 로직의 분리를 통한 유지보수성 향상을 위해 부분적 ```MVVM Pattern``` 적용
+- 데이터의 흐름을 명확히 파악하고 추후의 유지보수성을 고려하여 ```ViewModel 내 Input-Output Pattern``` 적용
+- 전역적인 상태 공유로 상태의 일관성 유지를 위해 ```EnvironmentObject``` 활용
+- ```UIKit```으로 구성된 뷰를 ```SwiftUI```에서 활용하기 위한 ```UIViewControllerRepresentable``` 활용
 - 사용성 향상을 위한 필수값에 대한 검증 및 명확한 표기
 - 사용자 경험 개선을 위해 선택 날짜에 기록이 없거나 장소 검색결과가 없을 때, 시각적 피드백 제공
 - 사용자 경험 향상을 위해 건의하기(이메일 전송) 구현
-- 향상된 사용자 경험을 위한 실시간 데이터 반영
-- 이미지 추가 시, 비동기적으로 PhotosPickerItem을 Data로 변환하기 위한 Swift Concurrency 활용
-- 반응형 프로그래밍 및 비동기 처리를 위한 Combine 활용
-- Instruments - Leaks를 활용한 메모리 누수 방지
-- 재사용성과 유지보수성을 위한 Repository Pattern을 활용한 Realm 데이터 관리
-- Realm 비효율성 감소를 위한 Filemanager를 활용한 이미지 저장
-- 유지보수성을 위해 네트워크 코드 Singleton Pattern으로 구성
-- 불필요한 View Initialize를 방지하기 위한 LazyNavigationView 활용
-- iOS17 이상, 미만에 따라 각 버전에 따른 처리를 위한 ViewModifier 활용
-- 재사용성과 유지보수성을 고려한 리소스 정의
-- UI와 비즈니스 로직의 분리를 통한 유지보수성 향상을 위해 부분적 MVVM Pattern 적용
-- 데이터의 흐름을 명확히 파악하고 추후의 유지보수성을 고려하여 ViewModel 내 Input-Output Pattern 적용
-- 전역적인 상태 공유로 상태의 일관성 유지를 위해 EnvironmentObject 활용
-- UIKit으로 구성된 뷰를 SwiftUI에서 활용하기 위한 UIViewControllerRepresentable 활용
+- 향상된 사용자 경험을 위한 실시간으로 데이터 반영
 
 ---
 
@@ -92,13 +92,13 @@
 
 **- 문제점**
 <br>
-SwiftUI의 경우 뷰에서 무언가 변화가 생겼을 때, 뷰를 새로 렌더링 하는 방식을 가지고 있습니다. 하지만 사용자의 기록 현황을 확인할 수 있는 CalendarView의 경우 UIViewController를 감싸고 있는 형태로, 기록이 생성되거나 삭제되더라도 `updateUIVIewController()`에 별도의 코드를 작성해 주지 않아 변경사항이 반영되지 않는 문제가 발생하였습니다.
+```SwiftUI```의 경우 뷰에서 무언가 변화가 생겼을 때, 뷰를 새로 렌더링 하는 방식을 가지고 있습니다. 하지만 사용자의 기록 현황을 확인할 수 있는 ```CalendarView```의 경우 ```UIViewController```를 감싸고 있는 형태로, 기록이 생성되거나 삭제되더라도 `updateUIVIewController()`에 별도의 코드를 작성해 주지 않아 변경사항이 반영되지 않는 문제가 발생하였습니다.
 
 **- 해결**
 <br>
 이러한 문제를 해결하기 위해 `updateUIVIewController()`의 호출 시점마다 Calendar를 갱신해 주도록 처리하였습니다. 하지만 이는 예상보다도 많은 호출이 일어나 불필요한 애니메이션이 보여짐과 동시에 동기화가 불필요한 시점에도 갱신이 일어나며 쓸데없는 자원이 낭비되는 또 다른 문제가 발생하였습니다. 
 <br>
-그리하여 데이터가 변경되거나 삭제되었을 때에만 Reload 하도록 UIViewControllerRepresentable 내에 @Binding 값을 정의해 주어 캘린더를 업데이트해줘야 하는 시점을 Bool 값으로 구분해 주고자 하였습니다. 그리고 현재 값이 true 라면 Reload 해주고, 바로 다음에 불필요한 갱신이 일어나지않도록 값을 변경해 주는 과정을 거쳤습니다. 이를 통해 필요한 시점에만 변경사항을 반영해 줄 수 있었습니다. 
+그리하여 데이터가 변경되거나 삭제되었을 때에만 Reload 하도록 ```UIViewControllerRepresentable``` 내에 ```@Binding``` 값을 정의해 주어 캘린더를 업데이트해줘야 하는 시점을 ```Bool값```으로 구분해 주고자 하였습니다. 그리고 현재 값이 true 라면 Reload 해주고, 바로 다음에 불필요한 갱신이 일어나지않도록 값을 변경해 주는 과정을 거쳤습니다. 이를 통해 필요한 시점에만 변경사항을 반영해 줄 수 있었습니다. 
 
 ```swift
 struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
@@ -122,15 +122,15 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
     class FSCalendarViewController: UIViewController, FSCalendarDelegate, FSCalendarDataSource {
         init(vm: CalendarViewModel) {
         ...
-		    // Calendar Reload 갱신해야한다면 Reload -> Trigger false 처리  
-		    func reloadCalendar(_ reload: Bool) {
-		            DispatchQueue.main.async {
-		                if reload {
-		                    self.calendar.reloadData()
-		                    self.vm.action(.reloadCalendarTrigger(reload: false))
-		                }
-		            }
-		      }
+	// Calendar Reload 갱신해야한다면 Reload -> Trigger false 처리  
+	func reloadCalendar(_ reload: Bool) {
+            DispatchQueue.main.async {
+		if reload {
+		   self.calendar.reloadData()
+                   self.vm.action(.reloadCalendarTrigger(reload: false))
+		}
+            }
+	}
 }
 ```
 <br>
@@ -139,12 +139,12 @@ struct FSCalendarViewControllerWrapper: UIViewControllerRepresentable {
 
 **- 문제점**
 <br>
-특정 기록을 선택하였을 때, FullScreenCover로 설정된 뷰가 present되며 해당 기록의 상세정보를 확인할 수 있어야하는 상황에서 어떤 기록을 선택하든 보여지고 있는 기록들 중 첫번째 기록에 대한 상세정보만이 표출되는 문제가 발생하였습니다.
+특정 기록을 선택하였을 때, ```FullScreenCover```로 설정된 뷰가 ```present```되며 해당 기록의 상세정보를 확인할 수 있어야하는 상황에서 어떤 기록을 선택하든 보여지고 있는 기록들 중 첫번째 기록에 대한 상세정보만이 표출되는 문제가 발생하였습니다.
 <br>
 
 **- 해결**
 <br>
-원인을 찾기 위해 우선 데이터 전달이 제대로 일어나는지 확인해보았습니다. 그리고 `onTapGesutre()`에서 전달 데이터를 출력해본 결과, 선택한 기록의 데이터가 출력되었고 FullScreenCover 내 DetailView는 해당 데이터가 아닌 첫번째 기록의 데이터를 전달받고 있음을 알 수 있었습니다. 즉, 탭을 했을 때 제대로 된 데이터가 선택되고 있지만 FullCoverScreen 내 뷰가 가지는 데이터는 변화하지않고 첫번째 데이터로 고정되어 생기는 문제라고 판단하게 되었습니다.
+원인을 찾기 위해 우선 데이터 전달이 제대로 일어나는지 확인해보았습니다. 그리고 `onTapGesutre()`에서 전달 데이터를 출력해본 결과, 선택한 기록의 데이터가 출력되었고 ```FullScreenCover 내 DetailView```는 해당 데이터가 아닌 첫번째 기록의 데이터를 전달받고 있음을 알 수 있었습니다. 즉, 탭을 했을 때 제대로 된 데이터가 선택되고 있지만 ```FullCoverScreen 내 뷰```가 가지는 데이터는 변화하지않고 첫번째 데이터로 고정되어 생기는 문제라고 판단하게 되었습니다.
 <br>
 그리하여 selectedLog라는 State 변수를 두어 기록을 선택할 때마다 DetailView로 전달해줄 기록으로 변경하고 이를 DetailView로 전달하도록 수정하였습니다. 
 
@@ -183,8 +183,8 @@ struct BottomSheetView: View {
 
 **- 문제점**
 <br>
-UIKit에서는 UIImage → Data 를 통해 Filemanager에 이미지를 저장할 수 있었지만 SwiftUI에서는 Image를 FileManager로 저장하는 방법을 찾지 못하였습니다. 
-그리하여 Image → UIImage 방식으로 이미지를 변환한 후, 저장 시 해당 UIImage를 활용하려고 하였으나 본래 이미지의 크기가 아닌 임의로 설정해준 크기로만 이미지를 변환할 수 있다는 또다른 문제가 있었습니다.
+```UIKit에서는 UIImage → Data 를 통해 Filemanager에 이미지를 저장```할 수 있었지만 SwiftUI에서는 Image를 FileManager로 저장하는 방법을 찾지 못하였습니다. 
+그리하여 ```Image → UIImage 방식으로 이미지를 변환한 후, 저장 시 해당 UIImage를 활용하려고 하였으나 본래 이미지의 크기가 아닌 임의로 설정해준 크기로만 이미지를 변환할 수 있다는 또다른 문제```가 있었습니다.
 
 ```swift
 extension Image {
@@ -198,6 +198,7 @@ extension Image {
 
         // 뷰의 레이어가 그려지게 
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+
         // 화면 업데이트 후 그려주기
         controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         let uiImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -211,7 +212,7 @@ extension Image {
 
 **- 해결**
 <br>
-그리하여 PhotosPicker로 선택한 이미지가 변경될 때마다 PhotosPickerItem을 Data로 1차 변환하고 이를 UIImage로 2차 변환해주는 과정을 거쳐 각 이미지의 크기에 맞는 UIImage를 가져올 수 있었습니다.
+그리하여 ```PhotosPicker```로 선택한 이미지가 변경될 때마다 ```PhotosPickerItem을 Data로 1차 변환하고 이를 UIImage로 2차 변환해주는 과정```을 거쳐 각 이미지의 크기에 맞는 UIImage를 가져올 수 있었습니다.
 
 그리고 뷰에서는 해당 UIImage를 사용하여 보여준 후, 사용자가 기록을 저장할 때에 그 UIImage를 활용해 이전과 같은 방식으로 Filemanager 내 이미지를 저장해줄 수 있었습니다.
 
@@ -222,20 +223,22 @@ extension Image {
 private func getUIImage(_ pickerItem: PhotosPickerItem?, completionHandler: @escaping (UIImage) -> Void) {
 	guard let pickerItem else { return }
 	Task {
-	// 1차 변환: PhotosPickerItem => Data
-		if let imageData = try? await pickerItem.loadTransferable(type: Data.self) {
-		  // 2차 변환: Data => UIImage
+            // 1차 변환: PhotosPickerItem => Data
+            if let imageData = try? await pickerItem.loadTransferable(type: Data.self) {
+
+            // 2차 변환: Data => UIImage
 	    if let image = UIImage(data: imageData) {
-		    // Main으로 UIImage 보내기 
-         DispatchQueue.main.async {
-            completionHandler(image)
-		     }
-	     }
-   }
-	   else {
-       print("Failed Get UIImage")
-     }
+
+            // Main으로 UIImage 보내기 
+            DispatchQueue.main.async {
+            	completionHandler(image)
+             }
+           }
+   	}	
+	else {
+      	    print("Failed Get UIImage")
 	}
+    }
 }
 ```
 
