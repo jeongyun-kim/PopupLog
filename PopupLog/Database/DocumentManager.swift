@@ -16,7 +16,7 @@ final class DocumentManager {
     
     // App Group 경로
     func getFolderPath() -> URL? {
-        guard let containerURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: AppInfo.appGroupID) else {
+        guard let containerURL = fileManager.containerURL(forSecurityApplicationGroupIdentifier: AppGroupInfo.appGroupID) else {
             return nil
         }
         let folderURL = containerURL.appendingPathComponent("popuplog")

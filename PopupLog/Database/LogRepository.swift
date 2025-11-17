@@ -23,7 +23,7 @@ final class LogRepository {
         let fileManager = FileManager.default
         
         guard let groupURL = fileManager.containerURL(
-            forSecurityApplicationGroupIdentifier: AppInfo.appGroupID
+            forSecurityApplicationGroupIdentifier: AppGroupInfo.appGroupID
         ) else {
             print("❌ App Group을 찾을 수 없습니다")
             return

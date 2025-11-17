@@ -4,7 +4,6 @@
 .DS_Store
 APIKey.swift
 Email.swift
-AppInfo.swift
 
 ### Swift ###
 # Xcode
