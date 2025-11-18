@@ -48,6 +48,7 @@
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
 		E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C92CA312400018AD8C /* View + Extension.swift */; };
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
+		E065EA182ECC005F002957EE /* Secrets.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = E065EA172ECC005F002957EE /* Secrets.xcconfig */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20682C98041700557A22 /* Preview Assets.xcassets */; };
 		E07A20702C98042900557A22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E07A206F2C98042900557A22 /* .gitignore */; };
@@ -148,6 +149,7 @@
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
 		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
 		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
+		E065EA172ECC005F002957EE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20682C98041700557A22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 		E07A20552C98041600557A22 = {
 			isa = PBXGroup;
 			children = (
+				E065EA172ECC005F002957EE /* Secrets.xcconfig */,
 				E01A5DDC2EC1792D00B9D0AC /* CalendarWidgetExtensionDebug.entitlements */,
 				E07A206F2C98042900557A22 /* .gitignore */,
 				E07A20602C98041600557A22 /* PopupLog */,
@@ -590,6 +593,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E065EA182ECC005F002957EE /* Secrets.xcconfig in Resources */,
 				E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */,
 				E01CFC822CD525E500443BE8 /* Assets.xcassets in Resources */,
 				E07A20702C98042900557A22 /* .gitignore in Resources */,
