@@ -17,7 +17,7 @@ final class NetworkService {
         let headerSecret = BundleWrapper(.NSecret).wrappedValue
         let clientID = BundleWrapper(.clientID).wrappedValue
         let secretKey = BundleWrapper(.APIKey).wrappedValue
-        let baseURL = BundleWrapper(.BaseURL).wrappedValue
+        let baseURL = BundleWrapper(.baseURL).wrappedValue
 
         let params: Parameters = [
             "query": keyword,

@@ -13,7 +13,7 @@ struct MenuContentsView: View {
     @ObservedResults(Log.self) private var logList
     @ObservedObject var vm: CalendarViewModel
     @Environment(\.openURL) var openURL
-    private let email = SupportEmail(email: Email().value, title: "건의하기")
+    private let email = SupportEmail(email: BundleWrapper(.email).wrappedValue, title: "건의하기")
     
     var body: some View {
         HStack {

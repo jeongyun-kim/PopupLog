@@ -9,10 +9,11 @@ import Foundation
 
 enum BundleIDs: String {
     case APIKey = "API_KEY"
-    case BaseURL = "BASE_URL"
+    case baseURL = "BASE_URL"
     case NClient = "N_CLIENT"
     case NSecret = "N_SECRET"
     case clientID = "CLIENT_ID"
+    case email = "EMAIL"
 }
 
 @propertyWrapper
