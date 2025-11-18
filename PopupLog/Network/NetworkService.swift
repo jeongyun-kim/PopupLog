@@ -13,19 +13,23 @@ final class NetworkService {
     static let shared = NetworkService()
     
     func searchPlace(_ keyword: String, completionHandler: @escaping (Result<SearchPlaceResults, AFError>) -> Void) {
-        let url = APIKey.baseURL
-        
+        let headerClient = BundleWrapper(.NClient).wrappedValue
+        let headerSecret = BundleWrapper(.NSecret).wrappedValue
+        let clientID = BundleWrapper(.clientID).wrappedValue
+        let secretKey = BundleWrapper(.APIKey).wrappedValue
+        let baseURL = BundleWrapper(.BaseURL).wrappedValue
+
         let params: Parameters = [
             "query": keyword,
             "display": 5
         ]
         
         let headers: HTTPHeaders = [
-            APIKey.HeaderKey.client: APIKey.HeaderValue.clientId,
-            APIKey.HeaderKey.secret: APIKey.HeaderValue.secretKey
+            headerClient: clientID,
+            headerSecret: secretKey
         ]
         
-        AF.request(url, parameters: params, headers: headers).responseDecodable(of: SearchPlaceResults.self) { response in
+        AF.request(baseURL, parameters: params, headers: headers).responseDecodable(of: SearchPlaceResults.self) { response in
             switch response.result {
             case .success(let value):
                 completionHandler(.success(value))
