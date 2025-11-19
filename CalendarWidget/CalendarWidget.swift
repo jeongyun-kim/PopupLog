@@ -48,6 +48,9 @@ struct CalendarProvider: TimelineProvider {
     
     private func getCalendarData() -> [CalendarDay] {
         let calendar = Calendar.current
+        let logs = LogRepository.shared.getAllLogs()
+        
+        // 현재 월의 시작과 끝
         let now = Date()
         guard let monthInterval = calendar.dateInterval(of: .month, for: now),
               let monthFirstWeekday = calendar.dateComponents([.weekday], from: monthInterval.start).weekday,
@@ -58,23 +61,48 @@ struct CalendarProvider: TimelineProvider {
         let currentComponents = calendar.dateComponents([.year, .month], from: now)
         let todayComponents = calendar.dateComponents([.year, .month, .day], from: now)
         
+        // 날짜별로 로그 그룹화 (정확한 날짜 비교)
+        var dateLogsMap: [String: [Log]] = [:]
+        for log in logs {
+            let dateKey = log.visitDate.formattedDate // "yyyy-MM-dd" 형식
+            dateLogsMap[dateKey, default: []].append(log)
+        }
+        
         var calendarDays: [CalendarDay] = []
         
-        // 시작 빈칸
+        // 시작 빈칸 추가
         let emptyDays = (monthFirstWeekday - 1) % 7
-        calendarDays.append(contentsOf: (0..<emptyDays).map { _ in
-            CalendarDay(id: UUID().uuidString, day: 0, isCurrentMonth: false, isToday: false, recordId: nil)
-        })
+        for _ in 0..<emptyDays {
+            calendarDays.append(CalendarDay(
+                id: UUID().uuidString,
+                day: 0,
+                isCurrentMonth: false,
+                isToday: false,
+                recordId: nil
+            ))
+        }
         
-        // 실제 날짜
+        // 실제 날짜들 추가
         for day in 1...daysInMonth {
-            let dateComponents = DateComponents(year: currentComponents.year, month: currentComponents.month, day: day)
-            let isToday = (dateComponents == todayComponents)
+            let dateComponents = DateComponents(
+                year: currentComponents.year,
+                month: currentComponents.month,
+                day: day
+            )
             
+            let isToday = (dateComponents.year == todayComponents.year &&
+                          dateComponents.month == todayComponents.month &&
+                          dateComponents.day == todayComponents.day)
+            
+            // 해당 날짜의 로그 가져오기
             var recordId: String?
-            if let date = calendar.date(from: dateComponents),
-               let logData = LogRepository.shared.getLogData(date) {
-                recordId = "\(logData.id)"
+            if let date = calendar.date(from: dateComponents) {
+                let dateKey = date.formattedDate
+                
+                // LogRepository의 getLogData 메서드 사용 (더 정확함)
+                if let logData = LogRepository.shared.getLogData(date) {
+                    recordId = "\(logData.id)"
+                }
             }
             
             calendarDays.append(CalendarDay(
@@ -172,10 +200,11 @@ struct SmallCalendarView: View {
                     Color.white.opacity(0.2)
                 }
             } else {
+                // 로그는 있지만 이미지가 없는 경우 - 기본 이미지 표시
                 ZStack {
-                    Image(uiImage: isDarkMode ? Resources.Images.darkTicket : Resources.Images.ticket)
-                        .resizable().aspectRatio(contentMode: .fill)
-                    Color.white.opacity(0.3)
+                    Image("ticketDefaultImage")
+                        .resizable().scaledToFill()
+                    (colorScheme == .light ? Color.white.opacity(0.3) : Color.black.opacity(0.6))
                 }
             }
         } else {
@@ -252,16 +281,18 @@ struct CalendarDayCellView: View {
         GeometryReader { geometry in
             ZStack {
                 if let recordId = day.recordId {
-                    // 이미지가 있는 날
+                    // 로그가 있는 날
                     Group {
                         if let image = loadImage(recordId: recordId) {
+                            // 이미지가 있는 경우
                             Image(uiImage: image)
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                         } else {
-                            Image(uiImage: isDarkMode ? Resources.Images.darkTicket : Resources.Images.ticket)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
+                            // 로그는 있지만 이미지가 없는 경우 - 기본 이미지 표시
+                            Image("ticketDefaultImage")
+                                .resizable().scaledToFill()
+                            (colorScheme == .light ? Color.white.opacity(0.3) : Color.black.opacity(0.6))
                         }
                         
                         RoundedRectangle(cornerRadius: 6)
@@ -276,7 +307,7 @@ struct CalendarDayCellView: View {
                         .opacity(day.isCurrentMonth ? 1 : 0.3)
                 } else if day.day != 0 {
                     ZStack {
-                        // 이미지가 없는 날
+                        // 로그가 없는 날
                         Text("\(day.day)")
                             .font(.system(size: isCompact ? 10 : 12, weight: .medium))
                             .foregroundColor(isDarkMode ? .white : .black)
@@ -350,12 +381,17 @@ struct EmptyLogWidgetTextView: View {
 struct HasLogTextView: View {
     let day: String
     let E: String
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text(E).font(.subheadline).foregroundColor(.black)
-                Text(day).font(.headline).foregroundStyle(.black)
+                Text(E)
+                    .font(.subheadline)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
+                Text(day)
+                    .font(.headline)
+                    .foregroundColor(colorScheme == .dark ? .white : .black)
             }
             Spacer()
         }
@@ -389,11 +425,11 @@ struct CalendarWidgetContentView: View {
                                 Color.white.opacity(0.2)
                             }
                         } else {
+                            // 로그는 있지만 이미지가 없는 경우 - 기본 이미지 표시
                             ZStack {
-                                Image(uiImage: colorScheme == .light ? Resources.Images.ticket : Resources.Images.darkTicket)
+                                Image("ticketDefaultImage")
                                     .resizable().scaledToFill()
-                                Color.white.opacity(0.3)
-                               
+                                (colorScheme == .light ? Color.white.opacity(0.3) : Color.black.opacity(0.6))
                             }
                         }
                     } else {
