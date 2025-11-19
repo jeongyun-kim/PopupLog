@@ -49,6 +49,7 @@
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E065EA1A2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
 		E065EA1B2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
+		E072A2692ECC56CD00DB06CD /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E02E2DD82EC1845D0007F57E /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20682C98041700557A22 /* Preview Assets.xcassets */; };
 		E07A20702C98042900557A22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E07A206F2C98042900557A22 /* .gitignore */; };
@@ -117,6 +118,17 @@
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E072A26A2ECC56CD00DB06CD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E072A2692ECC56CD00DB06CD /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +161,8 @@
 		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
 		E065EA192ECC0194002957EE /* BundleIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDs.swift; sourceTree = "<group>"; };
 		E065EBC22ECC10B8002957EE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		E072A2672ECC532D00DB06CD /* PopupLogRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PopupLogRelease.entitlements; sourceTree = "<group>"; };
+		E072A2682ECC533400DB06CD /* CalendarWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20682C98041700557A22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -279,6 +293,7 @@
 		E07A20552C98041600557A22 = {
 			isa = PBXGroup;
 			children = (
+				E072A2682ECC533400DB06CD /* CalendarWidgetExtensionRelease.entitlements */,
 				E065EBC22ECC10B8002957EE /* Secrets.xcconfig */,
 				E01A5DDC2EC1792D00B9D0AC /* CalendarWidgetExtensionDebug.entitlements */,
 				E07A206F2C98042900557A22 /* .gitignore */,
@@ -301,6 +316,7 @@
 		E07A20602C98041600557A22 /* PopupLog */ = {
 			isa = PBXGroup;
 			children = (
+				E072A2672ECC532D00DB06CD /* PopupLogRelease.entitlements */,
 				E01A5DDB2EC1791B00B9D0AC /* PopupLogDebug.entitlements */,
 				E01CFC812CD525E500443BE8 /* Assets.xcassets */,
 				E0A7E1962CA9745100390718 /* Info.plist */,
@@ -490,6 +506,7 @@
 				E01A5DB82EC1786600B9D0AC /* Sources */,
 				E01A5DB92EC1786600B9D0AC /* Frameworks */,
 				E01A5DBA2EC1786600B9D0AC /* Resources */,
+				E072A26A2ECC56CD00DB06CD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -722,6 +739,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = CalendarWidgetExtensionRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L348QC8MG7;
@@ -916,6 +934,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PopupLog/PopupLogRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PopupLog/Preview Content\"";
