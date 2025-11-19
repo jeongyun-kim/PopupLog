@@ -49,7 +49,6 @@
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E065EA1A2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
 		E065EA1B2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
-		E072A2692ECC56CD00DB06CD /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = E02E2DD82EC1845D0007F57E /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20682C98041700557A22 /* Preview Assets.xcassets */; };
 		E07A20702C98042900557A22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E07A206F2C98042900557A22 /* .gitignore */; };
@@ -124,7 +123,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				E072A2692ECC56CD00DB06CD /* RealmSwift in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
