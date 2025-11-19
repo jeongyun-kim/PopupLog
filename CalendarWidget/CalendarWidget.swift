@@ -211,8 +211,6 @@ struct SmallCalendarView: View {
             EmptyLogWidgetImageView()
         }
     }
-    
-    private var isDarkMode: Bool { colorScheme == .dark }
 }
 
 // MARK: Large View
