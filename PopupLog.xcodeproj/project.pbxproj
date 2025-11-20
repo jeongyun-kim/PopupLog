@@ -49,6 +49,7 @@
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E065EA1A2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
 		E065EA1B2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
+		E072A2952ECEA90100DB06CD /* AddLogUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E072A2932ECEA90100DB06CD /* AddLogUnitTest.swift */; };
 		E07A20622C98041600557A22 /* PopupLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07A20612C98041600557A22 /* PopupLogApp.swift */; };
 		E07A20692C98041700557A22 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E07A20682C98041700557A22 /* Preview Assets.xcassets */; };
 		E07A20702C98042900557A22 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = E07A206F2C98042900557A22 /* .gitignore */; };
@@ -91,6 +92,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E01A5DBB2EC1786600B9D0AC;
 			remoteInfo = CalendarWidgetExtension;
+		};
+		E072A28D2ECEA8EB00DB06CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E07A20562C98041600557A22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E07A205D2C98041600557A22;
+			remoteInfo = PopupLog;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -161,6 +169,8 @@
 		E065EBC22ECC10B8002957EE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		E072A2672ECC532D00DB06CD /* PopupLogRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PopupLogRelease.entitlements; sourceTree = "<group>"; };
 		E072A2682ECC533400DB06CD /* CalendarWidgetExtensionRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CalendarWidgetExtensionRelease.entitlements; sourceTree = "<group>"; };
+		E072A2892ECEA8EB00DB06CD /* UnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E072A2932ECEA90100DB06CD /* AddLogUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogUnitTest.swift; sourceTree = "<group>"; };
 		E07A205E2C98041600557A22 /* PopupLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PopupLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E07A20612C98041600557A22 /* PopupLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogApp.swift; sourceTree = "<group>"; };
 		E07A20682C98041700557A22 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -192,6 +202,7 @@
 		E0A7E1902CA7160D00390718 /* SupportEmail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportEmail.swift; sourceTree = "<group>"; };
 		E0A7E1962CA9745100390718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E0A7E1992CA98AF400390718 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		E0C69BC62ECEAE0300FF36EA /* PopupLog.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PopupLog.xctestplan; sourceTree = "<group>"; };
 		E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +214,13 @@
 				E02E2DD92EC1845D0007F57E /* RealmSwift in Frameworks */,
 				E01A5DC12EC1786600B9D0AC /* SwiftUI.framework in Frameworks */,
 				E01A5DBF2EC1786600B9D0AC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E072A2862ECEA8EB00DB06CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,15 +306,25 @@
 			path = CalendarWidget;
 			sourceTree = "<group>";
 		};
+		E072A2942ECEA90100DB06CD /* UnitTest */ = {
+			isa = PBXGroup;
+			children = (
+				E072A2932ECEA90100DB06CD /* AddLogUnitTest.swift */,
+			);
+			path = UnitTest;
+			sourceTree = "<group>";
+		};
 		E07A20552C98041600557A22 = {
 			isa = PBXGroup;
 			children = (
+				E0C69BC62ECEAE0300FF36EA /* PopupLog.xctestplan */,
 				E072A2682ECC533400DB06CD /* CalendarWidgetExtensionRelease.entitlements */,
 				E065EBC22ECC10B8002957EE /* Secrets.xcconfig */,
 				E01A5DDC2EC1792D00B9D0AC /* CalendarWidgetExtensionDebug.entitlements */,
 				E07A206F2C98042900557A22 /* .gitignore */,
 				E07A20602C98041600557A22 /* PopupLog */,
 				E01A5DD62EC178B500B9D0AC /* CalendarWidget */,
+				E072A2942ECEA90100DB06CD /* UnitTest */,
 				E01A5DBD2EC1786600B9D0AC /* Frameworks */,
 				E07A205F2C98041600557A22 /* Products */,
 			);
@@ -307,6 +335,7 @@
 			children = (
 				E07A205E2C98041600557A22 /* PopupLog.app */,
 				E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */,
+				E072A2892ECEA8EB00DB06CD /* UnitTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -518,6 +547,26 @@
 			productReference = E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E072A2882ECEA8EB00DB06CD /* UnitTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E072A2912ECEA8EB00DB06CD /* Build configuration list for PBXNativeTarget "UnitTest" */;
+			buildPhases = (
+				E072A2852ECEA8EB00DB06CD /* Sources */,
+				E072A2862ECEA8EB00DB06CD /* Frameworks */,
+				E072A2872ECEA8EB00DB06CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E072A28E2ECEA8EB00DB06CD /* PBXTargetDependency */,
+			);
+			name = UnitTest;
+			packageProductDependencies = (
+			);
+			productName = UnitTest;
+			productReference = E072A2892ECEA8EB00DB06CD /* UnitTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E07A205D2C98041600557A22 /* PopupLog */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E07A206C2C98041700557A22 /* Build configuration list for PBXNativeTarget "PopupLog" */;
@@ -559,6 +608,10 @@
 					E01A5DBB2EC1786600B9D0AC = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					E072A2882ECEA8EB00DB06CD = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = E07A205D2C98041600557A22;
+					};
 					E07A205D2C98041600557A22 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -588,6 +641,7 @@
 			targets = (
 				E07A205D2C98041600557A22 /* PopupLog */,
 				E01A5DBB2EC1786600B9D0AC /* CalendarWidgetExtension */,
+				E072A2882ECEA8EB00DB06CD /* UnitTest */,
 			);
 		};
 /* End PBXProject section */
@@ -598,6 +652,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02E2DE52EC1C4290007F57E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E072A2872ECEA8EB00DB06CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +691,14 @@
 				E02E2DDF2EC185F10007F57E /* Resources.swift in Sources */,
 				E01A5DDA2EC178B500B9D0AC /* CalendarWidgetBundle.swift in Sources */,
 				E02E2DDE2EC185EA0007F57E /* Date + Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E072A2852ECEA8EB00DB06CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E072A2952ECEA90100DB06CD /* AddLogUnitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -695,6 +764,11 @@
 			isa = PBXTargetDependency;
 			target = E01A5DBB2EC1786600B9D0AC /* CalendarWidgetExtension */;
 			targetProxy = E01A5DCA2EC1786700B9D0AC /* PBXContainerItemProxy */;
+		};
+		E072A28E2ECEA8EB00DB06CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E07A205D2C98041600557A22 /* PopupLog */;
+			targetProxy = E072A28D2ECEA8EB00DB06CD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -762,6 +836,52 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		E072A28F2ECEA8EB00DB06CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L348QC8MG7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jeongyun.PopupLog.UnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PopupLog.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PopupLog";
+			};
+			name = Debug;
+		};
+		E072A2902ECEA8EB00DB06CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L348QC8MG7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jeongyun.PopupLog.UnitTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PopupLog.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PopupLog";
 			};
 			name = Release;
 		};
@@ -974,6 +1094,15 @@
 			buildConfigurations = (
 				E01A5DCE2EC1786700B9D0AC /* Debug */,
 				E01A5DCF2EC1786700B9D0AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E072A2912ECEA8EB00DB06CD /* Build configuration list for PBXNativeTarget "UnitTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E072A28F2ECEA8EB00DB06CD /* Debug */,
+				E072A2902ECEA8EB00DB06CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

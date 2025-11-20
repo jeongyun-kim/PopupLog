@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "13675A0F-C980-4BD1-AC81-B43689A2C8E6",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PopupLog.xcodeproj",
+      "identifier" : "E07A205D2C98041600557A22",
+      "name" : "PopupLog"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "target" : {
+        "containerPath" : "container:PopupLog.xcodeproj",
+        "identifier" : "E072A2882ECEA8EB00DB06CD",
+        "name" : "UnitTest"
+      }
+    }
+  ],
+  "version" : 1
+}

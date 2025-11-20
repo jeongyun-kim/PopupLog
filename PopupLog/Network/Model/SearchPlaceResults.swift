@@ -44,4 +44,14 @@ struct Place: Decodable, Hashable {
         self.mapy = try container.decode(String.self, forKey: .mapy)
         self.id = UUID()
     }
+    
+    // 테스트용 init
+    init(title: String, link: String = "", roadAddress: String, mapx: String, mapy: String, id: UUID = UUID()) {
+        self.title = title
+        self.link = link
+        self.roadAddress = roadAddress
+        self.mapx = mapx
+        self.mapy = mapy
+        self.id = id
+    }
 }
