@@ -14,8 +14,11 @@ final class AddViewModel: BaseViewModel {
     var subscriptions = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
+    // 테스트를 위해 외부에서 주입받을 수 있게 수정!!
+    private let networkService: NetworkServiceProtocol
     
-    init() {
+    init(networkService: NetworkServiceProtocol = NetworkService.shared as! NetworkServiceProtocol) {
+        self.networkService = networkService
        transform()
     }
 }
@@ -174,7 +177,9 @@ extension AddViewModel {
                 guard !keyword.isEmpty else { 
                     self.output.searchedPlaces = []
                     return }
-                NetworkService.shared.searchPlace(keyword) { result in
+                
+                // NetworkService.shared 대신 주입받은 networkService 사용 
+                self.networkService.searchPlace(keyword) { result in
                     switch result {
                     case .success(let value):
                         self.output.searchedPlaces = value.items

@@ -82,6 +82,9 @@
 		E0A7E1892CA6B12800390718 /* SwiftyCrop in Frameworks */ = {isa = PBXBuildFile; productRef = E0A7E1882CA6B12800390718 /* SwiftyCrop */; };
 		E0A7E1912CA7160D00390718 /* SupportEmail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1902CA7160D00390718 /* SupportEmail.swift */; };
 		E0A7E19A2CA98AF400390718 /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A7E1992CA98AF400390718 /* String + Extension.swift */; };
+		E0C69BDE2ECEDFD700FF36EA /* MockNetworkUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C69BDD2ECEDFD700FF36EA /* MockNetworkUnitTest.swift */; };
+		E0C69BE02ECEE01100FF36EA /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C69BDF2ECEE01100FF36EA /* NetworkServiceProtocol.swift */; };
+		E0C69BE32ECEE26700FF36EA /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C69BE22ECEE26700FF36EA /* MockNetworkService.swift */; };
 		E0EB4A662D197B3E00B556DC /* ChartHeaderText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +206,9 @@
 		E0A7E1962CA9745100390718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E0A7E1992CA98AF400390718 /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		E0C69BC62ECEAE0300FF36EA /* PopupLog.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = PopupLog.xctestplan; sourceTree = "<group>"; };
+		E0C69BDD2ECEDFD700FF36EA /* MockNetworkUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkUnitTest.swift; sourceTree = "<group>"; };
+		E0C69BDF2ECEE01100FF36EA /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		E0C69BE22ECEE26700FF36EA /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		E0EB4A652D197B3E00B556DC /* ChartHeaderText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartHeaderText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -254,6 +260,7 @@
 			children = (
 				E009D9572C9B368D00D07972 /* Model */,
 				E009D9522C9B34CB00D07972 /* NetworkService.swift */,
+				E0C69BDF2ECEE01100FF36EA /* NetworkServiceProtocol.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -309,7 +316,9 @@
 		E072A2942ECEA90100DB06CD /* UnitTest */ = {
 			isa = PBXGroup;
 			children = (
+				E0C69BE12ECEE25F00FF36EA /* MockNetwork */,
 				E072A2932ECEA90100DB06CD /* AddLogUnitTest.swift */,
+				E0C69BDD2ECEDFD700FF36EA /* MockNetworkUnitTest.swift */,
 			);
 			path = UnitTest;
 			sourceTree = "<group>";
@@ -523,6 +532,14 @@
 			path = OnChange;
 			sourceTree = "<group>";
 		};
+		E0C69BE12ECEE25F00FF36EA /* MockNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				E0C69BE22ECEE26700FF36EA /* MockNetworkService.swift */,
+			);
+			path = MockNetwork;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -698,6 +715,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0C69BE32ECEE26700FF36EA /* MockNetworkService.swift in Sources */,
+				E0C69BDE2ECEDFD700FF36EA /* MockNetworkUnitTest.swift in Sources */,
 				E072A2952ECEA90100DB06CD /* AddLogUnitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +756,7 @@
 				E009D9462C9B1E1300D07972 /* AddViewModel.swift in Sources */,
 				E02E2DE12EC18A500007F57E /* CalendarWidget.swift in Sources */,
 				E07A20902C98062200557A22 /* Resources.swift in Sources */,
+				E0C69BE02ECEE01100FF36EA /* NetworkServiceProtocol.swift in Sources */,
 				E07A20A72C9865A500557A22 /* SearchView.swift in Sources */,
 				E0A7E1862CA6511A00390718 /* SearchViewModel.swift in Sources */,
 				E0A7E19A2CA98AF400390718 /* String + Extension.swift in Sources */,
