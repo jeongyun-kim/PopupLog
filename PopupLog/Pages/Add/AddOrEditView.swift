@@ -287,18 +287,51 @@ extension AddOrEditView {
         .background(vm.output.place.isEmpty ? Color(.systemGray5).opacity(0.7) : .clear)
         .clipShape(RoundedRectangle(cornerRadius: Resources.Radius.button))
         .sheet(isPresented: $vm.output.presentPlaceSearchView, content: {
-            VStack {
+            searchPlaceSheetView()
+        })
+    }
+    
+    // MARK: 장소검색뷰
+    private func searchPlaceSheetView() -> some View {
+            VStack(spacing: 0) {
+                // 검색 입력창
                 TextField("장소를 검색해보세요", text: $vm.output.placeField)
                     .asRoundedTextField()
                     .padding(.top, 32)
                     .onSubmit(of: .text) {
                         vm.action(.searchPlace)
                     }
-                searchPlaceListView()
+                
+                // 로딩 중이라면
+                if vm.output.isLoading {
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .scaleEffect(1.2)
+                        Text("검색 중...")
+                            .font(.callout)
+                            .foregroundStyle(Resources.Colors.lightGray)
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                } else { // 로딩 끝
+                    // 검색 결과 리스트
+                    searchPlaceListView()
+                }
             }
             .presentationDetents([.medium])
-        })
-    }
+            // 에러 Alert
+            .alert("오류", isPresented: $vm.output.showError) {
+                Button("확인", role: .cancel) { // 창 닫기
+                    vm.output.showError = false
+                }
+                Button("다시 시도") { // 재시도
+                    vm.action(.searchPlace)
+                }
+            } message: { // 에러 메시지 출력
+                if let errorMessage = vm.output.errorMessage {
+                    Text(errorMessage)
+                }
+            }
+        }
     
     // MARK: 검색결과 리스트
     private func searchPlaceListView() -> some View {

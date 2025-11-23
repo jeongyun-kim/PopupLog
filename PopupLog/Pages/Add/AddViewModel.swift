@@ -17,9 +17,9 @@ final class AddViewModel: BaseViewModel {
     // 테스트를 위해 외부에서 주입받을 수 있게 수정!!
     private let networkService: NetworkServiceProtocol
     
-    init(networkService: NetworkServiceProtocol = NetworkService.shared as! NetworkServiceProtocol) {
+    init(networkService: NetworkServiceProtocol = NetworkService.shared) {
         self.networkService = networkService
-       transform()
+        transform()
     }
 }
 
@@ -57,6 +57,10 @@ extension AddViewModel {
         var isSelectedImage = false // 사진이 선택된 상태인지
         var isEditMode = false // 편집모드인지 여부
         var logToSave = Log() // 저장할 로그
+        // ✅ 에러 처리 관련 프로퍼티 추가
+        var isLoading = false              // 로딩 중인지
+        var errorMessage: String? = nil    // 에러 메시지
+        var showError = false              // 에러 Alert 표시 여부
     }
 }
 
@@ -123,7 +127,7 @@ extension AddViewModel {
                 let image = self.input.selectedImage.value
                 let isValidImage = self.output.isSelectedImage
                 let place = self.output.selectedDBPlace
-    
+                
                 if let log = input.logToEdit.value {
                     // 수정 모드
                     managingImage(isValid: isValidImage, id: "\(log.id)", image: image)
@@ -144,7 +148,7 @@ extension AddViewModel {
                 self.output.contentField = value.content
                 self.output.selectedTag = value.tag
                 self.output.visitedDate = value.visitDate
-        
+                
                 // 이미지가 존재한다면 이미지 넣어주기
                 if let image = DocumentManager.shared.loadImage(id: "\(value.id)") {
                     self.action(.image(selected: image))
@@ -170,22 +174,61 @@ extension AddViewModel {
                 self.output.presentTagListView.toggle()
             }.store(in: &subscriptions)
         
+        // 장소 검색 
         input.searchPlace
             .sink { [weak self] _ in
                 guard let self else { return }
                 let keyword = self.output.placeField
-                guard !keyword.isEmpty else { 
-                    self.output.searchedPlaces = []
-                    return }
                 
-                // NetworkService.shared 대신 주입받은 networkService 사용 
+                // 빈 키워드면 초기화
+                guard !keyword.isEmpty else {
+                    self.output.searchedPlaces = []
+                    self.output.emptyPlaceText = ""
+                    self.output.errorMessage = nil
+                    return
+                }
+                
+                // ✅ 로딩 시작
+                self.output.isLoading = true
+                self.output.errorMessage = nil
+                self.output.showError = false
+                
+                // 네트워크 요청
                 self.networkService.searchPlace(keyword) { result in
+                    // 로딩 종료
+                    self.output.isLoading = false
+                    
                     switch result {
                     case .success(let value):
+                        // 검색 결과 업데이트
                         self.output.searchedPlaces = value.items
                         self.output.emptyPlaceText = value.items.isEmpty ? "검색결과가 없어요" : ""
+                        
                     case .failure(let error):
-                        print(error)
+                        // 에러 타입별 메시지 설정
+                        if let urlError = error.underlyingError as? URLError {
+                            switch urlError.code {
+                            case .notConnectedToInternet:
+                                self.output.errorMessage = "인터넷 연결을 확인해주세요"
+                            case .timedOut:
+                                self.output.errorMessage = "네트워크 연결이 불안정합니다\n잠시 후 다시 시도해주세요"
+                            case .cannotFindHost, .cannotConnectToHost:
+                                self.output.errorMessage = "서버에 연결할 수 없습니다"
+                            default:
+                                self.output.errorMessage = "네트워크 오류가 발생했습니다"
+                            }
+                        } else {
+                            // 서버 에러 등
+                            self.output.errorMessage = "검색 중 오류가 발생했습니다\n잠시 후 다시 시도해주세요"
+                        }
+                        
+                        // 에러 발생 시 검색 결과 비우기
+                        self.output.searchedPlaces = []
+                        self.output.emptyPlaceText = ""
+                        self.output.showError = true
+                        
+                        // 디버깅용
+                        print("장소 검색 에러: \(error.localizedDescription)")
                     }
                 }
             }.store(in: &subscriptions)
