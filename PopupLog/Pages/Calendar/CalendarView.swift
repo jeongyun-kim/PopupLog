@@ -111,6 +111,7 @@ extension CalendarView {
                     .padding(8)
             }
             .disabled(!viewStatus.isPresentingBottomSheet)
+            .accessibilityIdentifier("AddLog")
         }
     }
     

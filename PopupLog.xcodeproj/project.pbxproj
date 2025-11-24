@@ -46,6 +46,9 @@
 		E035D0BC2CA056CC0018AD8C /* TagSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */; };
 		E035D0C02CA061F00018AD8C /* AddOrEditTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */; };
 		E035D0CA2CA312400018AD8C /* View + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035D0C92CA312400018AD8C /* View + Extension.swift */; };
+		E041819F2ED32656002A1594 /* PopupLogUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E041819C2ED32656002A1594 /* PopupLogUITests.swift */; };
+		E04181A02ED32656002A1594 /* PopupLogUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E041819D2ED32656002A1594 /* PopupLogUITestsLaunchTests.swift */; };
+		E04181A42ED32783002A1594 /* AddLogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04181A32ED32783002A1594 /* AddLogTests.swift */; };
 		E064A9A12CA3ABDD00A4AE8C /* MCEmojiPicker in Frameworks */ = {isa = PBXBuildFile; productRef = E064A9A02CA3ABDD00A4AE8C /* MCEmojiPicker */; };
 		E065EA1A2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
 		E065EA1B2ECC0194002957EE /* BundleIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E065EA192ECC0194002957EE /* BundleIDs.swift */; };
@@ -95,6 +98,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = E01A5DBB2EC1786600B9D0AC;
 			remoteInfo = CalendarWidgetExtension;
+		};
+		E04181972ED3264C002A1594 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E07A20562C98041600557A22 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E07A205D2C98041600557A22;
+			remoteInfo = PopupLog;
 		};
 		E072A28D2ECEA8EB00DB06CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -168,6 +178,10 @@
 		E035D0BB2CA056CC0018AD8C /* TagSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagSettingView.swift; sourceTree = "<group>"; };
 		E035D0BF2CA061F00018AD8C /* AddOrEditTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditTagView.swift; sourceTree = "<group>"; };
 		E035D0C92CA312400018AD8C /* View + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View + Extension.swift"; sourceTree = "<group>"; };
+		E04181912ED3264C002A1594 /* PopupLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PopupLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E041819C2ED32656002A1594 /* PopupLogUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogUITests.swift; sourceTree = "<group>"; };
+		E041819D2ED32656002A1594 /* PopupLogUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupLogUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E04181A32ED32783002A1594 /* AddLogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogTests.swift; sourceTree = "<group>"; };
 		E065EA192ECC0194002957EE /* BundleIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleIDs.swift; sourceTree = "<group>"; };
 		E065EBC22ECC10B8002957EE /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
 		E072A2672ECC532D00DB06CD /* PopupLogRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PopupLogRelease.entitlements; sourceTree = "<group>"; };
@@ -220,6 +234,13 @@
 				E02E2DD92EC1845D0007F57E /* RealmSwift in Frameworks */,
 				E01A5DC12EC1786600B9D0AC /* SwiftUI.framework in Frameworks */,
 				E01A5DBF2EC1786600B9D0AC /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E041818E2ED3264C002A1594 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +334,16 @@
 			path = CalendarWidget;
 			sourceTree = "<group>";
 		};
+		E041819E2ED32656002A1594 /* PopupLogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E041819C2ED32656002A1594 /* PopupLogUITests.swift */,
+				E041819D2ED32656002A1594 /* PopupLogUITestsLaunchTests.swift */,
+				E04181A32ED32783002A1594 /* AddLogTests.swift */,
+			);
+			path = PopupLogUITests;
+			sourceTree = "<group>";
+		};
 		E072A2942ECEA90100DB06CD /* UnitTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,6 +365,7 @@
 				E07A20602C98041600557A22 /* PopupLog */,
 				E01A5DD62EC178B500B9D0AC /* CalendarWidget */,
 				E072A2942ECEA90100DB06CD /* UnitTest */,
+				E041819E2ED32656002A1594 /* PopupLogUITests */,
 				E01A5DBD2EC1786600B9D0AC /* Frameworks */,
 				E07A205F2C98041600557A22 /* Products */,
 			);
@@ -345,6 +377,7 @@
 				E07A205E2C98041600557A22 /* PopupLog.app */,
 				E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */,
 				E072A2892ECEA8EB00DB06CD /* UnitTest.xctest */,
+				E04181912ED3264C002A1594 /* PopupLogUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -564,6 +597,26 @@
 			productReference = E01A5DBC2EC1786600B9D0AC /* CalendarWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		E04181902ED3264C002A1594 /* PopupLogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E04181992ED3264C002A1594 /* Build configuration list for PBXNativeTarget "PopupLogUITests" */;
+			buildPhases = (
+				E041818D2ED3264C002A1594 /* Sources */,
+				E041818E2ED3264C002A1594 /* Frameworks */,
+				E041818F2ED3264C002A1594 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E04181982ED3264C002A1594 /* PBXTargetDependency */,
+			);
+			name = PopupLogUITests;
+			packageProductDependencies = (
+			);
+			productName = PopupLogUITests;
+			productReference = E04181912ED3264C002A1594 /* PopupLogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		E072A2882ECEA8EB00DB06CD /* UnitTest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E072A2912ECEA8EB00DB06CD /* Build configuration list for PBXNativeTarget "UnitTest" */;
@@ -625,6 +678,10 @@
 					E01A5DBB2EC1786600B9D0AC = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					E04181902ED3264C002A1594 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = E07A205D2C98041600557A22;
+					};
 					E072A2882ECEA8EB00DB06CD = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = E07A205D2C98041600557A22;
@@ -659,6 +716,7 @@
 				E07A205D2C98041600557A22 /* PopupLog */,
 				E01A5DBB2EC1786600B9D0AC /* CalendarWidgetExtension */,
 				E072A2882ECEA8EB00DB06CD /* UnitTest */,
+				E04181902ED3264C002A1594 /* PopupLogUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -669,6 +727,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				E02E2DE52EC1C4290007F57E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E041818F2ED3264C002A1594 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +773,16 @@
 				E02E2DDF2EC185F10007F57E /* Resources.swift in Sources */,
 				E01A5DDA2EC178B500B9D0AC /* CalendarWidgetBundle.swift in Sources */,
 				E02E2DDE2EC185EA0007F57E /* Date + Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E041818D2ED3264C002A1594 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E04181A42ED32783002A1594 /* AddLogTests.swift in Sources */,
+				E041819F2ED32656002A1594 /* PopupLogUITests.swift in Sources */,
+				E04181A02ED32656002A1594 /* PopupLogUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -785,6 +860,11 @@
 			target = E01A5DBB2EC1786600B9D0AC /* CalendarWidgetExtension */;
 			targetProxy = E01A5DCA2EC1786700B9D0AC /* PBXContainerItemProxy */;
 		};
+		E04181982ED3264C002A1594 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E07A205D2C98041600557A22 /* PopupLog */;
+			targetProxy = E04181972ED3264C002A1594 /* PBXContainerItemProxy */;
+		};
 		E072A28E2ECEA8EB00DB06CD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E07A205D2C98041600557A22 /* PopupLog */;
@@ -856,6 +936,50 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		E041819A2ED3264C002A1594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L348QC8MG7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jeongyun.PopupLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = PopupLog;
+			};
+			name = Debug;
+		};
+		E041819B2ED3264C002A1594 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = L348QC8MG7;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = jeongyun.PopupLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = PopupLog;
 			};
 			name = Release;
 		};
@@ -1114,6 +1238,15 @@
 			buildConfigurations = (
 				E01A5DCE2EC1786700B9D0AC /* Debug */,
 				E01A5DCF2EC1786700B9D0AC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E04181992ED3264C002A1594 /* Build configuration list for PBXNativeTarget "PopupLogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E041819A2ED3264C002A1594 /* Debug */,
+				E041819B2ED3264C002A1594 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

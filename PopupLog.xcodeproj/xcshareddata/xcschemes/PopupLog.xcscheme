@@ -46,6 +46,17 @@
                ReferencedContainer = "container:PopupLog.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E04181902ED3264C002A1594"
+               BuildableName = "PopupLogUITests.xctest"
+               BlueprintName = "PopupLogUITests"
+               ReferencedContainer = "container:PopupLog.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

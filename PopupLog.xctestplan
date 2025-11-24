@@ -23,6 +23,13 @@
         "identifier" : "E072A2882ECEA8EB00DB06CD",
         "name" : "UnitTest"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:PopupLog.xcodeproj",
+        "identifier" : "E04181902ED3264C002A1594",
+        "name" : "PopupLogUITests"
+      }
     }
   ],
   "version" : 1

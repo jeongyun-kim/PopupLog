@@ -83,6 +83,7 @@ extension AddOrEditView {
         // 제목 / 본문 비어있으면 저장 X
         .disabled(vm.output.contentField.isEmptyRemovedSpace
                   || vm.output.titleField.isEmptyRemovedSpace)
+        .accessibilityIdentifier("SaveLogButton")
     }
     
     // MARK: 제목
@@ -93,6 +94,7 @@ extension AddOrEditView {
                 .font(.headline)
             TextField("제목을 입력해주세요", text: $vm.output.titleField)
                 .asRoundedTextField()
+                .accessibilityIdentifier("LogTitleTextField")
         }
         .padding(.bottom, 8)
     }
@@ -122,6 +124,7 @@ extension AddOrEditView {
                             .strokeBorder(lineWidth: 1)
                             .foregroundStyle(Resources.Colors.lightGray)
                     }
+                    .accessibilityIdentifier("LogContentTextEditor")
             }
         }
         .padding(.horizontal)
@@ -136,6 +139,8 @@ extension AddOrEditView {
                 // 선택된 태그있으면 보여주기
                 if let tag = vm.output.selectedTag {
                     TagView(tag: tag)
+                        .accessibilityIdentifier("Tag_\(tag.id)_Selected")
+                        .accessibilityAddTraits(.isButton)
                         .onTapGesture {
                             vm.action(.selectedTag(tag: nil)) // 선택된 태그 해제
                         }
@@ -154,6 +159,8 @@ extension AddOrEditView {
                 LazyHStack {
                     ForEach(TagRepository.shared.getAllTags(), id: \.id) { tag in
                         TagView(tag: tag)
+                            .accessibilityIdentifier("Tag_\(tag.id)")
+                            .accessibilityAddTraits(.isButton)
                             .onTapGesture {
                                 vm.action(.selectedTag(tag: tag))
                             }
@@ -165,6 +172,9 @@ extension AddOrEditView {
         .sheet(isPresented: $vm.output.presentTagListView, content: {
             tagSheetView()
         })
+        .onAppear {
+            print(TagRepository.shared.getAllTags().map { $0.id })
+        }
     }
     
     // MARK: 태그 리스트 -> 태그 관리
